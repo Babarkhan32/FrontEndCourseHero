@@ -1,0 +1,49 @@
+@media only screen and (min-width:992px){
+    .Header{
+        background:#096dd9;
+        height: 50px;
+    }
+    .HeaderLi{
+        color: white;
+        display: inline-block;
+        margin-right: 10px;
+        margin-top: 0px;
+        font-weight: 550;
+        cursor: pointer;
+        padding-top: 12px;
+        height: 50px;
+        padding-right: 30px;
+    }
+}
+@media only screen and (max-width:991px){
+    .Header{
+        background:#096dd9;
+        height: 50px;
+    }
+    .HeaderLi{
+    color: white;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 0px;
+    font-weight: 550;
+    cursor: pointer;
+    font-size: 12px;
+    padding-top: 12px;
+    height: 50px;
+    padding-right: 10px;
+}
+}
+.Headerui{
+    list-style-type: none;
+    /* margin-left: 114px; */
+    float: left;
+    margin-left: 0px;
+}
+
+.HeaderLi:hover{
+    color: #ececec;
+}
+.RightNav{
+    float:right;
+    list-style-type: none;
+}

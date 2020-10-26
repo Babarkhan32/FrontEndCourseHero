@@ -1,0 +1,15 @@
+
+.navbar-toggler {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: transparent;
+    border: 1px solid #007bff !important;
+    border-radius: .25rem;
+}
+.navbar-toggler .anticon{
+    color: #096dd9
+}
+.navbar-toggler .anticon:hover{
+    color: #007bff;
+}

@@ -1,0 +1,26 @@
+.FilterCont{
+    border: 1px solid #dcdcdc;
+    background: #fdfdfd;
+    padding: 5px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.3) 1px 1px 6px 0px;
+    margin-bottom: 5px;
+
+}
+.Title{
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 0;
+    color: #096dd9;
+}
+.Title:hover{
+    color:#007bff
+}
+
+.FilterCard{
+    margin-bottom: 10px;
+    border: 1px solid #dcdcdc;
+    margin-left: 5px;
+    margin-right: 5px;
+}
