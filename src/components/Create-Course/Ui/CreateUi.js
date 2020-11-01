@@ -20,7 +20,7 @@ const CreateUi=(props)=>{
      props.setCourseType(value);
    }
    function handleChangeCategory(value){
- props.setSubjectCategory(value);
+      props.setSubjectCategory(value);
    }
    function onChangeStartingDate(date, dateString) {
      props.setStartingDate(dateString);

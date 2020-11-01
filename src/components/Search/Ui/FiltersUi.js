@@ -3,37 +3,46 @@ import style from '../Assets/Search.module.css';
 import { Card,Checkbox,Select,Input} from 'antd';
 const { Option } = Select;
 
-function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
+
  
-const FiltersUi=()=>{
+const FiltersUi=(props)=>{
+  function handleChange(value) {
+   props.onSetSubject(value)
+  }
+
+  function handleLanguageChange(value) {
+    props.onSetLanguage(value);
+  }
+
+  function handleCountryChange(value) {
+    props.onSetCountry(value);
+  }
     return(
 <div>
 <Card className={style.FilterCard} size="small" title="Mode" >
-     <Checkbox> Offline</Checkbox>
+     <Checkbox onChange={(e)=>{props.onSetOffline(e.target)}}> Offline</Checkbox>
      <br/>
-     <Checkbox> Online</Checkbox>
+     <Checkbox onChange={(e)=>props.onSetOnline(e.target)}> Online</Checkbox>
     </Card>
 
     <Card className={style.FilterCard} size="small" title="Course" >
-     <Checkbox> Certificate </Checkbox>
+     <Checkbox  onChange={(e)=>props.onSetCertificate(e.target)}> Certificate </Checkbox>
      <br/>
-     <Checkbox> Non-Certificate</Checkbox>
+     <Checkbox  onChange={(e)=>props.onSetNonCertificate(e.target)}> Non-Certificate</Checkbox>
      <br/>
-     <Checkbox> Certificate/Credit</Checkbox>
+     <Checkbox onChange={(e)=>props.onSetCertificateCredit(e.target)}> Certificate/Credit</Checkbox>
     </Card>
 
     <Card className={style.FilterCard} size="small" title="Degree" >
-     <Checkbox> Associate's </Checkbox>
+     <Checkbox onChange={(e)=>props.onSetAssociate(e.target)} > Associate's </Checkbox>
      <br/>
-     <Checkbox> Bachelor's</Checkbox>
+     <Checkbox onChange={(e)=>props.onSetBachelors(e.target)}> Bachelor's</Checkbox>
      <br/>
-     <Checkbox>Master's</Checkbox>
+     <Checkbox onChange={(e)=>props.onSetMaster(e.target)}>Master's</Checkbox>
      <br/>
-     <Checkbox>Post Doc</Checkbox>
+     <Checkbox onChange={(e)=>props.onSetPostDoc(e.target)}>Post Doc</Checkbox>
      <br/>
-     <Checkbox>PHD</Checkbox>
+     <Checkbox onChange={(e)=>props.onSetPhd(e.target)}>PHD</Checkbox>
     </Card>
 
     <Card className={style.FilterCard} size="small" title="Subject" >
@@ -68,7 +77,7 @@ const FiltersUi=()=>{
     <Card className={style.FilterCard} size="small" title="Language" >
      <Select
     style={{ width: '100%' }}
-    onChange={handleChange}
+    onChange={handleLanguageChange}
     optionLabelProp="label"
   >
     <Option value="English" label="English">
@@ -99,7 +108,7 @@ Malay
     <Card className={style.FilterCard} size="small" title="Country" >
      <Select
     style={{ width: '100%' }}
-    onChange={handleChange}
+    onChange={handleCountryChange}
     optionLabelProp="label"
   >
     <Option value="China" label="China">
@@ -126,12 +135,12 @@ Pakistan
     <Card className={style.FilterCard} size="small" title="Cost" >
     <Checkbox> Free </Checkbox>
     <br/>
-     <Input placeholder='Cost Upto' type='number' className='mtt-5'/> 
+     <Input onChange={(e)=>props.onSetCost(e.target.value)}placeholder='Cost Upto' type='number' className='mtt-5'/> 
     </Card>
     <Card className={style.FilterCard} size="small" title="Duration" >
      <label> Upto (Months) </label>
      <br/>
-     <Input placeholder='Months' type='number'/> 
+     <Input onChange={(e)=>props.onSetDuration(e.target.value)} placeholder='Months' type='number'/> 
     </Card>
 
 </div>

@@ -16,7 +16,23 @@ const SearchUi=(props)=>{
 <div className={style.FilterCont}>
 <h6 className={style.Title}> Filters </h6>
 <hr className='hr-def'/> 
-<FiltersUi/>
+<FiltersUi
+ onSetOnline={props.onSetOnline}
+ onSetOffline={props.onSetOffline}
+ onSetSubject={props.onSetSubject}
+ onSetCertificate={props.onSetCertificate}
+ onSetNonCertificate={props.onSetNonCertificate}
+ onSetAssociate={props.onSetAssociate}
+ onSetBachelors={props.onSetBachelors}
+ onSetMaster={props.onSetMaster}
+ onSetPhd={props.onSetPhd}
+ onSetPostDoc={props.onSetPostDoc}
+ onSetCost={props.onSetCost}
+ onSetDuration={props.onSetDuration}
+ onSetCountry={props.onSetCountry}
+ onSetLanguage={props.onSetLanguage}
+ onSetCertificateCredit={props.onSetCertificateCredit}
+/>
 </div>
         </div>
         <div className='col-12 col-sm-9 col-md-9 col-lg-9 col-xl-9'>
@@ -25,7 +41,7 @@ const SearchUi=(props)=>{
         props.data.map(course=>{
           return(
             <CardUi Subject={course.name} Dep={course.subjectCategory} rev='200' uni={course.institute}
-            rate={2} platform='Coursera' country={course.courseCountry}
+            rate={2} platform='Coursera' country={course.courseCountry} language={course.courseLanguage}
              cost={course.cost} aid='Yes' deadline={course.ending_date}  date={course.starting_date}/>
           )
         })

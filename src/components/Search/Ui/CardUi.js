@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import { Card,Modal,Rate,Button } from 'antd';
 
 
-const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate})=>{
+const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language})=>{
 
     const [visible,setVisible]=useState(false),
 
@@ -58,7 +58,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
     <label className='LabelTitle'> Degree: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> Master's </label>
     </div>
     <div className='col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5'> 
-    <label className='LabelTitle'> Language: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> English </label>
+    <label className='LabelTitle'> Language: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {language} </label>
     </div>
     <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> 
     <label className='LinkedTitle' onClick={showModal}> Faculty </label> 
