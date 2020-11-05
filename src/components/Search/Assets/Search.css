@@ -11,6 +11,7 @@ body{
     overflow:hidden;
 }
 .BGNavBar {
+    position: fixed;
     width: 100%;
     top:0px;
     height:55px;

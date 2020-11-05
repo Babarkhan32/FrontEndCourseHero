@@ -20,6 +20,11 @@ color: #096dd9;;
 }
 
 @media only screen and (max-width:991px){
+    .Brand{
+        margin-right: 5px;
+    }
+   
+
     .Searchbar{
         margin-left: 0px;
         width: 320px;
@@ -33,6 +38,8 @@ color: #096dd9;;
         margin-left: 3px;
     color: grey;
     font-weight: 550;
+    cursor: pointer;
+    margin-top: 2px;
 }
 .LoginTitle:hover{
 color: #bababa;

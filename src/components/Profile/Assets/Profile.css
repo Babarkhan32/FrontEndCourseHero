@@ -40,9 +40,11 @@ border: 1px solid #dcdcdc;
     overflow-x: hidden;
 }
 .PageWrapper{
-    margin-top: 0px;
+    margin-top: 1px;
     margin-left: auto;
     margin-right: auto;
+    position: fixed;
+    width: 100%;
     
 }
 .container{
