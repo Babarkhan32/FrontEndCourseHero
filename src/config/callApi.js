@@ -1,7 +1,10 @@
 
 import axios from 'axios'
 import config from './constants'
+
+
 export const callApi=(address,method,headers,data)=>{
+
     let token=localStorage.getItem('accessToken');
     if(method==='GET'){
         return axios.get(config.baseUrl+address,data, {

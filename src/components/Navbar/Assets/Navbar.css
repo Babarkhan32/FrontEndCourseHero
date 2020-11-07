@@ -13,3 +13,41 @@
 .navbar-toggler .anticon:hover{
     color: #007bff;
 }
+@media only screen and (max-width:991px){
+    .navbar-collapse {
+        flex-basis: 100%;
+        -ms-flex-positive: 1;
+        z-index: 1;
+        flex-grow: 1;
+        align-items: center;
+        background-color: #e0e0e0 !important;
+        /* box-shadow: rgba(0, 0, 0, 0.4) 1px 1px 6px 0px !important; */
+        margin-top: 10px;
+        /* padding: 0px !important; */
+        padding-left: 20px;
+        padding-bottom: 5px;
+    }
+    .navbar {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        -ms-flex-align: center;
+        align-items: center;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 5px 2px;
+    }
+    .navbar-toggler {
+        padding: 0.25rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1;
+        background-color: transparent;
+        border: 1px solid transparent;
+        border-radius: .25rem;
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+  
+}
