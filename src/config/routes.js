@@ -6,7 +6,7 @@ import Register from '../components/Register/Container/Register';
 import Profile from '../components/Profile/Container/Profile';
 import Create from '../components/Create-Course/Container/Create';
 import Search from '../components/Search/Container/Search';
-
+//routes
 
 const Routes=()=>{
 
