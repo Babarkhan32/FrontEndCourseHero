@@ -19,7 +19,9 @@ const NavbarUi=(props)=>{
   console.log(props,"pROPS");
   const { SubMenu } = Menu;
     const [login,setLogin]=useState(false),
-    [loading,setLoading]=useState(false);
+    [loading,setLoading]=useState(false),
+
+   [searchString,setSearchString]=useState('');
 
 
     
@@ -64,7 +66,8 @@ const onSetLogout=()=>{
     <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div className="navbar-nav">
         
-             <Search className={style.Searchbar} placeholder="Search Subject" onSearch={value => console.log(value)} data-toggle="collapse" data-target=".navbar-collapse.show"/>   </div>
+             <Search   className={style.Searchbar} placeholder="Search Subject" onChange={(e)=>setSearchString(e.target.value)} data-toggle="collapse" data-target=".navbar-collapse.show"/>   </div>
+             <Button onClick={()=>props.history.push('/search',{user:searchString})}> Search </Button>
        {!props.accessToken?
         <div className="navbar-nav">
             <label className={style.LoginTitle} onClick={showModal} data-toggle="collapse" data-target=".navbar-collapse.show">Login</label>

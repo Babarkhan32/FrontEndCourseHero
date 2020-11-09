@@ -2,9 +2,12 @@ import React,{useEffect,useState} from 'react'
 import getSearchedCourses from '../api/getSearchedCourses';
 import SearchUi from '../Ui/SearchUi'
 import getCourses from './../api/getCourses';
+import getNavSearch from './../api/getNavSearch';
 
-const Search=()=>{
+const Search=(props)=>{
 
+
+    console.log("Wew Props",props);
     const [data,setData]=useState([]);
     const[online,setOnline]=useState('');
     const [offline,setOffline]=useState('');
@@ -279,15 +282,40 @@ const Search=()=>{
     })
 
     }
-
     useEffect(()=>{
+        if(props.location.state==undefined){
+
+            console.log("SEARCH0");
             getCourses().then(result=>{
                 if(result){
                 setData(result.data);
                 console.log(result,"Result for era");
                 }
+            
             })
-    },[])
+        }else{
+            console.log("SEARCH1");
+
+            getNavSearch(props.location.state.user).then(result=>{
+                if(result){
+
+                    console.log(result);
+               setData(result.data);
+                }
+            })
+        }
+
+    },[props.location.state])
+  
+
+    // useEffect(()=>{
+    //         getCourses().then(result=>{
+    //             if(result){
+    //             setData(result.data);
+    //             console.log(result,"Result for era");
+    //             }
+    //         })
+    // },[])
     return(
         <SearchUi
          onSetOnline={onSetOnline}
