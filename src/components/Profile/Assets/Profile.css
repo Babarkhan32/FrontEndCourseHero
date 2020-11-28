@@ -95,3 +95,43 @@ a:hover {
 .mtt-10{
 margin-top: 10px;
 }
+.BlkTitle{
+    color: #616263;
+    cursor: pointer;
+    font-weight: 550;
+}
+.BlkTitle:hover{
+    color: #787a7b;
+}
+.ant-upload.ant-upload-select{
+    width:100% !important;
+}
+.ant-card-body {
+    padding: 15px;
+    text-align: center;
+    border-top: 2px solid #e6e4e4;
+    margin-top: 7px;
+}
+
+.ant-card-cover img {
+    border-radius: 2px 2px 0 0;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    border: 2px solid;
+}
+
+.ant-card-bordered .ant-card-cover {
+    margin-right: -1px;
+    margin-left: -1px;
+    -webkit-transform: translateY(-1px);
+    transform: translateY(-1px);
+    text-align: center;
+    margin-top: 15px;
+}
+.ant-menu-item .anticon, .ant-menu-submenu-title .anticon{
+    font-size: 18px;
+}
+.ant-menu-vertical .ant-menu-item:not(:last-child), .ant-menu-vertical-left .ant-menu-item:not(:last-child), .ant-menu-vertical-right .ant-menu-item:not(:last-child), .ant-menu-inline .ant-menu-item:not(:last-child) {
+    margin-bottom: 0px;
+}

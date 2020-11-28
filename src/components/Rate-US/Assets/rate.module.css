@@ -1,0 +1,36 @@
+.RegInput{
+    height: 35px;
+    border-radius: 4px;
+}
+.Title{
+    color: #096dd9;
+    cursor: pointer;
+    font-weight: 550;
+    margin-top: 15px;
+
+}
+.Title:hover{
+    color: #007bff;
+}
+.pageTitle{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    }   
+    .FooterText{
+        margin-top: 0px;
+        font-size: 14px;
+        color: #9e9b9b;
+        font-weight: 500;
+        cursor: pointer;
+    }
+    .FooterLink{
+    padding-left: 5px;
+    font-weight: 550px;
+    cursor: pointer;
+    color: #096dd9;
+    }
+    .FooterLink:hover{
+        text-decoration: none;
+        color: #007bff
+    }

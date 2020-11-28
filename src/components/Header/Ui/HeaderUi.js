@@ -1,8 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Popover} from 'antd';
+import {Popover,Modal,Card} from 'antd';
 import style from '../Assets/Header.module.css'
 import '../Assets/Header.css';
+import degree from '../Assets/images/degree.jpg';
+import course from '../Assets/images/course.png';
+const {Meta}=Card;
 
 
 const content = (
@@ -10,6 +13,14 @@ const content = (
   );
 
 const HeaderUi=()=>{
+  const [addCourse, showAddCourse]=useState(false),
+
+  show=()=>{
+    showAddCourse(true)
+  },
+  hide=()=>{
+    showAddCourse(false)
+  };
     return(
        
             <div className={style.Header}>
@@ -26,14 +37,14 @@ const HeaderUi=()=>{
                   Search Courses 
                  </li>
                  </Link>
-                 <Link to='/create/course'> 
-                 <li className={style.HeaderLi}>
+               
+                 <li className={style.HeaderLi} onClick={show}>
                   Create Course 
                  </li>
-                 </Link>
+                 
                  </ul>
                  </div>
-                 <div className=' p-0 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2'>
+                 {/* <div className=' p-0 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2'>
                  <ul className={style.RightNav} >
                  
                  <Popover placement="bottom" content={content}  >
@@ -45,10 +56,44 @@ const HeaderUi=()=>{
                    </Popover>
                 
                      </ul>
-                 </div>
+                 </div> */}
                  </div>
                 
-            
+                 <Modal
+          title="Create Course"
+          visible={addCourse}
+         footer={null}
+        >
+
+          <div className='row'>
+            <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> </div>
+            <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'> 
+            <Card
+    hoverable 
+   
+    cover={   <Link to='/create/course'> <img alt="course" src={course} /> </Link>}
+  >
+       <Link to='/create/course'>
+    <Meta title="Add Individual Course"  />
+    </Link>
+  </Card>
+  <br/>
+         <Card
+    hoverable
+ 
+    cover={   <Link to='/Create/Degree'> <img alt="degree" src={degree} /></Link>}
+  >
+       <Link to='/'>
+    <Meta title="Add Degree"  />
+    </Link>
+  </Card>
+            </div>
+            <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> </div>
+          
+          </div>
+ 
+ 
+        </Modal>
              
             </div>
        

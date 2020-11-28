@@ -4,6 +4,7 @@ import style from '../Assets/Search.module.css';
 import '../Assets/Search.css';
 import CardUi from './CardUi';
 import FiltersUi from './FiltersUi';
+import DegreeCardUi from './DegreeCardUi';
 
 const SearchUi=(props)=>{
     return(
@@ -48,6 +49,7 @@ const SearchUi=(props)=>{
         :<div>"Nothing"</div>
       }    
       
+      <DegreeCardUi/>
           
        {/* <br/>
        <CardUi Subject='Media Studies' Dep='(Personal Development)' rev='400' uni='Oxford University' rate={4} platform='Coursera' country=' Pakistan' cost='50000' aid='No' deadline=' 2020-08-01 ' date='2020-08-10'/>

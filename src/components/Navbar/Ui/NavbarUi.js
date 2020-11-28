@@ -1,7 +1,7 @@
 import React,{useState} from 'react';
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
+import { SettingTwoTone  } from '@ant-design/icons';
 import {Link,withRouter} from 'react-router-dom';
 import { Input,Modal, Button,Checkbox } from 'antd';
 import { UserOutlined, LockOutlined,PicCenterOutlined } from '@ant-design/icons';
@@ -66,8 +66,9 @@ const onSetLogout=()=>{
     <div className="collapse navbar-collapse justify-content-between" id="navbarCollapse">
         <div className="navbar-nav">
         
-             <Search   className={style.Searchbar} placeholder="Search Subject" onChange={(e)=>setSearchString(e.target.value)} data-toggle="collapse" data-target=".navbar-collapse.show"/>   </div>
-             <Button onClick={()=>props.history.push('/search',{user:searchString})}> Search </Button>
+             <Search   className={style.Searchbar} placeholder="Search Subject" onChange={(e)=>setSearchString(e.target.value)} data-toggle="collapse" data-target=".navbar-collapse.show"/>  
+             <Button className={style.SearchBtn} type='primary' onClick={()=>props.history.push('/search',{user:searchString})}> Search </Button>
+             </div>
        {!props.accessToken?
         <div className="navbar-nav">
             <label className={style.LoginTitle} onClick={showModal} data-toggle="collapse" data-target=".navbar-collapse.show">Login</label>
@@ -79,15 +80,16 @@ const onSetLogout=()=>{
           key="sub1"
           title={
             <span>
-              <SettingOutlined />
+              <SettingTwoTone />
               <span>{props.user}</span>
             </span>
           }
         >
-          <Menu.ItemGroup key="g1" >
+          <Menu key="1" >
             <Menu.Item key="1">Settings</Menu.Item>
+            <Menu.Divider/>
             <Menu.Item onClick={onSetLogout}  key="2">Logout</Menu.Item>
-</Menu.ItemGroup>
+</Menu>
 </SubMenu>
         </Menu>
        

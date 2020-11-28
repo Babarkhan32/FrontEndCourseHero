@@ -44,11 +44,11 @@ padding-bottom: 0px;
 }
 .CourseCards .ant-card-head {
     border-bottom: 1px solid #dedcdc !important;
-    background: #fbfafa !important;
+    /* background: #fbfafa !important; */
     
 }
 .CourseCards  .ant-card-actions{
-    background: #fbfafa !important;
+    /* background: #fbfafa !important; */
     border-top: 1px solid #dedcdc !important;
 }
 .ant-btn-primary{
@@ -60,6 +60,11 @@ background:#007bff !important;
 }
 .departmentLabel{
     font-size: 14px;
+    margin-left: 10px;
+    color: #949494;
+}
+.smallLabel{
+    font-size: 12px;
     margin-left: 10px;
     color: #949494;
 }
@@ -99,4 +104,27 @@ cursor: pointer;
 }
 .LinkedTitle:hover{
   color:  #007bff;
+}
+.LinkedCount{
+    color: #096dd9; 
+       text-decoration: none;
+       font-weight: 500;
+       cursor: pointer;
+       font-size: 12px;
+       background-color: transparent;
+}
+.LinkedCount:hover{
+ color:  #007bff;
+}
+.ant-popover {
+    width: 410px;
+    text-align: center !important;
+}
+.ant-upload.ant-upload-drag p.ant-upload-text {
+    margin: 0px 0 3px;
+    color: rgb(144 144 144 / 85%);
+    font-size: 13px;
+}
+.ant-upload.ant-upload-drag p.ant-upload-drag-icon {
+    margin-bottom: 0px;
 }

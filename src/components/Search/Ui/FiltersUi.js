@@ -19,18 +19,14 @@ const FiltersUi=(props)=>{
   }
     return(
 <div>
-<Card className={style.FilterCard} size="small" title="Mode" >
-     <Checkbox onChange={(e)=>{props.onSetOffline(e.target)}}> Offline</Checkbox>
-     <br/>
-     <Checkbox onChange={(e)=>props.onSetOnline(e.target)}> Online</Checkbox>
-    </Card>
-
-    <Card className={style.FilterCard} size="small" title="Course" >
+    <Card className={style.FilterCard} size="small" title="Single Course" >
      <Checkbox  onChange={(e)=>props.onSetCertificate(e.target)}> Certificate </Checkbox>
      <br/>
      <Checkbox  onChange={(e)=>props.onSetNonCertificate(e.target)}> Non-Certificate</Checkbox>
      <br/>
-     <Checkbox onChange={(e)=>props.onSetCertificateCredit(e.target)}> Certificate/Credit</Checkbox>
+     <Checkbox onChange={(e)=>props.onSetCertificateCredit(e.target)}> Credit</Checkbox>
+     <br/>
+     <Checkbox > Non-Credit</Checkbox>
     </Card>
 
     <Card className={style.FilterCard} size="small" title="Degree" >
@@ -40,9 +36,15 @@ const FiltersUi=(props)=>{
      <br/>
      <Checkbox onChange={(e)=>props.onSetMaster(e.target)}>Master's</Checkbox>
      <br/>
-     <Checkbox onChange={(e)=>props.onSetPostDoc(e.target)}>Post Doc</Checkbox>
-     <br/>
      <Checkbox onChange={(e)=>props.onSetPhd(e.target)}>PHD</Checkbox>
+     <br/>
+     <Checkbox onChange={(e)=>props.onSetPostDoc(e.target)}>Post Doc</Checkbox>
+    </Card>
+
+    <Card className={style.FilterCard} size="small" title="Mode" >
+     <Checkbox onChange={(e)=>{props.onSetOffline(e.target)}}> Offline</Checkbox>
+     <br/>
+     <Checkbox onChange={(e)=>props.onSetOnline(e.target)}> Online</Checkbox>
     </Card>
 
     <Card className={style.FilterCard} size="small" title="Subject" >
@@ -132,10 +134,65 @@ Pakistan
     </Option>
   </Select>
     </Card>
+
+    <Card className={style.FilterCard} size="small" title="City" >
+     <Select
+    style={{ width: '100%' }}
+    optionLabelProp="label"
+  >
+    <Option value="Islamabad" label="Islamabad">
+      
+    Islamabad
+      
+    </Option>
+    <Option value="Peshawar" label="Peshawar">
+    Peshawar
+      
+    </Option>
+    <Option value="Wah Cantt" label="Wah Cantt">
+     
+    Wah Cantt
+    
+    </Option>
+    <Option value="Rawalpindi" label="Rawalpindi">
+      
+    Rawalpindi
+      
+    </Option>
+  </Select>
+    </Card>
+
+ 
     <Card className={style.FilterCard} size="small" title="Cost" >
     <Checkbox> Free </Checkbox>
     <br/>
      <Input onChange={(e)=>props.onSetCost(e.target.value)}placeholder='Cost Upto' type='number' className='mtt-5'/> 
+     <label className='mtt-10'> Curreny Type </label>
+     <br/>
+
+     <Select
+    style={{ width: '100%' }}
+    optionLabelProp="label"
+  >
+    <Option value=" Dollar ($)" label=" Dollar ($)">
+ Dollar ($)
+      
+    </Option>
+    <Option value="PKR (Rs)" label="PKR (Rs)">
+PKR (Rs)
+      
+    </Option>
+    <Option value="Riyal (SAR)" label="Riyal (SAR)">
+     
+    Riyal (SAR)
+    
+    </Option>
+    <Option value="Renminbi (¥)" label="Renminbi (¥)">
+      
+    Renminbi (¥)
+      
+    </Option>
+  </Select>
     </Card>
     <Card className={style.FilterCard} size="small" title="Duration" >
      <label> Upto (Months) </label>

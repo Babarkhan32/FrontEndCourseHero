@@ -6,6 +6,11 @@ import Register from '../components/Register/Container/Register';
 import Profile from '../components/Profile/Container/Profile';
 import Create from '../components/Create-Course/Container/Create';
 import Search from '../components/Search/Container/Search';
+import RateUs from '../components/Rate-US/Container/RateUs';
+import StudentRegistration from '../components/Student-Registration/Container/StudentRegistration';
+import InstituteReg from '../components/Institute-Registration/Container/InstituteReg';
+import FacultyReg from '../components/Faculty-Registration/Container/FacultyReg';
+import CreateDegree from '../components/Create-Degree/Container/CreateDegree';
 //routes
 
 const Routes=()=>{
@@ -60,6 +65,11 @@ const Routes=()=>{
 <Route path="/profile"><Profile></Profile></Route>
 <PrivateRoute  path='/create/course'><Create></Create></PrivateRoute>
 <Route exact path='/search' component={Search}/>
+<Route exact path='/Rate' component ={RateUs}/>
+<Route exact path='/Student/Reg' component={StudentRegistration}/>
+<Route exact path='/Institute/Reg' component={InstituteReg}/>
+<Route exact path='/Faculty/Reg' component={FacultyReg}/>
+<Route exact path='/Create/Degree' component={CreateDegree}/>
 </Switch>
         </div>
     </Router>
