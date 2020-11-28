@@ -64,7 +64,7 @@ showOptional=()=>{
 
     return(
         <div> 
-        <Card className='CourseCards'
+        <Card className='CourseCards'  hoverable
         title={
         <div> 
           <h6>Web Security Fundamentals  <label className='departmentLabel'> Mathematics / Second Subject</label>  </h6> 
@@ -105,10 +105,10 @@ showOptional=()=>{
      </div>
 
      <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'>
-  <Popover content={"Faculty Introduction"} placement='left' trigger="hover">
+  
    <label className='LinkedTitle' onClick={showModal}> Faculty </label> 
   {/* <label className='LabelTitle'> Online: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LinkedTitle'> 3 </label> */}
-  </Popover>
+
     </div>
      
   {/* <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> 
@@ -169,9 +169,21 @@ showOptional=()=>{
          }
        >
            <Timeline>
-    <Timeline.Item>Professor Dr. John </Timeline.Item>
-    <Timeline.Item>Mr. Drake</Timeline.Item>
-    <Timeline.Item>Mrs. Blake</Timeline.Item>
+    <Timeline.Item> <h6 className='ItemHeading'> Professor Dr. John </h6>
+      
+       
+   <label className='ItemDesc'>  Faculty Introduction to be written here at this place </label> 
+       </Timeline.Item>
+    <Timeline.Item>  <h6 className='ItemHeading'> Mr. Drake </h6>
+
+  
+   <label className='ItemDesc' >  Faculty Introduction to be written here at this place </label> 
+    </Timeline.Item>
+    <Timeline.Item>  <h6 className='ItemHeading'>Mrs. Blake </h6>
+
+
+   <label className='ItemDesc' >  Faculty Introduction to be written here at this place </label> 
+    </Timeline.Item>
   </Timeline>
          
        </Modal>
@@ -186,13 +198,13 @@ showOptional=()=>{
          }
        >
        <Timeline>
-    <Timeline.Item>Automata</Timeline.Item>
-    <Timeline.Item>Data Structures</Timeline.Item>
-    <Timeline.Item>Human Computer Interaction</Timeline.Item>
-    <Timeline.Item>Artificial Intelligence</Timeline.Item>
-    <Timeline.Item>Compiler Construction</Timeline.Item>
-    <Timeline.Item>Statistics</Timeline.Item>
-    <Timeline.Item>Digital Logic and Designs</Timeline.Item>
+    <Timeline.Item> <h6 className='ItemHeading'> Automata </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'> Data Structures </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Human Computer Interaction </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Artificial Intelligence </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Compiler Construction </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Statistics </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Digital Logic and Designs </h6> </Timeline.Item>
   </Timeline>
 
 
@@ -209,11 +221,11 @@ showOptional=()=>{
          }
        >
        <Timeline>
-    <Timeline.Item>Automata</Timeline.Item>
-    <Timeline.Item>Data Structures</Timeline.Item>
-    <Timeline.Item>Human Computer Interaction</Timeline.Item>
-    <Timeline.Item>Artificial Intelligence</Timeline.Item>
-    <Timeline.Item>Compiler Construction</Timeline.Item>
+    <Timeline.Item> <h6 className='ItemHeading'> Automata </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'> Data Structures </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'> Human Computer Interaction </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'> Artificial Intelligence </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Compiler Construction</h6></Timeline.Item>
   </Timeline>
 
 
@@ -234,8 +246,8 @@ showOptional=()=>{
        <Timeline>
   
   
-    <Timeline.Item>Statistics</Timeline.Item>
-    <Timeline.Item>Digital Logic and Designs</Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Statistics </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Digital Logic and Designs </h6></Timeline.Item>
   </Timeline>
 
 
@@ -254,10 +266,10 @@ showOptional=()=>{
          }
        >
        <Timeline>
-    <Timeline.Item>Automata</Timeline.Item>
-    <Timeline.Item>Data Structures</Timeline.Item>
-    <Timeline.Item>Human Computer Interaction</Timeline.Item>
-    <Timeline.Item>Artificial Intelligence</Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Automata </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Data Structures</h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Human Computer Interaction</h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Artificial Intelligence</h6></Timeline.Item>
    
   </Timeline>
 
@@ -275,9 +287,9 @@ showOptional=()=>{
          }
        >
        <Timeline>
-    <Timeline.Item>Compiler Construction</Timeline.Item>
-    <Timeline.Item>Statistics</Timeline.Item>
-    <Timeline.Item>Digital Logic and Designs</Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Compiler Construction </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Statistics </h6></Timeline.Item>
+    <Timeline.Item><h6 className='ItemHeading'>Digital Logic and Designs </h6></Timeline.Item>
   </Timeline>
 
 

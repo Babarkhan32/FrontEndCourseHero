@@ -311,6 +311,71 @@ const CreateDegreeUi =()=>{
         )}
       </Form.List>
         
+      <h6 className='Title mtt-15'> Faculty Name</h6>
+       <Input type='text'/>
+
+          <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
+          <Upload {...Uploadprops} >
+    <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
+  </Upload>
+
+  <Divider><label> or  </label></Divider>
+  <Link to='/Faculty/Reg' target="_blank">
+         <Button type="default" block>
+      Create Resume
+       </Button>
+       </Link> 
+
+       <Form.List name="degree">
+        {(fields, { add, remove }) => (
+          <>
+            {fields.map(field => (
+              <div key={field.key} style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }} align="baseline">
+               
+  <h6 className='Title mtt-15'> Add Faculty </h6>
+  <hr className='hr-def mb-0'/>
+                <div
+                  {...field}
+                  name={[field.name, 'faculty']}
+                  fieldKey={[field.fieldKey, 'faculty']}
+                  rules={[{ required: true, message: 'Missing faculty' }]}
+                >
+                  
+                  <h6 className='BlkTitle mtt-15'> Faculty Name</h6>
+       <Input type='text'/>
+
+                </div>
+                <div
+                  {...field}
+                  name={[field.name, 'resume']}
+                  fieldKey={[field.fieldKey, 'resume']}
+                  rules={[{ required: true, message: 'resume' }]}
+                >
+                        <h6 className='Title mtt-15'> Faculty Resume</h6>
+          <Upload {...Uploadprops} >
+    <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
+  </Upload>
+
+  <Divider><label> or  </label></Divider>
+  <Link to='/Faculty/Reg' target="_blank">
+         <Button type="default" block>
+      Create Resume
+       </Button>
+       </Link> 
+                </div>
+
+                <DeleteTwoTone twoToneColor='red' className='mtt-10' onClick={() => remove(field.name)} />
+              </div>
+            ))}
+            <div className='mtt-10'>
+              <Button style={{width:'100%'}} type="dashed" onClick={() => add()} block icon={<PlusOutlined />}>
+                Add Faculty
+              </Button>
+            </div>
+          </>
+        )}
+      </Form.List>
+     
       <h6 className='Title mtt-15'> Course Country</h6>
          <Select
     style={{ width: '100%' }}
@@ -570,7 +635,7 @@ const CreateDegreeUi =()=>{
           <h6 className='BlkTitle mtt-15'>Add Course Details  </h6>
   <hr className='hr-def mb-0'/>
   <Link to='/create/course' target="_blank">
-         <Button className='mtt-10s' type="default" block>
+         <Button className='mtt-10' type="default" block>
        Add Course
        </Button>
        </Link>

@@ -27,7 +27,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
 
     return(
         <div> 
-        <Card className='CourseCards'
+        <Card className='CourseCards'  hoverable
         title={
         <div> 
           <h6>{Subject}  <label className='departmentLabel'> {Dep} / Second Subject</label>  </h6> 

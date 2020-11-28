@@ -143,3 +143,19 @@ margin-top: 10px;
 .ant-timeline-item-last{
 padding-bottom: 0px;
 }
+
+
+.ItemHeading{
+    color:#545454;
+    font-size: 14px;
+    font-weight:550;
+    cursor: pointer;
+}
+.ItemHeading:hover{
+    color: #bababa;
+}
+.ItemDesc{
+    color: #545454;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}

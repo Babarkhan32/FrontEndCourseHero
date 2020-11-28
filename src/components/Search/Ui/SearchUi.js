@@ -5,7 +5,7 @@ import '../Assets/Search.css';
 import CardUi from './CardUi';
 import FiltersUi from './FiltersUi';
 import DegreeCardUi from './DegreeCardUi';
-
+import {Empty} from 'antd';
 const SearchUi=(props)=>{
     return(
         <div className='MainCont'>
@@ -46,7 +46,7 @@ const SearchUi=(props)=>{
              cost={course.cost} aid='Yes' deadline={course.ending_date}  date={course.starting_date}/>
           )
         })
-        :<div>"Nothing"</div>
+        :<div className='text-center mtt-10'><Empty/></div>
       }    
       
       <DegreeCardUi/>
