@@ -66,9 +66,9 @@ const HeaderUi=()=>{
         >
 
           <div className='row'>
-            <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> </div>
+            <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'> </div>
             <div className='col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6'> 
-            <Card
+            <Card className='CreateCards'
     hoverable 
    
     cover={   <Link to='/create/course'> <img alt="course" src={course} /> </Link>}
@@ -78,7 +78,7 @@ const HeaderUi=()=>{
     </Link>
   </Card>
   <br/>
-         <Card
+         <Card className='CreateCards'
     hoverable
  
     cover={   <Link to='/Create/Degree'> <img alt="degree" src={degree} /></Link>}
@@ -88,7 +88,7 @@ const HeaderUi=()=>{
     </Link>
   </Card>
             </div>
-            <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> </div>
+            <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'> </div>
           
           </div>
  
