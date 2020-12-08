@@ -34,8 +34,8 @@ const Navbar=(props)=>{
 
     login(data).then(result=>{
 
-      console.log("lets see here",result)
-      if(result.token){
+      
+      if(result&&result.token){
         
         localStorage.setItem('accessToken',result.token)
         setUser(result.name);

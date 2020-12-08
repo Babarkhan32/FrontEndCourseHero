@@ -1,7 +1,9 @@
-import React from 'react';
+import React,{useState} from 'react';
 import HeaderCont from '../../Header/Container/Header';
 import {Input,Select,DatePicker,Upload,Button,Form} from 'antd';
-import {InboxOutlined,  MinusCircleFilled, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
+import { DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
+import ImgCrop from 'antd-img-crop';
+
 const {TextArea} = Input;
 const { Option } = Select;
 
@@ -12,15 +14,51 @@ const selectBefore = (
   </Select>
 );
 
-const normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
+
+
 
 const StudentRegUi=()=>{
+const [fileList, setFileList] = useState([
+
+  ]);
+
+  const onFinish=(values)=>{
+    values.imageSet=fileList;
+
+    console.log("Success",values);
+  }
+  
+  
+  const onChange = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+    console.log(newFileList);
+  };
+  
+  
+  const onPreview = async file => {
+    let src = file.url;
+    if (!src) {
+      src = await new Promise(resolve => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file.originFileObj);
+        reader.onload = () => resolve(reader.result);
+      });
+    }
+    const image = new Image();
+    image.src = src;
+    const imgWindow = window.open(src);
+    imgWindow.document.write(image.outerHTML);
+  };
+  
+  const normFile = e => {
+      console.log('Upload event:', e);
+      if (Array.isArray(e)) {
+        return e;
+      }
+      return e && e.fileList;
+    };
+  
+  
     return(
         <div className='MainCont'>
         <div className='PageWrapper'> 
@@ -36,11 +74,13 @@ const StudentRegUi=()=>{
   <div className='row'>
       <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'></div>
       <div className='col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10'>
-      <Form name="dynamic_form_nest_item" autoComplete="off">
+      <Form onFinish={onFinish} name="dynamic_form_nest_item" autoComplete="off">
       <h6 className='Title'> Name</h6>
+      <Form.Item name="FullName"  rules={[{ required: true }]}> 
       <Input type='text' name='Name'/>
-
+</Form.Item>
       <h6 className='Title mtt-15'> Gender</h6>
+      <Form.Item name="gender"  rules={[{ required: true }]}> 
       <Select placeholder='Select Gender' allowClear style={{ width: '100%' }}  optionLabelProp="label">
       <Option value="Male" label='Male'>Male</Option>
       <Option value="Female" label='Female'>Female</Option>
@@ -48,32 +88,47 @@ const StudentRegUi=()=>{
       Other
       </Option>
     </Select>
+    </Form.Item>
 
 
     <h6 className='Title mtt-15'> Date of Birth </h6>
+    <Form.Item name="DateOfBirth"  rules={[{ required: true }]}> 
     <DatePicker  style={{width:'100%'}}  />
-
+</Form.Item>
     <h6 className='Title mtt-15'> Email Address </h6>
+    <Form.Item name="emailAddress"  rules={[{ required: true }]}> 
     <Input type='text' name='Email'/>
-
+</Form.Item>
     <h6 className='Title mtt-15'> Phone Number </h6>
+    <Form.Item name="phoneNumber"  rules={[{ required: true }]}> 
     <Input type='text' name='Phone Number'/>
-
+</Form.Item>
     <h6 className='Title mtt-15'> Whatsapp Number </h6>
+    <Form.Item name="whatsapp"  rules={[{ required: true }]}> 
     <Input type='text' name='Whatsapp Number'/>
-
+</Form.Item>
     <h6 className='Title mtt-15'> Permanent Address </h6>
+    <Form.Item name="Address"  rules={[{ required: true }]}> 
     <Input type='text' name='Address'/>
-
+</Form.Item>
     <h6 className='Title mtt-15'> Upload Picture </h6>
-        <Upload.Dragger name="files" action="/upload.do" listType="picture">
-            <p className="ant-upload-drag-icon">
-              <InboxOutlined />
-            </p>
-            <p className="ant-upload-text">Click or drag file to this area to upload</p>
-          </Upload.Dragger>
-
+    <Form.Item name="imageSet">
+    <ImgCrop rotate>
+   
+      <Upload
+        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+        listType="picture-card"
+        fileList={fileList}
+        onChange={onChange}
+        onPreview={onPreview}
+      >
+        {fileList.length < 5 && '+ Upload'}
+      </Upload>
+      
+    </ImgCrop>
+    </Form.Item>
     <h6 className='Title mtt-15'> Spoken Languages </h6>
+    <Form.Item name="spokenLanguages"  rules={[{ required: true }]}> 
     <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -94,16 +149,20 @@ const StudentRegUi=()=>{
     
     </Option>
   </Select>
-       
+       </Form.Item>
   <h6 className='Title mtt-15'> Describe Yourself </h6>
+  <Form.Item name="introduction"  rules={[{ required: true }]}> 
   <TextArea rows={4} showCount maxLength={100} />
-
+</Form.Item>
   <h6 className='BlkTitle mtt-15'> Education History </h6>
   <hr className='hr-def mb-0'/>
 
   <h6 className='Title mtt-15'>Degree Name </h6>
+  <Form.Item name="degreeName"  rules={[{ required: true }]}> 
                   <Input placeholder="Degree Name" />
+                  </Form.Item>
                   <h6 className='Title mtt-15'>Degree Type </h6>
+                  <Form.Item name="degreeTyppe"  rules={[{ required: true }]}> 
                  <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -135,13 +194,16 @@ const StudentRegUi=()=>{
     </Option>
     
   </Select>
-  
+  </Form.Item>
   <h6 className='Title mtt-15'>Degree Institute </h6>
+  <Form.Item name="degreeInstitute"  rules={[{ required: true }]}> 
                      <Input placeholder="Degree Institute" />
+                     </Form.Item>
                      <h6 className='Title mtt-15'>Passing Year </h6>
+                     <Form.Item name="passingYear"  rules={[{ required: true }]}> 
                      <DatePicker  style={{width:'100%'}}  />
                      
-                     
+                     </Form.Item>
       <Form.List name="users">
         {(fields, { add, remove }) => (
           <>
@@ -150,22 +212,24 @@ const StudentRegUi=()=>{
                
   <h6 className='BlkTitle mtt-15'> Add Degree Details </h6>
   <hr className='hr-def mb-0'/>
-                <div
+  <h6 className='Title mtt-15'>Degree Name </h6>
+                <Form.Item
                   {...field}
                   name={[field.name, 'Degree']}
                   fieldKey={[field.fieldKey, 'Degree']}
                   rules={[{ required: true, message: 'Missing Degree' }]}
                 >
-                  <h6 className='Title mtt-15'>Degree Name </h6>
+                
                   <Input placeholder="Degree Name" />
-                </div>
-                <div
+                </Form.Item>
+                <h6 className='Title mtt-15'>Degree Type </h6>
+                <Form.Item
                   {...field}
                   name={[field.name, 'type']}
                   fieldKey={[field.fieldKey, 'type']}
                   rules={[{ required: true, message: 'Missing type' }]}
                 >
-                     <h6 className='Title mtt-15'>Degree Type </h6>
+                     
 
                      <Select
     style={{ width: '100%' }}
@@ -199,27 +263,27 @@ const StudentRegUi=()=>{
     
   </Select>
                 
-                </div>
-
-                <div
+                </Form.Item>
+                <h6 className='Title mtt-15'>Degree Institute </h6>
+                <Form.Item
                   {...field}
                   name={[field.name, 'institute']}
                   fieldKey={[field.fieldKey, 'institute']}
                   rules={[{ required: true, message: 'Missing institute' }]}
                 >
-                     <h6 className='Title mtt-15'>Degree Institute </h6>
+                     
                      <Input placeholder="Degree Institute" />
-                </div>
-
-                <div
+                </Form.Item>
+                <h6 className='Title mtt-15'>Passing Year </h6>
+                <Form.Item
                   {...field}
                   name={[field.name, 'year']}
                   fieldKey={[field.fieldKey, 'year']}
                   rules={[{ required: true, message: 'Missing year' }]}
                 >
-                     <h6 className='Title mtt-15'>Passing Year </h6>
+                  
                      <DatePicker  style={{width:'100%'}}  />
-                </div>
+                </Form.Item>
 
                 <DeleteTwoTone twoToneColor='red' className='mtt-10' onClick={() => remove(field.name)} />
               </div>
@@ -242,9 +306,12 @@ const StudentRegUi=()=>{
   <hr className='hr-def mb-0'/>
 
   <h6 className='Title mtt-15'> Brief Study Proposal </h6>
+  <Form.Item name="studyProposal"  rules={[{ required: true }]}> 
+     
   <TextArea rows={4} showCount maxLength={500} />
-
+</Form.Item>
   <h6 className='Title'> Select Desired Program Type </h6>
+  <Form.Item name="programType"  rules={[{ required: true }]}> 
  <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -299,11 +366,14 @@ const StudentRegUi=()=>{
      </Option>
 
   </Select>
+  </Form.Item>
 
-        <h6 className='Title mtt-15'> Enter Desired Discipline/Subject  </h6>     
+        <h6 className='Title mtt-15'> Enter Desired Discipline/Subject  </h6>    
+        <Form.Item name="desireddisciplineName"  rules={[{ required: true }]}>  
         <Input placeholder="Discipline Name" />  
-
+</Form.Item>
         <h6 className='Title mtt-15'> Select Desired Mode   </h6> 
+        <Form.Item name="desiredMode"  rules={[{ required: true }]}> 
         <Select placeholder='Select Mode' allowClear style={{ width: '100%' }}  optionLabelProp="label">
       <Option value="Online" label='Online'>Online</Option>
       <Option value="Offline" label='Female'>Offline</Option>
@@ -311,12 +381,14 @@ const StudentRegUi=()=>{
       Other
       </Option>
     </Select>
-
+</Form.Item>
     <h6 className='Title mtt-15'> Approximate Afforable Cost   </h6> 
+    <Form.Item name="affordableCost"  rules={[{ required: true }]}> 
     <Input addonBefore={selectBefore} placeholder='Cost' />
-
+</Form.Item>
 
     <h6 className='Title mtt-15'> Preffered Country</h6>
+    <Form.Item name="prefferedCountry"  rules={[{ required: true }]}> 
          <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -337,8 +409,9 @@ const StudentRegUi=()=>{
     
     </Option>
   </Select>
-
+</Form.Item>
   <h6 className='Title mtt-15'> Preffered City</h6>
+  <Form.Item name="prefferedCity"  rules={[{ required: true }]}> 
          <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -359,8 +432,9 @@ const StudentRegUi=()=>{
     
     </Option>
   </Select>
-
+</Form.Item>
     <h6 className='Title mtt-15'> Preffered Language</h6>
+    <Form.Item name="prefferedLanguages"  rules={[{ required: true }]}> 
          <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -381,10 +455,10 @@ const StudentRegUi=()=>{
     
     </Option>
   </Select>
-
+</Form.Item>
 
 <div className='text-center mtt-10'>
-<Button type='primary'> Submit </Button>
+<Button type='primary' htmlType='submit'> Submit </Button>
 </div>
       </Form>
        

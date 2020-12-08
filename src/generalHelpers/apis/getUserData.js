@@ -10,7 +10,6 @@ return queryResult.data;
 
   }catch(e){
       console.log(e);
-
   }
 
 

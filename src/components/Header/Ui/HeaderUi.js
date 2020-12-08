@@ -62,6 +62,7 @@ const HeaderUi=()=>{
                  <Modal
           title="Create Course"
           visible={addCourse}
+          onCancel={hide}
          footer={null}
         >
 

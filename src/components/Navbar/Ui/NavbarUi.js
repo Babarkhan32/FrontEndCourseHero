@@ -23,8 +23,6 @@ const NavbarUi=(props)=>{
 
    [searchString,setSearchString]=useState('');
 
-
-    
      const showModal = () => {
        
         setLogin(true) 

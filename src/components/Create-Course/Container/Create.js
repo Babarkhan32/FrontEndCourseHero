@@ -191,6 +191,12 @@ const onSubmit=()=>{
                     alert("Course inserted Successfully")
                 })
     }
+    const onFinish=(data)=>{
+        insertCourse(data).then(result=>{
+            console.log("Result",result);
+            alert("Course inserted Successfully")
+        })
+    }
    
  return(
         <CreateUi

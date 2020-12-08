@@ -109,20 +109,19 @@ const Search=(props)=>{
 
     }
     const onSetNonCertificate=(value)=>{
-        console.log(query);
         if(value.checked==true){
+        query.nonCertificate='Non-Certificate';
         setNonCertificate('Non-Certificate');
 
-        query.nonCertificate='Non-Certificate'
             
           }else{
-              onSetNonCertificate('');
+            
             query.nonCertificate=''
+            setNonCertificate('');
 
           }
           getSearchedCourses(query).then(result=>{
-              
-            console.log(result.data)
+              console.log(result);
             if(result){
                 setData(result.data);
             }

@@ -27,7 +27,9 @@ const CreateDegreeUi =()=>{
           }
         },
       };
-
+      const onFinish = (values) => {
+        console.log('Success:', values);
+      };
 
     return(
        <div className='MainCont'>
@@ -44,12 +46,14 @@ const CreateDegreeUi =()=>{
       <div className='row'>
       <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'></div>
       <div className='col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10'>
-      <Form  name="control-hooks" >
+      <Form onFinish={onFinish}  name="control-hooks" >
       <h6 className='Title mtt-15'> Degree Name</h6>
+
+      <Form.Item name="degreeName"  rules={[{ required: true }]}>
           <Input type='text'/>
-
+          </Form.Item>
           <h6 className='Title mtt-15'> Degree Specification</h6>
-
+          <Form.Item name="degreeType"  rules={[{ required: true }]}>
           <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -88,6 +92,7 @@ const CreateDegreeUi =()=>{
       </Option>
  
   </Select>
+  </Form.Item>
   <h6 className='Title mtt-15'> Select Degree Type </h6>
   <Form.Item name="type"  rules={[{ required: true }]}>
         <Select
@@ -107,14 +112,24 @@ const CreateDegreeUi =()=>{
             <div name="customizeType" rules={[{ required: true }]}>
 
 <h6 className='BlkTitle mtt-15'> Enter Main Disciplinary Subject</h6>
-              <Input type='text'/>
+<Form.Item name="MainDisciplinary"  rules={[{ required: true }]}>
 
+              <Input type='text'/>
+</Form.Item>
               <h6 className='BlkTitle mtt-15'> Additional Subject</h6>
-          <Input type='text'/>
+              <Form.Item name="AdditionalSubject1"  rules={[{ required: true }]}>
+
+<Input type='text'/>
+</Form.Item>
           <h6 className='BlkTitle mtt-15'>Additional Subject</h6>
-          <Input type='text'/>
+          <Form.Item name="AdditionalSubject2"  rules={[{ required: true }]}>
+<Input type='text'/>
+</Form.Item>
           <h6 className='BlkTitle mtt-15'> Additional Subject</h6>
-          <Input type='text'/>
+          <Form.Item name="AdditionalSubject3"  rules={[{ required: true }]}>
+
+              <Input type='text'/>
+</Form.Item>
 
           <hr className='hr-def'/>
 
@@ -122,7 +137,10 @@ const CreateDegreeUi =()=>{
           ) : getFieldValue('type') === 'Disciplinary' ? (
             <div name="customizeType"  rules={[{ required: true }]}>
                <h6 className='BlkTitle mtt-15'> Enter Main Subject</h6>
-              <Input type='text'/>
+               <Form.Item name="mainSubject"  rules={[{ required: true }]}>
+
+<Input type='text'/>
+</Form.Item>
               <hr className='hr-def'/>
 
             </div>): null;
@@ -131,16 +149,24 @@ const CreateDegreeUi =()=>{
       
 
       <h6 className='Title mtt-15'> Degree Importance/Overview </h6>
+      <Form.Item name="degreeOverview"  rules={[{ required: true }]}>
   <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the degree overview' />
-
+</Form.Item>
   <h6 className='Title'> Degree Content</h6>
+  <Form.Item name="degreeContent"  rules={[{ required: true }]}>
           <TextArea  rows={4} /> 
-
+          </Form.Item>
           <h6 className='Title mtt-15'> Total Number of Courses</h6>
+      <Form.Item name="totalNumberCourses"  rules={[{ required: true }]}>
+          
           <Input placeholder="total courses" type='number'  />
+          </Form.Item>
 
           <h6 className='BlkTitle mtt-15'> Course Name</h6>
+      <Form.Item name="coursename"  rules={[{ required: true }]}>
+
           <Input placeholder="course name"  />
+          </Form.Item>
           <Form.List name="course">
         {(fields, { add, remove }, { errors }) => (
           <>
@@ -162,7 +188,10 @@ const CreateDegreeUi =()=>{
                     },
                   ]}
                 >
+                  <Form.Item name="courseName"  rules={[{ required: true }]}>
                   <Input placeholder="course name"  />
+</Form.Item>
+                 
                 </div>
                       </div>
 
@@ -195,10 +224,16 @@ const CreateDegreeUi =()=>{
       </Form.List>
         
       <h6 className='Title mtt-15'> Total Number of Online Courses</h6>
+      <Form.Item name="totalCourses"  rules={[{ required: true }]}>
+      
           <Input placeholder="total courses" type='number'  />
-          <h6 className='BlkTitle mtt-15'> Online Course Name</h6>
-          <Input placeholder="online course name"  />
+          </Form.Item>
 
+          <h6 className='BlkTitle mtt-15'> Online Course Name</h6>
+      <Form.Item name="online course name"  rules={[{ required: true }]}>
+         
+          <Input placeholder="online course name"  />
+          </Form.Item>
           <Form.List name="online">
         {(fields, { add, remove }, { errors }) => (
           <>
@@ -220,7 +255,10 @@ const CreateDegreeUi =()=>{
                     },
                   ]}
                 >
-                  <Input placeholder="online course name"  />
+                <Form.Item name="MainDisciplinary"  rules={[{ required: true }]}>
+
+<Input placeholder="course name"  />
+</Form.Item>
                 </div>
                       </div>
 
@@ -254,10 +292,14 @@ const CreateDegreeUi =()=>{
         
 
       <h6 className='Title mtt-15'> Total Number of Offline Courses</h6>
-          <Input placeholder="total courses" type='number'  />
+      <Form.Item name="offline total"  rules={[{ required: true }]}>
+     <Input placeholder="total courses" type='number'  />
+          </Form.Item>
           <h6 className='BlkTitle mtt-15'> Offline Course Name</h6>
+      <Form.Item name="offlinename"  rules={[{ required: true }]}>
+          
           <Input placeholder="offline course name"  />
-
+</Form.Item>
           <Form.List name="offline">
         {(fields, { add, remove }, { errors }) => (
           <>
@@ -279,7 +321,10 @@ const CreateDegreeUi =()=>{
                     },
                   ]}
                 >
-                  <Input placeholder="offline name"  />
+                 <Form.Item name="offlineName"  rules={[{ required: true }]}>
+
+<Input placeholder="offline name" />
+</Form.Item>
                 </div>
                       </div>
 
@@ -310,10 +355,11 @@ const CreateDegreeUi =()=>{
           </>
         )}
       </Form.List>
-        
       <h6 className='Title mtt-15'> Faculty Name</h6>
+      <Form.Item name="facName"  rules={[{ required: true }]}>
+    
        <Input type='text'/>
-
+</Form.Item>
           <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
           <Upload {...Uploadprops} >
     <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
@@ -342,7 +388,10 @@ const CreateDegreeUi =()=>{
                 >
                   
                   <h6 className='BlkTitle mtt-15'> Faculty Name</h6>
-       <Input type='text'/>
+                  <Form.Item name="faculty"  rules={[{ required: true }]}>
+
+<Input placeholder="faculty"  />
+</Form.Item>
 
                 </div>
                 <div
@@ -377,6 +426,8 @@ const CreateDegreeUi =()=>{
       </Form.List>
      
       <h6 className='Title mtt-15'> Course Country</h6>
+      <Form.Item name="country"  rules={[{ required: true }]}>
+      
          <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -397,8 +448,10 @@ const CreateDegreeUi =()=>{
     
     </Option>
   </Select>
-
+</Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
+  <Form.Item name="city"  rules={[{ required: true }]}>
+  
          <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -419,11 +472,13 @@ const CreateDegreeUi =()=>{
     
     </Option>
   </Select>
-
+</Form.Item>
 
       <h6 className='Title mtt-15'> List of Compulsory Subjects </h6>
+      <Form.Item name="compulsorySubject"  rules={[{ required: true }]}>
+      
           <Input placeholder="compulsory subject name"  />
-
+</Form.Item>
           <Form.List name="compulsory">
         {(fields, { add, remove }, { errors }) => (
           <>
@@ -479,8 +534,10 @@ const CreateDegreeUi =()=>{
         
 
       <h6 className='Title mtt-15'> List of Optional Subjects </h6>
-          <Input placeholder="optional subject name"  />
+      <Form.Item name="optionalSubname"  rules={[{ required: true }]}>
 
+          <Input placeholder="optional subject name"  />
+</Form.Item>
           <Form.List name="optional ">
         {(fields, { add, remove }, { errors }) => (
           <>
@@ -535,11 +592,21 @@ const CreateDegreeUi =()=>{
       </Form.List>
         
       <h6 className='Title mtt-15'> Degree Offering Institute</h6>
+      <Form.Item name="degreeOfferingInstitute"  rules={[{ required: true }]}>
+
          <Input  type='text'/>
+         </Form.Item>
+         
          <h6 className='Title mtt-15'> Institue Web Address</h6>
+      <Form.Item name="web address"  rules={[{ required: true }]}>
+         
          <Input  type='text'/>
+         </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
+      <Form.Item name="instDetails"  rules={[{ required: true }]}>
+         
          <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
+         </Form.Item>
 
          <Divider><label> Add Institute Complete Profile </label></Divider>
          <Link to='/Institute/Reg' target="_blank">
@@ -549,12 +616,21 @@ const CreateDegreeUi =()=>{
        </Link> 
 
          <h6 className='Title mtt-15'>Teaching Medium Institute</h6>
-         <Input  type='text'/>
-         <h6 className='Title mtt-15'>Teaching Medium Institue Web Address</h6>
-         <Input  type='text'/>
-         <h6 className='Title mtt-15'>Add Institute Details</h6>
- <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
+      <Form.Item name="teachingmedium"  rules={[{ required: true }]}>
 
+         <Input  type='text'/>
+         </Form.Item>
+
+         <h6 className='Title mtt-15'>Teaching Medium Institue Web Address</h6>
+      <Form.Item name="teachingmediumweb"  rules={[{ required: true }]}>
+
+         <Input  type='text'/>
+         </Form.Item>
+         <h6 className='Title mtt-15'>Add Institute Details</h6>
+      <Form.Item name="inssdetails"  rules={[{ required: true }]}>
+
+ <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
+</Form.Item>
          <Divider><label> Add Institute Complete Profile </label></Divider>
          <Link to='/Institute/Reg' target="_blank">
          <Button type="default" block>
@@ -563,8 +639,13 @@ const CreateDegreeUi =()=>{
        </Link>
 
        <h6 className='Title mtt-15'> Duration</h6>
+      <Form.Item name="durationfrom"  rules={[{ required: true }]}>
+
          <Input  type='number'/>
+         </Form.Item>
          <h6 className='Title mtt-15'> Duration For</h6>
+      <Form.Item name="durationCrit"  rules={[{ required: true }]}>
+
          <Select
     style={{ width: '100%' }}
    
@@ -586,14 +667,21 @@ const CreateDegreeUi =()=>{
     
     </Option>
   </Select>
-
+</Form.Item>
   <h6 className='Title mtt-15'> Hours Per week</h6>
-         <Input  type='number'/>
+  <Form.Item name="hoursPerWeek"  rules={[{ required: true }]}>
 
+         <Input  type='number'/>
+</Form.Item>
          <h6 className='Title mtt-15'> Total Cost</h6>
-         <Input  type='number'/>
 
+      <Form.Item name="totalCost"  rules={[{ required: true }]}>
+
+         <Input  type='number'/>
+</Form.Item>
          <h6 className='Title mtt-15'> Currency</h6>
+      <Form.Item name="currency"  rules={[{ required: true }]}>
+
          <Select
     style={{ width: '100%' }}
    
@@ -615,22 +703,36 @@ const CreateDegreeUi =()=>{
     
     </Option>
   </Select>
- 
+ </Form.Item>
          <h6 className='Title mtt-15'> Cost Breakdown</h6>
-         <Input  type='number'/>
+      <Form.Item name="breakDown"  rules={[{ required: true }]}>
 
+         <TextArea rows={3}/>
+</Form.Item>
          <h6 className='Title mtt-15'> Financial Aid</h6>
+      <Form.Item name="financialAid"  rules={[{ required: true }]}>
+
          <Radio.Group name="radiogroup" defaultValue={'online'}>
+           
     <Radio  value={'Yes'}>Yes</Radio>
     <Radio   value={'No'}>No</Radio>
   </Radio.Group>
-
+</Form.Item>
   <h6 className='Title mtt-15'> Financial Aid Details </h6>
-          <TextArea  rows={3} />
+  <Form.Item name="financialAidDetails"  rules={[{ required: true }]}>
+           <TextArea  rows={3} />
+           </Form.Item>
+           
           <h6 className='Title mtt-15'>Starting Date </h6>
+  <Form.Item name="startingdate"  rules={[{ required: true }]}>
+
           <DatePicker  style={{width:'100%'}}  />
+          </Form.Item>
           <h6 className='Title mtt-15'> Application Deadline </h6>
+          <Form.Item name="AppDeadline"  rules={[{ required: true }]}>
+
           <DatePicker   style={{width:'100%'}}  />
+          </Form.Item>
 
           <h6 className='BlkTitle mtt-15'>Add Course Details  </h6>
   <hr className='hr-def mb-0'/>
@@ -642,7 +744,7 @@ const CreateDegreeUi =()=>{
 
   <hr className='hr-def'/>
           <div className='text-center mtt-5'>
-              <Button type='primary'> Submit </Button>
+              <Button type='primary' htmlType="submit"> Submit </Button>
           </div>
           </Form>
         </div>
