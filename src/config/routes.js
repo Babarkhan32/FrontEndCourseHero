@@ -69,7 +69,7 @@ const Routes=()=>{
 <Route exact path='/Student/Reg' component={StudentRegistration}/>
 <Route exact path='/Institute/Reg' component={InstituteReg}/>
 <Route exact path='/Faculty/Reg' component={FacultyReg}/>
-<Route exact path='/Create/Degree' component={CreateDegree}/>
+<PrivateRoute exact path='/Create/Degree'><CreateDegree></CreateDegree></PrivateRoute>
 </Switch>
         </div>
     </Router>
