@@ -2,8 +2,12 @@ import React,{useState} from 'react';
 import { Card,Modal,Rate,Button,Popover,Timeline} from 'antd';
 
 
-const DegreeCardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language})=>{
-
+const DegreeCardUi=({courseName,totalCost,type,offlinetotal,totalNumberCourses,
+  durationFrom,durationCrit,degreeType,hoursPerWeek,Dep,rev,
+   uni, platform, country,cost, financialAid,AppDeadline, date
+   ,rate,language,course,facName,degreeOfferingInstitute,currency,startingdate,
+   courseSpecification,online,offline,compulsory,optional,onlinetotal,coursetotal})=>{
+      console.log(AppDeadline,"App Dead line")
     const [visible,setVisible]=useState(false),
     [courseList,setCourseList]=useState(false),
     [onlineList,setonlineList]=useState(false),
@@ -61,13 +65,14 @@ showOptional=()=>{
     
     
   };
+console.log("Course NAME",courseName)
 
     return(
         <div> 
         <Card className='CourseCards'  hoverable
         title={
         <div> 
-          <h6>Web Security Fundamentals  <label className='departmentLabel'> Mathematics / Second Subject</label>  </h6> 
+          <h6>{courseName}  <label className='departmentLabel'>{courseSpecification}</label>  </h6> 
         
           </div>}
         extra={<div> 
@@ -84,11 +89,11 @@ showOptional=()=>{
       >
   <div className='row'>
     <div className='col-11 col-sm-11 col-md-11 col-lg-11 col-xl-11'>
-   <label className='LinkedTitle'>Harward Univerity </label> &nbsp; &nbsp;  via &nbsp; &nbsp;  <label className='LinkedTitle'> edx </label> &nbsp; <label className='smallLabel'>-Masters </label>
+   <label className='LinkedTitle'>{degreeOfferingInstitute} </label> &nbsp; &nbsp;  via &nbsp; &nbsp;  <label className='LinkedTitle'> edx </label> &nbsp; <label className='smallLabel'>-Masters </label>
     </div>
     
     <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'>
-    <label className='LinkedTitle'>English </label> 
+    <label className='LinkedTitle'>{language}</label> 
     </div>
   </div>
  
@@ -97,13 +102,12 @@ showOptional=()=>{
   <label className='LabelTitle'> Duration: </label> &nbsp;  <label className='LabelValue'> 2 Hour/W </label> &nbsp; <label className='LabelValue'> 2 Months </label>
   </div>
   <div className='col-7 col-sm-7 col-md-7 col-lg-7 col-xl-7 '>
-  <label className='LabelTitle'> Courses: </label>  &nbsp;  <label className='LinkedCount' onClick={showCourse}> 7 </label>
-  &nbsp; <label className='smallLabel'>Online</label> &nbsp;  <label className='LinkedCount' onClick={showOnline}> 5 </label>
-  &nbsp; <label className='smallLabel'>Offline</label> &nbsp;  <label className='LinkedCount' onClick={showOffline}> 2 </label>
-  &nbsp; <label className='smallLabel'> Compulsory</label> &nbsp;  <label className='LinkedCount' onClick={showCompulsory}> 4 </label>
-  &nbsp; <label className='smallLabel'>Optional</label> &nbsp;  <label className='LinkedCount'  onClick={showOptional}> 3 </label>
+  <label className='LabelTitle'> Courses: </label>  &nbsp;  <label className='LinkedCount' onClick={showCourse}> {totalNumberCourses} </label>
+  &nbsp; <label className='smallLabel'>Online</label> &nbsp;  <label className='LinkedCount' onClick={showOnline}>{online.length} </label>
+  &nbsp; <label className='smallLabel'>Offline</label> &nbsp;  <label className='LinkedCount' onClick={showOffline}> {offlinetotal} </label>
+  &nbsp; <label className='smallLabel'> Compulsory</label> &nbsp;  <label className='LinkedCount' onClick={showCompulsory}>{compulsory.length}  </label>
+  &nbsp; <label className='smallLabel'>Optional</label> &nbsp;  <label className='LinkedCount'  onClick={showOptional}>{optional.length}  </label>
      </div>
-
      <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'>
   
    <label className='LinkedTitle' onClick={showModal}> Faculty </label> 
@@ -130,13 +134,13 @@ showOptional=()=>{
   
   <div className='row'>
   <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'> 
-  <label className='LabelTitle'> Cost: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'>  $24000 </label >
+  <label className='LabelTitle'> Cost: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'>  {totalCost}/{currency} </label >
   </div>
   <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'> 
-  <label className='LabelTitle'> Aid: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> No </label >
+  <label className='LabelTitle'> Aid: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {financialAid} </label >
   </div>
       <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'>
-    <label className='LabelTitle'>Location:  </label>   <label className='LabelValue'> USA </label > <label className='smallLabel'>-Boston</label>
+    <label className='LabelTitle'>Location:  </label>   <label className='LabelValue'>{country} </label > 
     </div> 
 
     
@@ -146,10 +150,10 @@ showOptional=()=>{
 
   <div className='row'>
   <div className='col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5'> 
-  <label className='LabelTitle'> Application Deadline: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'>2020-08-01</label >
+  <label className='LabelTitle'> Application Deadline: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'>{AppDeadline}</label >
   </div>
   <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'> 
-  <label className='LabelTitle'> Start Date: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> 2020-08-10 </label >
+  <label className='LabelTitle'> Start Date: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {startingdate} </label >
   </div>
   {/* <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'> 
   <label className='LabelTitle'> Language: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {language} </label>
@@ -198,13 +202,17 @@ showOptional=()=>{
          }
        >
        <Timeline>
-    <Timeline.Item> <h6 className='ItemHeading'> Automata </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'> Data Structures </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Human Computer Interaction </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Artificial Intelligence </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Compiler Construction </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Statistics </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Digital Logic and Designs </h6> </Timeline.Item>
+         {
+           course.map(course=>{
+             return(
+              <Timeline.Item> <h6 className='ItemHeading'> {course} </h6></Timeline.Item>
+             )
+           }
+
+           )
+   
+   
+         }
   </Timeline>
 
 
@@ -221,11 +229,17 @@ showOptional=()=>{
          }
        >
        <Timeline>
-    <Timeline.Item> <h6 className='ItemHeading'> Automata </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'> Data Structures </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'> Human Computer Interaction </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'> Artificial Intelligence </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Compiler Construction</h6></Timeline.Item>
+       {
+           online.map(online=>{
+             return(
+              <Timeline.Item> <h6 className='ItemHeading'> {online} </h6></Timeline.Item>
+             )
+           }
+
+           )
+   
+   
+         }
   </Timeline>
 
 
@@ -246,8 +260,15 @@ showOptional=()=>{
        <Timeline>
   
   
-    <Timeline.Item><h6 className='ItemHeading'>Statistics </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Digital Logic and Designs </h6></Timeline.Item>
+       {
+           offline.map(offline=>{
+             return(
+              <Timeline.Item> <h6 className='ItemHeading'> {offline} </h6></Timeline.Item>
+             )
+           }
+
+           )
+   }
   </Timeline>
 
 
@@ -265,13 +286,17 @@ showOptional=()=>{
              <Button type='primary' onClick={hideCompulsory}> OK</Button>
          }
        >
-       <Timeline>
-    <Timeline.Item><h6 className='ItemHeading'>Automata </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Data Structures</h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Human Computer Interaction</h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Artificial Intelligence</h6></Timeline.Item>
+     {
+           compulsory.map(compulsory=>{
+             return(
+              <Timeline.Item> <h6 className='ItemHeading'> {compulsory} </h6></Timeline.Item>
+             )
+           }
+
+           )
    
-  </Timeline>
+   
+         }
 
 
          
@@ -287,9 +312,17 @@ showOptional=()=>{
          }
        >
        <Timeline>
-    <Timeline.Item><h6 className='ItemHeading'>Compiler Construction </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Statistics </h6></Timeline.Item>
-    <Timeline.Item><h6 className='ItemHeading'>Digital Logic and Designs </h6></Timeline.Item>
+       {
+           optional.map(optional=>{
+             return(
+              <Timeline.Item> <h6 className='ItemHeading'> {optional} </h6></Timeline.Item>
+             )
+           }
+
+           )
+   
+   
+         }
   </Timeline>
 
 

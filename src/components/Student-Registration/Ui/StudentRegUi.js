@@ -3,6 +3,7 @@ import HeaderCont from '../../Header/Container/Header';
 import {Input,Select,DatePicker,Upload,Button,Form} from 'antd';
 import { DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
 import ImgCrop from 'antd-img-crop';
+import insertStudent from './../api/insertStudent';
 
 const {TextArea} = Input;
 const { Option } = Select;
@@ -10,7 +11,6 @@ const { Option } = Select;
 const selectBefore = (
   <Select defaultValue="$" className="select-before">
     <Option value="$">$</Option>
-    <Option value="Pkr">Pkr</Option>
   </Select>
 );
 
@@ -25,7 +25,30 @@ const [fileList, setFileList] = useState([
   const onFinish=(values)=>{
     values.imageSet=fileList;
 
+    let obj={
+    Degree: values.degreeName,
+    type: values.degreeType,
+    institution:values.degreeInstitution,
+    year:values.passingYear
+    }
+
+    if(values.degrees&&values.degrees.length>0){
+      values.degrees.push(obj);
+    }else{
+      values.degrees=[obj]
+    }
+
+    delete values.degreeName;
+    delete values.degreeType;
+    delete values.degreeInstitution;
+    delete values.passingYear
+
+
     console.log("Success",values);
+
+  insertStudent(values).then(result=>{
+    console.log(result);
+  })
   }
   
   
@@ -162,7 +185,7 @@ const [fileList, setFileList] = useState([
                   <Input placeholder="Degree Name" />
                   </Form.Item>
                   <h6 className='Title mtt-15'>Degree Type </h6>
-                  <Form.Item name="degreeTyppe"  rules={[{ required: true }]}> 
+                  <Form.Item name="degreeType"  rules={[{ required: true }]}> 
                  <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -204,7 +227,7 @@ const [fileList, setFileList] = useState([
                      <DatePicker  style={{width:'100%'}}  />
                      
                      </Form.Item>
-      <Form.List name="users">
+      <Form.List name="degrees">
         {(fields, { add, remove }) => (
           <>
             {fields.map(field => (
@@ -376,8 +399,8 @@ const [fileList, setFileList] = useState([
         <Form.Item name="desiredMode"  rules={[{ required: true }]}> 
         <Select placeholder='Select Mode' allowClear style={{ width: '100%' }}  optionLabelProp="label">
       <Option value="Online" label='Online'>Online</Option>
-      <Option value="Offline" label='Female'>Offline</Option>
-      <Option value="Both" label='Both' >
+      <Option value="Offline" label='Offline'>Offline</Option>
+      <Option value="Other" label='Other' >
       Other
       </Option>
     </Select>

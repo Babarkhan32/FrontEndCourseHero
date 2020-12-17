@@ -2,10 +2,11 @@ import React,{useState} from 'react';
 import { Card,Modal,Rate,Button,Popover} from 'antd';
 
 
-const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language})=>{
+const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language,
+  duration,durationFor,hoursPerWeek,courseSpecification})=>{
 
     const [visible,setVisible]=useState(false),
-
+   
   showModal = () => {
    
       setVisible(true) 
@@ -51,13 +52,13 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
     </div>
     
     <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
-    <label className='LinkedTitle'>Certificate Course<label className='smallLabel'>-Credit </label>  </label> 
+    <label className='LinkedTitle'>{courseSpecification}<label className='smallLabel'>{courseSpecification} </label>  </label> 
     </div>
   </div>
  
   <div className='row'>
   <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'> 
-  <label className='LabelTitle'> Duration: </label> &nbsp; &nbsp; &nbsp; <label className='LabelValue'> 2 Hour/W </label> &nbsp; &nbsp; <label className='LabelValue'> 2 Months </label>
+  <label className='LabelTitle'> Duration: </label> &nbsp; &nbsp; &nbsp; <label className='LabelValue'>{hoursPerWeek}/ {durationFor} </label> &nbsp; &nbsp; <label className='LabelValue'> {duration}/ {durationFor} </label>
   </div>
 
   <div className='col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5'>
@@ -69,7 +70,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
    <Popover content={"Faculty Introduction"} placement='left' trigger="hover">
   <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
  
-   <label className='LinkedTitle'> Faculty </label> 
+   <label onClick={showModal} className='LinkedTitle'> Faculty </label> 
   {/* <label className='LabelTitle'> Online: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LinkedTitle'> 3 </label> */}
      </div>
      </Popover>
@@ -130,7 +131,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
              <Button type='primary' onClick={handleOk}> OK</Button>
          }
        >
-         <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+         <p>{aid}
 
 </p>
          

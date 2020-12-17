@@ -9,52 +9,11 @@ const { RangePicker } = DatePicker;
 
 
 const FacultyRegUi=(props)=>{
- 
-  const [fileList, setFileList] = useState([
-
-  ]);
- 
-  
-
-  
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-    console.log(newFileList);
-  };
-
-  
-  const onPreview = async file => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise(resolve => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
-  };
-  
-  const normFile = e => {
-      console.log('Upload event:', e);
-      if (Array.isArray(e)) {
-        return e;
-      }
-      return e && e.fileList;
-    };
-
-
-
-
-    return(
+ return(
         <div className='MainCont'>
       <div className='PageWrapper'> 
 <HeaderCont/>
- 
-<div className='container'>
+ <div className='container'>
 <div className='row'>
     <div className='col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2'></div>
     <div className='col-10 col-sm-10 col-md-8 col-lg-8 col-xl-8'>
@@ -121,11 +80,11 @@ const FacultyRegUi=(props)=>{
       <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
-        fileList={fileList}
-        onChange={onChange}
-        onPreview={onPreview}
+        fileList={props.fileList}
+        onChange={props.onChange}
+        onPreview={props.onPreview}
       >
-        {fileList.length < 5 && '+ Upload'}
+        {props.fileList.length < 5 && '+ Upload'}
       </Upload>
       
     </ImgCrop>
@@ -317,7 +276,7 @@ const FacultyRegUi=(props)=>{
          <Input  type='number'/>
 </Form.Item>
          <h6 className='Title mtt-15'> Area of Expertise</h6>
-  <Form.Item name="Area of expertise"  rules={[{ required: true }]}> 
+  <Form.Item name="Areaofexpertise"  rules={[{ required: true }]}> 
          <Input placeholder="Area of expertise"  />
          </Form.Item>
           <Form.List name="Expertise">
@@ -377,11 +336,10 @@ const FacultyRegUi=(props)=>{
       <h6 className='BlkTitle mtt-15'> Details of Courses Taught </h6>
       <hr className='hr-def mb-0'/>
       <h6 className='Title mtt-15'>Course Name </h6>
-               <Form.Item name="Course Name"  rules={[{ required: true }]}> 
+               <Form.Item name="CourseName"  rules={[{ required: true }]}> 
          <Input placeholder="Course Name"  />
-         </Form.Item>       <Form.Item name="coursesTaught"  rules={[{ required: true }]}> 
-         <Input placeholder="coursesTaught"  />
-         </Form.Item>
+         </Form.Item>      
+        
                   <h6 className='Title mtt-15'>Course Details </h6>
                 <Form.Item name="coursesDetails"  rules={[{ required: true }]}> 
          <TextArea  row={3} placeholder="coursesTaught"  />
@@ -391,7 +349,7 @@ const FacultyRegUi=(props)=>{
                  <Input placeholder="institute"  />
          </Form.Item>
 
-                     <Form.List name="users">
+                     <Form.List name="courseTaughtList">
         {(fields, { add, remove }) => (
           <>
             {fields.map(field => (
@@ -412,8 +370,8 @@ const FacultyRegUi=(props)=>{
                 <h6 className='Title mtt-15'>Course Details </h6>
                 <Form.Item
                   {...field}
-                  name={[field.name, 'details']}
-                  fieldKey={[field.fieldKey, 'details']}
+                  name={[field.name, 'courseName']}
+                  fieldKey={[field.fieldKey, 'courseName']}
                   rules={[{ required: true, message: 'Missing details' }]}
                 >
                      
@@ -496,7 +454,7 @@ const FacultyRegUi=(props)=>{
         
 
 
-         <Form.List name="users">
+         <Form.List name="empHistory">
         {(fields, { add, remove }) => (
           <>
             {fields.map(field => (

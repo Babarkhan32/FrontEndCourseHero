@@ -1,8 +1,8 @@
 
 import { callApi } from './../../../config/callApi';
-const insertInstitute=async(data)=>{
+const insertStudent=async(data)=>{
   try{
-console.log("Data",data.imageSet)
+console.log("Data",data)
   //   var form_data = new FormData();
 
   //   for ( var key in data ) {
@@ -10,11 +10,11 @@ console.log("Data",data.imageSet)
   // }
 
    let method='POST';
-  let queryResult=await callApi('/institute/insert',method,null,data,'');
+  let queryResult=await callApi('/student/insert',method,null,data,'');
 return queryResult.data;
 
   }catch(e){
       console.log(e);
 }
 }
-export default insertInstitute;
+export default insertStudent;

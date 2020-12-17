@@ -40,16 +40,51 @@ const SearchUi=(props)=>{
       {
         props.data.length>0 ?
         props.data.map(course=>{
+          console.log(course,"Rent wali garhi");
           return(
-            <CardUi Subject={course.name} Dep={course.subjectCategory} rev='200' uni={course.institute}
-            rate={2} platform='Coursera' country={course.courseCountry} language={course.courseLanguage}
-             cost={course.cost} aid='Yes' deadline={course.ending_date}  date={course.starting_date}/>
-          )
+            
+            course.isDegree? 
+            <DegreeCardUi compulsory={course.compulsory}
+            online={course.online}
+            totalCost={course.totalCost}
+            courseName={course.courseName}
+            country={course.country}
+            startingdate={course.startingdate}
+            course={course.course}
+            courseSpecification={course.courseSpecification}
+            facName={course.facName}
+            language={course.courseLanguage}
+            AppDeadline={course.AppDeadline}
+            financialAid={course.financialAid}
+            durationCrit={course.durationCrit}
+            offline={course.offline}
+            offlinetotal={course.offlinetotal}
+            onlinetotal={course.onlinetotal}
+            currency={course.currency}
+            degreeOfferingInstitute={course.degreeOfferingInstitute}
+            totalNumberCourses={course.totalNumberCourses}
+            optional={course.optional}/>
+            
+            : !course.isDegree?
+            <CardUi Subject={course.courseName} 
+            Dep={course.programSpecs}
+            rev={course.totalCost} 
+            uni={course.courseOfferingInstitute}
+            rate={2}
+            platform='Coursera' 
+            country={course.courseCountry} 
+            language={course.courseLanguage}
+            cost={course.totalCost}
+            courseSpecification={course.courseSpecification}
+            aid={course.financialAid} deadline={course.endingDate} 
+            date={course.startingDate} duration={course.duration}
+            hoursPerWeek={course.hoursPerWeek} durationFor={course.durationFor} />
+          :"")
         })
         :<div className='text-center mtt-10'><Empty/></div>
       }    
       
-      <DegreeCardUi/>
+     
           
        {/* <br/>
        <CardUi Subject='Media Studies' Dep='(Personal Development)' rev='400' uni='Oxford University' rate={4} platform='Coursera' country=' Pakistan' cost='50000' aid='No' deadline=' 2020-08-01 ' date='2020-08-10'/>

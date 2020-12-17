@@ -29,46 +29,7 @@ const CreateUi=(props)=>{
     },
   };
 
-  function handleChangeCategory(value) {
-    props.setSubjectCategory(value);
-   }
-   function handleChangeDurationFor(value){
-     props.setDurationFor(value);
-   }
-   function handleChangeAid(value){
-     props.setFinancialAid(value);
-   }
-   function handleSelectChange(value){
-     props.setCourseType(value);
-   }
-   function handleChangeCategory(value){
-      props.setSubjectCategory(value);
-   }
-   function onChangeStartingDate(date, dateString) {
-     props.setStartingDate(dateString);
-   }
-   function onChangeApplicationDeadLine(date, dateString) {
-     props.setApplicationDeadLine(dateString);
-   }
-   function handleChangeCountry(value){
-     props.setCourseCountry(value)
-   }
-   function handleChangeLanguage(value){
-     props.setCourseLanguage(value);
-   }
-   function handleChangeCurrency(value){
-     props.setCurrency(value);
-   }
-   function handleChangeMode(value){
-     props.setMode(value);
-   }
-
-
-   const onFinish=(value)=>{
-     console.log("Success",value);
-   }
   
-
 
     return(
       <div className='MainCont'>
@@ -85,10 +46,10 @@ const CreateUi=(props)=>{
       <div className='row'>
       <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'></div>
       <div className='col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10'>
-      <Form onFinish={onFinish} name="control-hooks">
+      <Form onFinish={props.onFinish} name="control-hooks">
           <h6 className='Title mtt-15'> Course Name</h6>
           <Form.Item name="courseName"  rules={[{ required: true }]}> 
-          <Input onChange={(e)=>props.setCourseName(e.target.value)} type='text'/>
+          <Input  type='text'/>
             </Form.Item>
           <h6 className='Title mtt-15'> Select Course Type </h6>
           {/* <Radio.Group name="type" defaultValue={'Disciplinary'}>
@@ -149,15 +110,15 @@ const CreateUi=(props)=>{
       <h6 className='Title mtt-15'> Mode</h6>
       <Form.Item name="mode"  rules={[{ required: true }]}> 
           <Radio.Group name="radiogroup" defaultValue={'online'}>
-    <Radio onChange={handleChangeMode} value={'Online'}>Online</Radio>
-    <Radio onChange={handleChangeMode} value={'Offline'}>Offline</Radio>
+    <Radio value={'Online'}>Online</Radio>
+    <Radio  value={'Offline'}>Offline</Radio>
   </Radio.Group>
 </Form.Item>
   <h6 className='Title mtt-15'> Course Language</h6>
   <Form.Item name="courseLanguage"  rules={[{ required: true }]}> 
          <Select
     style={{ width: '100%' }}
-    onChange={handleChangeLanguage}
+  
     optionLabelProp="label"
   >
     <Option value="English" label="Englishn">
@@ -183,7 +144,7 @@ const CreateUi=(props)=>{
 </Form.Item>
   <h6 className='Title'> Faculty Name</h6>
   <Form.Item name="facultyName"  rules={[{ required: true }]}> 
-       <Input onChange={(e)=>props.setFaculty(e.target.value)}/>
+       <Input/>
 </Form.Item>
           <h6 className='Title mtt-15'> Faculty Resume</h6>
           <Form.Item name="facultyResume"  rules={[{ required: true }]}> 
@@ -201,7 +162,7 @@ const CreateUi=(props)=>{
           <Form.Item name="courseSpecification"  rules={[{ required: true }]}> 
           <Select
     style={{ width: '100%' }}
-    onChange={handleSelectChange}
+   
     optionLabelProp="label"
   >
     <Option value="Certificate" label="Certificate">
@@ -224,11 +185,11 @@ const CreateUi=(props)=>{
 
   <h6 className='Title mtt-15'> Course Offering Institute</h6>
   <Form.Item name="courseOfferingInstitute"  rules={[{ required: true }]}> 
-         <Input onChange={(e)=>props.setCourseOfferingInstitute(e.target.value)} type='text'/>
+         <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'> Institue Web Address</h6>
          <Form.Item name="instituteWebAddress"  rules={[{ required: true }]}> 
-         <Input onChange={(e)=>props.setInstituteWebAddress(e.target.value)} type='text'/>
+         <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
          <Form.Item name="instituteDetails"  rules={[{ required: true }]}> 
@@ -243,11 +204,11 @@ const CreateUi=(props)=>{
 
          <h6 className='Title mtt-15'>Teaching Medium Institute</h6>
          <Form.Item name="mediumInstitute"  rules={[{ required: true }]}> 
-         <Input onChange={(e)=>props.setMediumInstitute(e.target.value)}  type='text'/>
+         <Input   type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Teaching Medium Institue Web Address</h6>
          <Form.Item name="mediumInstituteWebAddress"  rules={[{ required: true }]}> 
-         <Input onChange={(e)=>props.setMediumInstituteWebAddress(e.target.value)} type='text'/>
+         <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
          <Form.Item name="mediumInstituteDetails"  rules={[{ required: true }]}> 
@@ -265,7 +226,6 @@ const CreateUi=(props)=>{
        <Form.Item name="courseCountry"  rules={[{ required: true }]}> 
          <Select
     style={{ width: '100%' }}
-    onChange={handleChangeCountry}
     optionLabelProp="label"
   >
     <Option value="Pakistan" label="Pakistan">
@@ -311,7 +271,7 @@ const CreateUi=(props)=>{
 
           <h6 className='Title mtt-15'> Duration</h6>
           <Form.Item name="duration"  rules={[{ required: true }]}> 
-         <Input onChange={(e)=>props.setDuration(e.target.value)} type='number'/>
+         <Input type='number'/>
          </Form.Item>
          <h6 className='Title mtt-15'> Duration For</h6>
          <Form.Item name="durationFor"  rules={[{ required: true }]}> 
@@ -321,17 +281,16 @@ const CreateUi=(props)=>{
 
   <h6 className='Title mtt-15'> Hours Per week</h6>
   <Form.Item name="hoursPerWeek"  rules={[{ required: true }]}> 
-         <Input onChange={(e)=>props.setHoursPerWeek(e.target.value)} type='number'/>
+         <Input type='number'/>
 </Form.Item>
          <h6 className='Title mtt-15'> Total Cost</h6>
          <Form.Item name="totalCost"  rules={[{ required: true }]}> 
-         <Input onChange={e=>{props.setTotalCost(e.target.value)}} type='number'/>
+         <Input type='number'/>
 </Form.Item>
          <h6 className='Title mtt-15'> Currency</h6>
          <Form.Item name="currency"  rules={[{ required: true }]}> 
          <Select
     style={{ width: '100%' }}
-    onChange={handleChangeCurrency}
     optionLabelProp="label"
   >
     <Option value="$" label="$">
@@ -342,29 +301,26 @@ const CreateUi=(props)=>{
   </Select>
   </Form.Item>
  
-         <h6 className='Title mtt-15'> Cost Breakdown</h6>
-         <Form.Item name="costBreakDown"  rules={[{ required: true }]}> 
-         <Input onChange={(e)=>props.setCostBreakDown(e.target.value)} type='number'/>
-</Form.Item>
+      
          <h6 className='Title mtt-15'> Financial Aid</h6>
          <Form.Item name="financialAid"  rules={[{ required: true }]}> 
          <Radio.Group name="radiogroup" defaultValue={'online'}>
-    <Radio onChange={handleChangeAid} value={'Yes'}>Yes</Radio>
-    <Radio  onChange={handleChangeAid} value={'No'}>No</Radio>
+    <Radio value={'Yes'}>Yes</Radio>
+    <Radio  value={'No'}>No</Radio>
   </Radio.Group>
   </Form.Item>
 
   <h6 className='Title mtt-15'> Financial Aid Details </h6>
   <Form.Item name="financialAidDetails"  rules={[{ required: true }]}> 
-          <TextArea onChange={(e)=>props.setFinancialAidDetails(e.target.value)} rows={3} />
+          <TextArea rows={3} />
           </Form.Item>
           <h6 className='Title mtt-15'>Starting Date </h6>
           <Form.Item name="startingDate"  rules={[{ required: true }]}> 
-          <DatePicker onChange={onChangeStartingDate} style={{width:'100%'}}  />
+          <DatePicker style={{width:'100%'}}  />
           </Form.Item>
           <h6 className='Title mtt-15'> Application Deadline </h6>
           <Form.Item name="endingDate"  rules={[{ required: true }]}> 
-          <DatePicker onChange={onChangeApplicationDeadLine}  style={{width:'100%'}}  />
+          <DatePicker  style={{width:'100%'}}  />
           </Form.Item>
           <h6 className='BlkTitle mtt-15'>Is this course is a part of any other program/degree ?  </h6>
   <hr className='hr-def mb-0'/>

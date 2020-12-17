@@ -1,37 +1,16 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import HeaderCont from '../../Header/Container/Header';
-import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message,} from 'antd';
-import { UploadOutlined,PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,InboxOutlined } from '@ant-design/icons';
+import {Input,Select,Radio,Button,DatePicker,Form} from 'antd';
+import { PlusOutlined,MinusCircleTwoTone } from '@ant-design/icons';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 
-const CreateDegreeUi =()=>{
+const CreateDegreeUi =(props)=>{
 
-    const Uploadprops = {
-        name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        headers: {
-          authorization: 'authorization-text',
-        },
-        onChange(info) {
-          if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
-          }
-          if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
-          } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-          }
-        },
-      };
-      const onFinish = (values) => {
-        console.log('Success:', values);
-      };
-
-    return(
+      return(
        <div className='MainCont'>
       <div className='PageWrapper'> 
 <HeaderCont/>
@@ -46,14 +25,14 @@ const CreateDegreeUi =()=>{
       <div className='row'>
       <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'></div>
       <div className='col-10 col-sm-10 col-md-10 col-lg-10 col-xl-10'>
-      <Form onFinish={onFinish}  name="control-hooks" >
+      <Form onFinish={props.onFinish}  name="control-hooks" >
       <h6 className='Title mtt-15'> Degree Name</h6>
 
-      <Form.Item name="degreeName"  rules={[{ required: true }]}>
+      <Form.Item name="courseName"  rules={[{ required: true }]}>
           <Input type='text'/>
           </Form.Item>
           <h6 className='Title mtt-15'> Degree Specification</h6>
-          <Form.Item name="degreeType"  rules={[{ required: true }]}>
+          <Form.Item name="courseSpecification"  rules={[{ required: true }]}>
           <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -177,7 +156,7 @@ const CreateDegreeUi =()=>{
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
-                      <div
+                      <Form.Item
                   {...field}
                   validateTrigger={['onChange', 'onBlur']}
                   rules={[
@@ -188,11 +167,11 @@ const CreateDegreeUi =()=>{
                     },
                   ]}
                 >
-                  <Form.Item name="courseName"  rules={[{ required: true }]}>
+                  
                   <Input placeholder="course name"  />
 </Form.Item>
                  
-                </div>
+               
                       </div>
 
                       <div className='col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1'>
@@ -230,7 +209,7 @@ const CreateDegreeUi =()=>{
           </Form.Item>
 
           <h6 className='BlkTitle mtt-15'> Online Course Name</h6>
-      <Form.Item name="online course name"  rules={[{ required: true }]}>
+      <Form.Item name="onlinecoursename"  rules={[{ required: true }]}>
          
           <Input placeholder="online course name"  />
           </Form.Item>
@@ -244,7 +223,7 @@ const CreateDegreeUi =()=>{
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
-                      <div
+                      <Form.Item
                   {...field}
                   validateTrigger={['onChange', 'onBlur']}
                   rules={[
@@ -255,11 +234,11 @@ const CreateDegreeUi =()=>{
                     },
                   ]}
                 >
-                <Form.Item name="MainDisciplinary"  rules={[{ required: true }]}>
+               
 
 <Input placeholder="course name"  />
-</Form.Item>
-                </div>
+
+                </Form.Item>
                       </div>
 
                       <div className='col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1'>
@@ -292,7 +271,7 @@ const CreateDegreeUi =()=>{
         
 
       <h6 className='Title mtt-15'> Total Number of Offline Courses</h6>
-      <Form.Item name="offline total"  rules={[{ required: true }]}>
+      <Form.Item name="offlinetotal"  rules={[{ required: true }]}>
      <Input placeholder="total courses" type='number'  />
           </Form.Item>
           <h6 className='BlkTitle mtt-15'> Offline Course Name</h6>
@@ -310,7 +289,7 @@ const CreateDegreeUi =()=>{
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
-                      <div
+                      <Form.Item
                   {...field}
                   validateTrigger={['onChange', 'onBlur']}
                   rules={[
@@ -321,11 +300,10 @@ const CreateDegreeUi =()=>{
                     },
                   ]}
                 >
-                 <Form.Item name="offlineName"  rules={[{ required: true }]}>
-
-<Input placeholder="offline name" />
+              
+      <Input placeholder="offline name" />
 </Form.Item>
-                </div>
+              
                       </div>
 
                       <div className='col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1'>
@@ -360,7 +338,8 @@ const CreateDegreeUi =()=>{
     
        <Input type='text'/>
 </Form.Item>
-          <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
+
+          {/* <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
           <Upload {...Uploadprops} >
     <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
   </Upload>
@@ -423,8 +402,12 @@ const CreateDegreeUi =()=>{
             </div>
           </>
         )}
-      </Form.List>
-     
+      </Form.List> */}
+  
+          <h6 className='Title mtt-15'>Language</h6>
+          <Form.Item name="courseLanguage"  rules={[{ required: true }]}>
+<Input type='text'/>
+</Form.Item>
       <h6 className='Title mtt-15'> Course Country</h6>
       <Form.Item name="country"  rules={[{ required: true }]}>
       
@@ -489,7 +472,7 @@ const CreateDegreeUi =()=>{
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
-                      <div
+                      <Form.Item
                   {...field}
                   validateTrigger={['onChange', 'onBlur']}
                   rules={[
@@ -501,7 +484,7 @@ const CreateDegreeUi =()=>{
                   ]}
                 >
                   <Input placeholder="compulsory name"  />
-                </div>
+                </Form.Item>
                       </div>
 
                       <div className='col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1'>
@@ -538,7 +521,7 @@ const CreateDegreeUi =()=>{
 
           <Input placeholder="optional subject name"  />
 </Form.Item>
-          <Form.List name="optional ">
+          <Form.List name="optional">
         {(fields, { add, remove }, { errors }) => (
           <>
             {fields.map((field, index) => (
@@ -548,7 +531,7 @@ const CreateDegreeUi =()=>{
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
-                      <div
+                      <Form.Item
                   {...field}
                   validateTrigger={['onChange', 'onBlur']}
                   rules={[
@@ -560,7 +543,7 @@ const CreateDegreeUi =()=>{
                   ]}
                 >
                   <Input placeholder="optional  name"  />
-                </div>
+                </Form.Item>
                       </div>
 
                       <div className='col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1'>
@@ -598,7 +581,7 @@ const CreateDegreeUi =()=>{
          </Form.Item>
          
          <h6 className='Title mtt-15'> Institue Web Address</h6>
-      <Form.Item name="web address"  rules={[{ required: true }]}>
+      <Form.Item name="webaddress"  rules={[{ required: true }]}>
          
          <Input  type='text'/>
          </Form.Item>
@@ -608,12 +591,12 @@ const CreateDegreeUi =()=>{
          <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
          </Form.Item>
 
-         <Divider><label> Add Institute Complete Profile </label></Divider>
+         {/* <Divider><label> Add Institute Complete Profile </label></Divider>
          <Link to='/Institute/Reg' target="_blank">
          <Button type="default" block>
        Register Institiute 
        </Button>
-       </Link> 
+       </Link>  */}
 
          <h6 className='Title mtt-15'>Teaching Medium Institute</h6>
       <Form.Item name="teachingmedium"  rules={[{ required: true }]}>
@@ -631,12 +614,12 @@ const CreateDegreeUi =()=>{
 
  <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
 </Form.Item>
-         <Divider><label> Add Institute Complete Profile </label></Divider>
+         {/* <Divider><label> Add Institute Complete Profile </label></Divider>
          <Link to='/Institute/Reg' target="_blank">
          <Button type="default" block>
        Register Institiute 
        </Button>
-       </Link>
+       </Link> */}
 
        <h6 className='Title mtt-15'> Duration</h6>
       <Form.Item name="durationfrom"  rules={[{ required: true }]}>
@@ -692,7 +675,7 @@ const CreateDegreeUi =()=>{
     $
       
     </Option>
-    <Option value="PKR" label="PKR">
+    {/* <Option value="PKR" label="PKR">
      
     PKR
       
@@ -701,7 +684,7 @@ const CreateDegreeUi =()=>{
      
     Pound
     
-    </Option>
+    </Option> */}
   </Select>
  </Form.Item>
          <h6 className='Title mtt-15'> Cost Breakdown</h6>

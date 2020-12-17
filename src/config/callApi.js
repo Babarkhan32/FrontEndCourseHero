@@ -3,14 +3,21 @@ import axios from 'axios'
 import config from './constants'
 
 
-export const callApi=(address,method,headers,data)=>{
+export const callApi=(address,method,headers,data,type)=>{
+console.log("here is type",type);
+
+   let content_type='';
+    if(type=='form'){
+        content_type='multipart/form-data'
+    }else{
+        content_type='application/json'
+    }
 
     let token=localStorage.getItem('accessToken');
     if(method==='GET'){
         return axios.get(config.baseUrl+address,data, {
             headers: {
                 'authorization':'Beraer '+token,
-                'Accept' : 'application/json',
                 'Content-Type': 'application/json'
             }
         });
@@ -18,6 +25,7 @@ export const callApi=(address,method,headers,data)=>{
       console.log(data,"data");
         return axios.post(config.baseUrl+address+"/",data,{headers: {
             'authorization':token,
+            'Content-Type':content_type
         }
         });
     }else if(method==='PUT'){
