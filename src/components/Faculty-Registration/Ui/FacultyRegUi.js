@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
-import ImgCrop from 'antd-img-crop';
+// import ImgCrop from 'antd-img-crop';
 import HeaderCont from '../../Header/Container/Header';
 import {Input,Select,DatePicker,Upload,Button,Form,Radio} from 'antd';
+import Dropzone from 'react-dropzone-uploader';
 import {InboxOutlined,  MinusCircleTwoTone, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
 const {TextArea} = Input;
 const { Option } = Select;
@@ -9,7 +10,31 @@ const { RangePicker } = DatePicker;
 
 
 const FacultyRegUi=(props)=>{
- return(
+    /* Dropzone React*/
+
+    const getUploadParams = () => {
+      return { url: 'https://httpbin.org/post' }
+    }
+  
+    const handleChangeStatus = ({ meta }, status) => {
+      console.log(status, meta)
+    }
+  
+    const handleSubmit = (files, allFiles) => {
+      console.log(files.map(f => f.meta))
+      allFiles.forEach(f => f.remove())
+    }
+
+    const normFile = e => {
+      console.log('Upload event:', e);
+      if (Array.isArray(e)) {
+        return e;
+      }
+      return e && e.fileList;
+    };
+  
+    return(
+
         <div className='MainCont'>
       <div className='PageWrapper'> 
 <HeaderCont/>
@@ -72,10 +97,31 @@ const FacultyRegUi=(props)=>{
     </Form.Item>
 
 
+    {/* <h6 className='Title mtt-15'> Upload Picture </h6>
+    <Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    /> */}
+        {/* <Upload.Dragger name="files" action="/upload.do" listType="picture">
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p className="ant-upload-text">Click or drag file to this area to upload</p>
+          </Upload.Dragger> */}
+
+
     <h6 className='Title mtt-15'> Upload Picture </h6>
     
  <Form.Item name="imageSet">
-    <ImgCrop rotate>
+ <Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    />
+    {/* <ImgCrop rotate>
    
       <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
@@ -87,7 +133,7 @@ const FacultyRegUi=(props)=>{
         {props.fileList.length < 5 && '+ Upload'}
       </Upload>
       
-    </ImgCrop>
+    </ImgCrop> */}
     </Form.Item>
     <h6 className='Title mtt-15'> Spoken Languages </h6>
     <Form.Item name="spokenlanguages"  rules={[{ required: true }]}>

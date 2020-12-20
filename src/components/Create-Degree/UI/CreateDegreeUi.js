@@ -1,16 +1,54 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import HeaderCont from '../../Header/Container/Header';
-import {Input,Select,Radio,Button,DatePicker,Form} from 'antd';
-import { PlusOutlined,MinusCircleTwoTone } from '@ant-design/icons';
+import Dropzone from 'react-dropzone-uploader';
+import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message,} from 'antd';
+import { UploadOutlined,PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,InboxOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
 const { TextArea } = Input;
 
 
+
 const CreateDegreeUi =(props)=>{
 
-      return(
+    /* Dropzone React*/
+
+    const getUploadParams = () => {
+      return { url: 'https://httpbin.org/post' }
+    }
+  
+    const handleChangeStatus = ({ meta }, status) => {
+      console.log(status, meta)
+    }
+  
+    const handleSubmit = (files, allFiles) => {
+      console.log(files.map(f => f.meta))
+      allFiles.forEach(f => f.remove())
+    }
+
+
+    const Uploadprops = {
+        name: 'file',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        headers: {
+          authorization: 'authorization-text',
+        },
+        onChange(info) {
+          if (info.file.status !== 'uploading') {
+            console.log(info.file, info.fileList);
+          }
+          if (info.file.status === 'done') {
+            message.success(`${info.file.name} file uploaded successfully`);
+          } else if (info.file.status === 'error') {
+            message.error(`${info.file.name} file upload failed.`);
+          }
+        },
+      };
+
+
+    return(
+
        <div className='MainCont'>
       <div className='PageWrapper'> 
 <HeaderCont/>
@@ -339,11 +377,29 @@ const CreateDegreeUi =(props)=>{
        <Input type='text'/>
 </Form.Item>
 
+
           {/* <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
           <Upload {...Uploadprops} >
-    <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
-  </Upload>
 
+          <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
+          <Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    />
+          {/* <Upload {...Uploadprops} >
+
+    <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
+  </Upload> */}
+
+<h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
+          <Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    />
   <Divider><label> or  </label></Divider>
   <Link to='/Faculty/Reg' target="_blank">
          <Button type="default" block>
@@ -380,9 +436,16 @@ const CreateDegreeUi =(props)=>{
                   rules={[{ required: true, message: 'resume' }]}
                 >
                         <h6 className='Title mtt-15'> Faculty Resume</h6>
-          <Upload {...Uploadprops} >
+          {/* <Upload {...Uploadprops} >
     <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
-  </Upload>
+  </Upload> */}
+
+<Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    />
 
   <Divider><label> or  </label></Divider>
   <Link to='/Faculty/Reg' target="_blank">
@@ -402,7 +465,7 @@ const CreateDegreeUi =(props)=>{
             </div>
           </>
         )}
-      </Form.List> */}
+      </Form.List> 
   
           <h6 className='Title mtt-15'>Language</h6>
           <Form.Item name="courseLanguage"  rules={[{ required: true }]}>

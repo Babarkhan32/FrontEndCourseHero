@@ -11,6 +11,7 @@ import StudentRegistration from '../components/Student-Registration/Container/St
 import InstituteReg from '../components/Institute-Registration/Container/InstituteReg';
 import FacultyReg from '../components/Faculty-Registration/Container/FacultyReg';
 import CreateDegree from '../components/Create-Degree/Container/CreateDegree';
+import 'react-dropzone-uploader/dist/styles.css'
 //routes
 
 const Routes=()=>{

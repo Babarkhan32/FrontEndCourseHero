@@ -1,14 +1,42 @@
 import React,{useState} from 'react';
-import ImgCrop from 'antd-img-crop';
+// import ImgCrop from 'antd-img-crop';
 
 import HeaderCont from '../../Header/Container/Header';
+import Dropzone from 'react-dropzone-uploader'
 import {Input,Checkbox,Select,Radio,Button,DatePicker,Upload, Form} from 'antd';
 import {InboxOutlined,  MinusCircleTwoTone, PlusOutlined, PropertySafetyFilled } from '@ant-design/icons';
 const { Option } = Select;
 const { TextArea } = Input;
 
+
+
 const InstituteRegUi=(props)=>{
-  return(
+
+  const normFile = e => {
+    console.log('Upload event:', e);
+    if (Array.isArray(e)) {
+      return e;
+    }
+    return e && e.fileList;
+  };
+
+  /* Dropzone React*/
+
+  const getUploadParams = () => {
+    return { url: 'https://httpbin.org/post' }
+  }
+
+  const handleChangeStatus = ({ meta }, status) => {
+    console.log(status, meta)
+  }
+
+  const handleSubmit = (files, allFiles) => {
+    console.log(files.map(f => f.meta))
+    allFiles.forEach(f => f.remove())
+  }
+
+    return(
+
         <div className='MainCont'>
         <div className='PageWrapper'> 
 <HeaderCont/>
@@ -95,9 +123,9 @@ const InstituteRegUi=(props)=>{
 </Form.Item>
     <h6 className='Title mtt-15'> Upload Pictures </h6>
     <Form.Item name="imageSet">
-    <ImgCrop rotate>
+    {/* <ImgCrop rotate> */}
    
-      <Upload
+      {/* <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
         fileList={props.fileList}
@@ -105,10 +133,19 @@ const InstituteRegUi=(props)=>{
         onPreview={props.onPreview}
       >
         {props.fileList.length < 5 && '+ Upload'}
-      </Upload>
+      </Upload> */}
+
+<Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    />
       
-    </ImgCrop>
+    {/* </ImgCrop> */}
     </Form.Item>
+
+
           <h6 className='Title mtt-15'> List of Campuses </h6>
           <Form.Item name="instituteCampus"  rules={[{ required: true }]}> 
           <Input placeholder="campus name"  />

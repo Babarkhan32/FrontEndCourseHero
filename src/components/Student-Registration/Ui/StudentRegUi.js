@@ -1,10 +1,10 @@
 import React,{useState} from 'react';
 import HeaderCont from '../../Header/Container/Header';
 import {Input,Select,DatePicker,Upload,Button,Form} from 'antd';
-import { DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
-import ImgCrop from 'antd-img-crop';
+// import ImgCrop from 'antd-img-crop';
 import insertStudent from './../api/insertStudent';
-
+import Dropzone from 'react-dropzone-uploader';
+import {InboxOutlined,  MinusCircleFilled, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
 const {TextArea} = Input;
 const { Option } = Select;
 
@@ -82,6 +82,23 @@ const [fileList, setFileList] = useState([
     };
   
   
+
+  /* Dropzone React*/
+
+  const getUploadParams = () => {
+    return { url: 'https://httpbin.org/post' }
+  }
+
+  const handleChangeStatus = ({ meta }, status) => {
+    console.log(status, meta)
+  }
+
+  const handleSubmit = (files, allFiles) => {
+    console.log(files.map(f => f.meta))
+    allFiles.forEach(f => f.remove())
+  }
+
+
     return(
         <div className='MainCont'>
         <div className='PageWrapper'> 
@@ -135,10 +152,11 @@ const [fileList, setFileList] = useState([
     <Input type='text' name='Address'/>
 </Form.Item>
     <h6 className='Title mtt-15'> Upload Picture </h6>
+
     <Form.Item name="imageSet">
-    <ImgCrop rotate>
+    {/* <ImgCrop rotate> */}
    
-      <Upload
+      {/* <Upload
         action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
         listType="picture-card"
         fileList={fileList}
@@ -146,10 +164,21 @@ const [fileList, setFileList] = useState([
         onPreview={onPreview}
       >
         {fileList.length < 5 && '+ Upload'}
-      </Upload>
+      </Upload> */}
+
+<Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      maxFiles={1}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    />
       
-    </ImgCrop>
+    {/* </ImgCrop> */}
     </Form.Item>
+
+
+      
     <h6 className='Title mtt-15'> Spoken Languages </h6>
     <Form.Item name="spokenLanguages"  rules={[{ required: true }]}> 
     <Select

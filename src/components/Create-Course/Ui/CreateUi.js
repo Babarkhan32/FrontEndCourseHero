@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
+import Dropzone from 'react-dropzone-uploader'
 import HeaderCont from '../../Header/Container/Header';
 import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message,} from 'antd';
 import { UploadOutlined,PlusOutlined, DeleteTwoTone } from '@ant-design/icons';
@@ -10,6 +11,20 @@ const { TextArea } = Input;
 
  
 const CreateUi=(props)=>{
+  /* Dropzone React*/
+
+  const getUploadParams = () => {
+    return { url: 'https://httpbin.org/post' }
+  }
+
+  const handleChangeStatus = ({ meta }, status) => {
+    console.log(status, meta)
+  }
+
+  const handleSubmit = (files, allFiles) => {
+    console.log(files.map(f => f.meta))
+    allFiles.forEach(f => f.remove())
+  }
 
   const Uploadprops = {
     name: 'file',
@@ -148,9 +163,35 @@ const CreateUi=(props)=>{
 </Form.Item>
           <h6 className='Title mtt-15'> Faculty Resume</h6>
           <Form.Item name="facultyResume"  rules={[{ required: true }]}> 
-          <Upload {...Uploadprops} >
+
+          <Dropzone
+      getUploadParams={getUploadParams}
+      onChangeStatus={handleChangeStatus}
+      maxFiles={1}
+      onSubmit={handleSubmit}
+      styles={{ dropzone: { minHeight: 80} }}
+    />
+
+
+          {/* <Upload {...Uploadprops} >
     <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
-  </Upload></Form.Item>
+  </Upload> */}
+  
+  </Form.Item>
+
+
+          {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+  {({getRootProps, getInputProps}) => (
+    <section>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+    </section>
+  )}
+</Dropzone> */}
+
+
   <Divider><label> or  </label></Divider>
   {/* <Link to='/Faculty/Reg' target="_blank">
          <Button type="default" block>
