@@ -5,7 +5,9 @@ import CreateUi from '../Ui/CreateUi';
 import insertCourse from './../api/insertCourse';
 
 const Create=(props)=>{
+    const[facResume,setResume]=useState('')
 const onFinish=(data)=>{
+    data.facultyResume=facResume;
         insertCourse(data).then(result=>{
             console.log("Result",result);
             alert("Course inserted Successfully")
@@ -13,7 +15,10 @@ const onFinish=(data)=>{
     }
    
  return(
-        <CreateUi   onFinish={onFinish}/>
+        <CreateUi   
+        onFinish={onFinish}
+        setResume={setResume}
+        />
     )
 
 }

@@ -11,6 +11,7 @@ const { TextArea } = Input;
 
  
 const CreateUi=(props)=>{
+  console.log("props",props);
   /* Dropzone React*/
 
   const getUploadParams = () => {
@@ -22,6 +23,7 @@ const CreateUi=(props)=>{
   }
 
   const handleSubmit = (files, allFiles) => {
+    props.setResume(allFiles);
     console.log(files.map(f => f.meta))
     allFiles.forEach(f => f.remove())
   }
@@ -162,7 +164,7 @@ const CreateUi=(props)=>{
        <Input/>
 </Form.Item>
           <h6 className='Title mtt-15'> Faculty Resume</h6>
-          <Form.Item name="facultyResume"  rules={[{ required: true }]}> 
+          <Form.Item name="facultyResume"> 
 
           <Dropzone
       getUploadParams={getUploadParams}

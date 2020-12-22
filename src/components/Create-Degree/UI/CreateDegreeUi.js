@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
 import HeaderCont from '../../Header/Container/Header';
 import Dropzone from 'react-dropzone-uploader';
@@ -11,7 +11,7 @@ const { TextArea } = Input;
 
 
 const CreateDegreeUi =(props)=>{
-
+const [val,setVal]=useState(false);
     /* Dropzone React*/
 
     const getUploadParams = () => {
@@ -23,28 +23,31 @@ const CreateDegreeUi =(props)=>{
     }
   
     const handleSubmit = (files, allFiles) => {
+
+      props.setFiles(allFiles);
       console.log(files.map(f => f.meta))
       allFiles.forEach(f => f.remove())
+      setVal(true);
     }
 
 
-    const Uploadprops = {
-        name: 'file',
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        headers: {
-          authorization: 'authorization-text',
-        },
-        onChange(info) {
-          if (info.file.status !== 'uploading') {
-            console.log(info.file, info.fileList);
-          }
-          if (info.file.status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully`);
-          } else if (info.file.status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-          }
-        },
-      };
+    // const Uploadprops = {
+    //     name: 'file',
+    //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    //     headers: {
+    //       authorization: 'authorization-text',
+    //     },
+    //     onChange(info) {
+    //       if (info.file.status !== 'uploading') {
+    //         console.log(info.file, info.fileList);
+    //       }
+    //       if (info.file.status === 'done') {
+    //         message.success(`${info.file.name} file uploaded successfully`);
+    //       } else if (info.file.status === 'error') {
+    //         message.error(`${info.file.name} file upload failed.`);
+    //       }
+    //     },
+    //   };
 
 
     return(
@@ -401,11 +404,14 @@ const CreateDegreeUi =(props)=>{
       styles={{ dropzone: { minHeight: 80} }}
     />
   <Divider><label> or  </label></Divider>
-  <Link to='/Faculty/Reg' target="_blank">
+  {/* <Link to='/Faculty/Reg' target="_blank">
          <Button type="default" block>
       Create Resume
        </Button>
-       </Link> 
+       </Link>  */}
+       {val?
+    <p>Your files have beenn uploaded</p>:""
+}
 
        <Form.List name="degree">
         {(fields, { add, remove }) => (
@@ -780,13 +786,13 @@ const CreateDegreeUi =(props)=>{
           <DatePicker   style={{width:'100%'}}  />
           </Form.Item>
 
-          <h6 className='BlkTitle mtt-15'>Add Course Details  </h6>
+          {/* <h6 className='BlkTitle mtt-15'>Add Course Details  </h6>
   <hr className='hr-def mb-0'/>
   <Link to='/create/course' target="_blank">
          <Button className='mtt-10' type="default" block>
        Add Course
        </Button>
-       </Link>
+       </Link> */}
 
   <hr className='hr-def'/>
           <div className='text-center mtt-5'>

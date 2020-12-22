@@ -1,6 +1,6 @@
 
 import { callApi } from './../../../config/callApi';
-const insertDegree=async(data)=>{
+const newDegree=async(data)=>{
   try{
    let method='POST';
   let queryResult=await callApi('/degree/insert',method,null,data,'');
@@ -13,4 +13,4 @@ return queryResult.data;
   }
 }
 
-export default insertDegree;
+export default newDegree;

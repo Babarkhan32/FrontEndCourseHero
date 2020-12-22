@@ -18,9 +18,8 @@ const selectBefore = (
 
 
 const StudentRegUi=()=>{
-const [fileList, setFileList] = useState([
-
-  ]);
+const [fileList, setFileList] = useState([]);
+const [val,setVal]=useState(false);
 
   const onFinish=(values)=>{
     values.imageSet=fileList;
@@ -45,6 +44,10 @@ const [fileList, setFileList] = useState([
 
 
     console.log("Success",values);
+    
+    let newArray=[];
+    values.imageSet=fileList;
+      values.imageSet.forEach(f => newArray.push(f.file));
 
   insertStudent(values).then(result=>{
     console.log(result);
@@ -95,6 +98,9 @@ const [fileList, setFileList] = useState([
 
   const handleSubmit = (files, allFiles) => {
     console.log(files.map(f => f.meta))
+
+    setFileList(allFiles);
+    setVal(true);
     allFiles.forEach(f => f.remove())
   }
 
@@ -152,7 +158,9 @@ const [fileList, setFileList] = useState([
     <Input type='text' name='Address'/>
 </Form.Item>
     <h6 className='Title mtt-15'> Upload Picture </h6>
-
+    {val?
+    <p>Your files have beenn uploaded</p>:""
+}
     <Form.Item name="imageSet">
     {/* <ImgCrop rotate> */}
    
@@ -348,11 +356,11 @@ const [fileList, setFileList] = useState([
           </>
         )}
       </Form.List>
-      <div className='text-center mtt-10'>
+      {/* <div className='text-center mtt-10'>
         <Button type="primary" >
           Save Degree
         </Button>
-      </div>
+      </div> */}
 
       <h6 className='BlkTitle mtt-15'> Specify your study plan </h6>
   <hr className='hr-def mb-0'/>

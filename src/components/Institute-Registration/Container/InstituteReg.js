@@ -32,7 +32,9 @@ const InstituteReg = () => {
     } else {
       values.department = [values.instituteDepartments];
     }
-    
+    let newArray=[];
+      fileList.forEach(f => newArray.push(f.file));
+    values.imageSet=newArray;
     delete values.facultyList;
     delete values.instituteCampus;
     delete values.instituteDepartments;

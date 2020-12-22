@@ -8,8 +8,8 @@ console.log("here is type",type);
 
    let content_type='';
     if(type=='form'){
-        content_type='multipart/form-data'
-    }else{
+    content_type='multipart/form-data';
+        }else{
         content_type='application/json'
     }
 

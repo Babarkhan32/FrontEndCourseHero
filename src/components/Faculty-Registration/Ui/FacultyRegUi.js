@@ -9,7 +9,10 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 
 
+
 const FacultyRegUi=(props)=>{
+
+  const [val,setVal]=useState(false);
     /* Dropzone React*/
 
     const getUploadParams = () => {
@@ -21,8 +24,12 @@ const FacultyRegUi=(props)=>{
     }
   
     const handleSubmit = (files, allFiles) => {
+
+      props.setFileList(allFiles);
+      console.log("All files",allFiles);
       console.log(files.map(f => f.meta))
       allFiles.forEach(f => f.remove())
+      setVal(true);
     }
 
     const normFile = e => {
@@ -135,6 +142,9 @@ const FacultyRegUi=(props)=>{
       
     </ImgCrop> */}
     </Form.Item>
+    {val?
+    <p>your files have been uploaded</p>:''
+}
     <h6 className='Title mtt-15'> Spoken Languages </h6>
     <Form.Item name="spokenlanguages"  rules={[{ required: true }]}>
     <Select

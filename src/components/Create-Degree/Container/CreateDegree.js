@@ -1,10 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import CreateDegreeUi from '../UI/CreateDegreeUi';
-import insertDegree from './../apis/insertDegree';
+import newDegree from './../apis/insertDegree';
 
 const CreateDegree=()=>{
+  const[files,setFiles]=useState([]);
     const onFinish = async(values) => {
-
+        
         if(values.compulsory && values.compulsory.length>0){
           values.compulsory.push(values.compulsorySubject);
         }else{
@@ -34,20 +35,23 @@ const CreateDegree=()=>{
         }else{
           values.offline=[values.offlinename]
         }
-
+        let newArray=[];
+          files.forEach(f => newArray.push(f.file));
+          values.imageSet=newArray;
         delete values.coursename;
         delete values.compulsorySubject;
         delete values.onlinecoursename;
         delete values.optionalSubname;
         delete values.offlinename;
-        
-        await insertDegree(values).then(result=>{
+
+         await newDegree(values).then(result=>{
             console.log("Degree of babar khan ",result);
         })
       };
 
 
     return <CreateDegreeUi
-    onFinish={onFinish}/>
+    onFinish={onFinish}
+    setFiles={setFiles}/>
 }
 export default CreateDegree

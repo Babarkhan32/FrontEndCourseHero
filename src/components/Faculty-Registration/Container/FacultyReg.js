@@ -42,7 +42,11 @@ const FacultyReg = () => {
     } else {
       values.empHistory = [history];
     }
+let newArray=[];
+    values.imageSet=fileList;
+      values.imageSet.forEach(f => newArray.push(f.file));
 
+      values.imageSet=newArray;
     delete values.degrees;
     delete values.degreeFrom;
     delete values.degreePassingYear;
@@ -59,7 +63,7 @@ const FacultyReg = () => {
     delete values.CourseTaughtinstitute;
     delete values.coursesDetails;
    
-
+console.log(values);
     insertFaculty(values).then(result=>{
         console.log(result);
     })
@@ -95,6 +99,7 @@ const FacultyReg = () => {
       onPreview={onPreview}
       onChange={onChange}
       fileList={fileList}
+      setFileList={setFileList}
     />
   );
 };
