@@ -1,8 +1,9 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback} from 'react';
 // import ImgCrop from 'antd-img-crop';
+import {useDropzone} from 'react-dropzone'//added by sulaiman
 
 import HeaderCont from '../../Header/Container/Header';
-import Dropzone from 'react-dropzone-uploader'
+// import Dropzone from 'react-dropzone-uploader' //by sulaiman
 import {Input,Checkbox,Select,Radio,Button,DatePicker,Upload, Form} from 'antd';
 import {InboxOutlined,  MinusCircleTwoTone, PlusOutlined, PropertySafetyFilled } from '@ant-design/icons';
 const { Option } = Select;
@@ -12,6 +13,7 @@ const { TextArea } = Input;
 
 const InstituteRegUi=(props)=>{
 
+  // const [imagesURL, setImagesURL] = useState([])
   const normFile = e => {
     console.log('Upload event:', e);
     if (Array.isArray(e)) {
@@ -34,7 +36,28 @@ const InstituteRegUi=(props)=>{
     console.log(files.map(f => f.meta))
     allFiles.forEach(f => f.remove())
   }
+  let tempArr = props.fileList ? props.fileList : []
+  // let tempImagesURLs = imagesURL ? imagesURL : []
+  const onDrop = useCallback(acceptedFiles => {
+    tempArr.push(acceptedFiles[0]);
+    // const reader = new FileReader()
+    // let progressNum = 0;
+    // reader.onabort = () => console.log('file reading was aborted.')
+    // reader.onerror = () => console.log('file reading failed')
+    // reader.onprogress = (file) => console.log('progress', Math.ceil(file.total - file.loaded)/ file.total * 10) 
+    // reader.onload = () => {
+    //   const binaryStr = reader.result
+    //   tempImagesURLs.push(binaryStr)
+    //   setImagesURL(tempImagesURLs.map(file => file))
+    // }
+    // reader.readAsDataURL(acceptedFiles[0])
+    props.setFileList(tempArr.map((file) => file))
+  }, [])
+  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop})
 
+  const handleRemove = () => {
+    console.log('removed');
+  }
     return(
 
         <div className='MainCont'>
@@ -122,7 +145,43 @@ const InstituteRegUi=(props)=>{
     <Input type='text' name='Address'/>
 </Form.Item>
     <h6 className='Title mtt-15'> Upload Pictures </h6>
+    {
+       props.fileList && props.fileList.map((file, index) => (
+         console.log('fileKey', file),
+        <div key={file.lastModified}>
+           <ul>
+          <li>{index + 1}- {file.name}
+          <Button type="primary" className="mx-3"
+            onClick={console.log('previewed')}
+          >preview</Button>
+          <Button type="primary">Remove</Button>
+          </li>
+          
+        </ul>
+        </div>
+       
+      ))
+    }
+    {/* {
+      props.fileList && imagesURL ?
+      <>
+        <div> 
+          <h6 className='col-5'>your file has been uploade</h6>
+          <Button type='primary' className='col-3' onClick={() => {
+            props.setFileList(null)
+            setImagesURL(null)
+          }
+          }>Remove</Button>
+        </div>
+        <img src={imagesURL} className="container-fluid"/>
+      </>
+      : */}
+      
     <Form.Item name="imageSet">
+      <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">
+            <input {...getInputProps()}/>
+            <h6 style={{ color: "#d9d9d9", marginTop: '5%'}}>drag and drop a file or click here to select a file</h6>
+          </div>
     {/* <ImgCrop rotate> */}
    
       {/* <Upload
@@ -135,15 +194,16 @@ const InstituteRegUi=(props)=>{
         {props.fileList.length < 5 && '+ Upload'}
       </Upload> */}
 
-<Dropzone
+{/* <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 80} }}
-    />
+    /> */}
       
     {/* </ImgCrop> */}
     </Form.Item>
+{/* } */}
 
 
           <h6 className='Title mtt-15'> List of Campuses </h6>

@@ -1,9 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback} from 'react';
 import HeaderCont from '../../Header/Container/Header';
 import {Input,Select,DatePicker,Upload,Button,Form} from 'antd';
 // import ImgCrop from 'antd-img-crop';
 import insertStudent from './../api/insertStudent';
-import Dropzone from 'react-dropzone-uploader';
+import Dropzone from 'react-dropzone-uploader';// by sulaiman
+import {useDropzone} from 'react-dropzone'//added by sulaiman
 import {InboxOutlined,  MinusCircleFilled, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
 const {TextArea} = Input;
 const { Option } = Select;
@@ -19,9 +20,12 @@ const selectBefore = (
 
 const StudentRegUi=()=>{
 const [fileList, setFileList] = useState([]);
+const [imageURI, setImageURI] = useState(null);
+const [progressPercent, setProgressPercent] = useState(0);
 const [val,setVal]=useState(false);
 
   const onFinish=(values)=>{
+    console.log('fileList', fileList)
     values.imageSet=fileList;
 
     let obj={
@@ -45,12 +49,11 @@ const [val,setVal]=useState(false);
 
     console.log("Success",values);
     
-    let newArray=[];
-    values.imageSet=fileList;
-      values.imageSet.forEach(f => newArray.push(f.file));
-
-  insertStudent(values).then(result=>{
-    console.log(result);
+    // let newArray=[];
+    //   values.imageSet=fileList;
+    //   values.imageSet.forEach(f => newArray.push(f.file));
+      insertStudent(values).then(result=>{
+      console.log(result);
   })
   }
   
@@ -89,7 +92,7 @@ const [val,setVal]=useState(false);
   /* Dropzone React*/
 
   const getUploadParams = () => {
-    return { url: 'https://httpbin.org/post' }
+    return { url: 'https://localhost:5001/upload' }
   }
 
   const handleChangeStatus = ({ meta }, status) => {
@@ -104,8 +107,30 @@ const [val,setVal]=useState(false);
     allFiles.forEach(f => f.remove())
   }
 
+  const onDrop = useCallback(acceptedFiles => {
+    console.log('acceptedFiles', acceptedFiles)
+    const reader = new FileReader()
+    let progressNum = 0;
+    reader.onabort = () => console.log('file reading was aborted.')
+    reader.onerror = () => console.log('file reading failed')
+    reader.onprogress = (file) => {
+      if(file.lengthComputable) {
+        progressNum = parseInt(file.loaded / file.total * 100)
+        console.log('progressNum', progressNum)
+      }
+    } 
+    reader.onload = () => {
+      const binaryStr = reader.result
+      setImageURI(binaryStr)
+    }
+    reader.readAsDataURL(acceptedFiles[0])
+    setFileList(acceptedFiles[0])
+    setVal(true);
+  }, [])
+  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop, multiple:false})
 
     return(
+      console.log('fileList', fileList),
         <div className='MainCont'>
         <div className='PageWrapper'> 
         <HeaderCont/>
@@ -158,10 +183,21 @@ const [val,setVal]=useState(false);
     <Input type='text' name='Address'/>
 </Form.Item>
     <h6 className='Title mtt-15'> Upload Picture </h6>
-    {val?
-    <p>Your files have beenn uploaded</p>:""
-}
-    <Form.Item name="imageSet">
+    {
+      fileList && imageURI ?
+      <>
+        <div> 
+          <h6 className='col-5'>your file has been uploaded</h6>
+          <Button type='primary' className='col-3' onClick={() => {
+            setFileList(null)
+            setImageURI(null)
+          }
+          }>Remove</Button>
+        </div>
+        <img src={imageURI} className="container-fluid"/>
+      </>
+      :
+      <Form.Item name="imageSet">
     {/* <ImgCrop rotate> */}
    
       {/* <Upload
@@ -174,16 +210,26 @@ const [val,setVal]=useState(false);
         {fileList.length < 5 && '+ Upload'}
       </Upload> */}
 
-<Dropzone
+{/* suliaman dropzone start*/}
+          <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">
+            <input {...getInputProps()}/>
+            <h6 style={{ color: "#d9d9d9", marginTop: '5%'}}>drag and drop a file or click here to select a file</h6>
+          </div>
+{/* suliaman dropzone end*/}
+{/* <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       maxFiles={1}
       onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 80} }}
-    />
+    /> */}
       
     {/* </ImgCrop> */}
     </Form.Item>
+    // val?
+    // <p>Your file has been uploaded</p>:""
+}
+    
 
 
       

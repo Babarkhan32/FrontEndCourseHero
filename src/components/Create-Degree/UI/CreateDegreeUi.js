@@ -1,7 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import HeaderCont from '../../Header/Container/Header';
 import Dropzone from 'react-dropzone-uploader';
+import {useDropzone} from 'react-dropzone'//added by sulaiman
 import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message,} from 'antd';
 import { UploadOutlined,PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,InboxOutlined } from '@ant-design/icons';
 
@@ -31,6 +32,30 @@ const [val,setVal]=useState(false);
     }
 
 
+    let tempArr = props.files ? props.files : []
+  // let tempImagesURLs = imagesURL ? imagesURL : []
+  const onDrop = useCallback(acceptedFiles => {
+    tempArr.push(acceptedFiles[0]);
+    // const reader = new FileReader()
+    // let progressNum = 0;
+    // reader.onabort = () => console.log('file reading was aborted.')
+    // reader.onerror = () => console.log('file reading failed')
+    // reader.onprogress = (file) => console.log('progress', Math.ceil(file.total - file.loaded)/ file.total * 10) 
+    // reader.onload = () => {
+    //   const binaryStr = reader.result
+    //   tempImagesURLs.push(binaryStr)
+    //   setImagesURL(tempImagesURLs.map(file => file))
+    // }
+    // reader.readAsDataURL(acceptedFiles[0])
+    props.setFiles(tempArr.map((file) => file))
+    setVal(true);
+    console.log('filesArr', props.files)
+  }, [])
+  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop})
+
+  const handleRemove = () => {
+    console.log('removed');
+  }
     // const Uploadprops = {
     //     name: 'file',
     //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -397,21 +422,48 @@ const [val,setVal]=useState(false);
   </Upload> */}
 
 <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
-          <Dropzone
+{
+  props.files && props.files.length && 
+  <div>
+    {props.files[0].name}
+  </div>
+}
+{/* {
+       props.fileList && props.fileList.map((file, index) => (
+        <div>
+           <ul>
+          <li>{index + 1}- {file.name}
+          <Button type="primary" className="mx-3">preview</Button>
+          <Button type="primary">Remove</Button>
+          </li>
+          
+        </ul>
+        </div>
+       
+      ))
+    } */}
+    <Form.Item name="imageSet">
+    <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">
+            <input {...getInputProps()}/>
+            <h6 style={{ color: "#d9d9d9", marginTop: '5%'}}>drag and drop a file or click here to select a file</h6>
+          </div>
+    </Form.Item>
+
+          {/* <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 80} }}
     />
-  <Divider><label> or  </label></Divider>
+  <Divider><label> or  </label></Divider> */}
   {/* <Link to='/Faculty/Reg' target="_blank">
          <Button type="default" block>
       Create Resume
        </Button>
        </Link>  */}
-       {val?
+       {/* {val?
     <p>Your files have beenn uploaded</p>:""
-}
+} */}
 
        <Form.List name="degree">
         {(fields, { add, remove }) => (
@@ -446,14 +498,20 @@ const [val,setVal]=useState(false);
     <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
   </Upload> */}
 
-<Dropzone
+<Form.Item name="imageSet">
+    <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">
+            <input {...getInputProps()}/>
+            <h6 style={{ color: "#d9d9d9", marginTop: '5%'}}>drag and drop a file or click here to select a file</h6>
+          </div>
+    </Form.Item>
+{/* <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 80} }}
     />
 
-  <Divider><label> or  </label></Divider>
+  <Divider><label> or  </label></Divider> */}
   <Link to='/Faculty/Reg' target="_blank">
          <Button type="default" block>
       Create Resume

@@ -1,6 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import {BrowserRouter as Router, Route, Switch,Redirect} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Navbar from '../components/Navbar/Container/Navbar';
 import Register from '../components/Register/Container/Register';
 import Profile from '../components/Profile/Container/Profile';
@@ -14,21 +14,21 @@ import CreateDegree from '../components/Create-Degree/Container/CreateDegree';
 import 'react-dropzone-uploader/dist/styles.css'
 //routes
 
-const Routes=()=>{
+const Routes = () => {
 
-  
+
   function PrivateRoute({ children, ...rest }) {
-    const token=localStorage.getItem('accessToken');
-  
-  
-      return (
-        <Route
-          {...rest}
-          render={({ location }) =>
-        
-            token ? (
-              children
-            ) : (
+    const token = localStorage.getItem('accessToken');
+
+
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+
+          token ? (
+            children
+          ) : (
               <Redirect
                 to={{
                   pathname: "/register",
@@ -36,45 +36,45 @@ const Routes=()=>{
                 }}
               />
             )
-          }
-        />
-      );
+        }
+      />
+    );
+  }
+
+
+  const isAuthenticated = () => {
+    let val = localStorage.getItem("accessToken");
+    if (val) {
+      if (val.length === 149) {
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return false
     }
-
-
-    const isAuthenticated=()=>{
-        let val=localStorage.getItem("accessToken");
-        if(val){
-            if(val.length===149){
-                return true
-            }else{
-                return false
-            }
-        }else {
-            return false
-        }
-        }
-       isAuthenticated();
-      return(
+  }
+  isAuthenticated();
+  return (
     <Router>
-        <div>
-       
-<Navbar/>
- <Switch>
-            <Route exact path='/' component={Search}/>
-            <Route exact path='/register' component={Register}/>
-<Route path="/profile"><Profile></Profile></Route>
-<PrivateRoute  path='/create/course'><Create></Create></PrivateRoute>
-<Route exact path='/search' component={Search}/>
-<Route exact path='/Rate' component ={RateUs}/>
-<Route exact path='/Student/Reg' component={StudentRegistration}/>
-<Route exact path='/Institute/Reg' component={InstituteReg}/>
-<Route exact path='/Faculty/Reg' component={FacultyReg}/>
-<PrivateRoute exact path='/Create/Degree'><CreateDegree></CreateDegree></PrivateRoute>
-</Switch>
-        </div>
+      <div>
+
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={Search} />
+          <Route exact path='/register' component={Register} />
+          <Route path="/profile"><Profile></Profile></Route>
+          <PrivateRoute path='/create/course'><Create></Create></PrivateRoute>
+          <Route exact path='/search' component={Search} />
+          <Route exact path='/Rate' component={RateUs} />
+          <Route exact path='/Student/Reg' component={StudentRegistration} />
+          <Route exact path='/Institute/Reg' component={InstituteReg} />
+          <Route exact path='/Faculty/Reg' component={FacultyReg} />
+          <PrivateRoute exact path='/Create/Degree'><CreateDegree></CreateDegree></PrivateRoute>
+        </Switch>
+      </div>
     </Router>
-)
+  )
 
 
 
