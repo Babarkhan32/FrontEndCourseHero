@@ -1,8 +1,9 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import HeaderCont from '../../Header/Container/Header';
 import Dropzone from 'react-dropzone-uploader';
-import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message,} from 'antd';
+import {useDropzone} from 'react-dropzone'//added by sulaiman
+import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message, Modal} from 'antd';
 import { UploadOutlined,PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,InboxOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -31,6 +32,49 @@ const [val,setVal]=useState(false);
     }
 
 
+    let tempArr = props.files ? props.files : []
+
+  const onDrop = useCallback(acceptedFiles => {
+    tempArr.push(acceptedFiles[0]);
+    props.setFiles(tempArr.map((file) => file))
+    if(acceptedFiles[0]) {
+      message.success("File uploaded successfully.")
+    } else {
+      message.error("File uploading failed.")
+    }
+    setVal(true);
+    console.log('filesArr', props.files)
+  }, [])
+  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop})
+
+  const handlePreview = (file) => {
+    if(file.type === "application/pdf") {
+      Modal.info({
+        title:file.name,
+        okText: 'Close',
+        content: 'No preview available for pdf files.'
+      })
+    } else {
+      const reader = new FileReader()
+      reader.onabort = () => message.warning('file reading was aborted.')
+      reader.onerror = () => message.error('file reading failed')
+      reader.onload = () => {
+        Modal.info({
+          title:file.name,
+          okText: 'Close',
+          width:"60%",
+          content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+        })
+    }
+    reader.readAsDataURL(file)
+    } 
+  }
+  
+  const handleDelete = (fileId) => {
+    let filteredArr = tempArr.filter((item) => item.id !== fileId)
+    tempArr = filteredArr
+    props.setFiles([...tempArr])
+  }
     // const Uploadprops = {
     //     name: 'file',
     //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -397,21 +441,57 @@ const [val,setVal]=useState(false);
   </Upload> */}
 
 <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
-          <Dropzone
+{
+  props.files && props.files.length > 0 ? 
+  <div className="row mt-1" key={props.files[0].id}> 
+  <span className="col-5 mr-3 mt-1"><h6 style={{color: "#096dd9"}}>{props.files[0].name}</h6></span>
+  <Button className="col-3 mx-2" type='primary'
+    onClick={() => handlePreview(props.files[0])}
+  >Preview</Button>
+  <Button className="col-3" type='primary'
+    onClick={() => handleDelete(props.files[0].id)}
+  >Delete
+  </Button>
+</div>
+:
+<Form.Item name="imageSetFirst" className="mt-2">
+    <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">
+            <input {...getInputProps()}/>
+            <h6 style={{ color: "#d9d9d9", marginTop: '5%'}}>drag and drop a file or click here to select a file</h6>
+          </div>
+    </Form.Item>
+}
+{/* {
+       props.fileList && props.fileList.map((file, index) => (
+        <div>
+           <ul>
+          <li>{index + 1}- {file.name}
+          <Button type="primary" className="mx-3">preview</Button>
+          <Button type="primary">Remove</Button>
+          </li>
+          
+        </ul>
+        </div>
+       
+      ))
+    } */}
+    
+
+          {/* <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 80} }}
     />
-  <Divider><label> or  </label></Divider>
+  <Divider><label> or  </label></Divider> */}
   {/* <Link to='/Faculty/Reg' target="_blank">
          <Button type="default" block>
       Create Resume
        </Button>
        </Link>  */}
-       {val?
+       {/* {val?
     <p>Your files have beenn uploaded</p>:""
-}
+} */}
 
        <Form.List name="degree">
         {(fields, { add, remove }) => (
@@ -438,7 +518,7 @@ const [val,setVal]=useState(false);
                 <div
                   {...field}
                   name={[field.name, 'resume']}
-                  fieldKey={[field.fieldKey, 'resume']}
+                  fieldKey={[field.fieldKey + 1, 'resume']}
                   rules={[{ required: true, message: 'resume' }]}
                 >
                         <h6 className='Title mtt-15'> Faculty Resume</h6>
@@ -446,14 +526,36 @@ const [val,setVal]=useState(false);
     <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
   </Upload> */}
 
-<Dropzone
+
+{ 
+
+  props.files && props.files.length > 0 && props.files[field.fieldKey + 1] ? 
+  <div className="row mt-1" key={props.files[field.fieldKey + 1].id}> 
+  <span className="col-5 mr-3 mt-1"><h6 style={{color: "#096dd9"}}>{props.files[field.fieldKey + 1].name}</h6></span>
+  <Button className="col-3 mx-2" type='primary'
+    onClick={() => handlePreview(props.files[1])}
+  >Preview</Button>
+  <Button className="col-3" type='primary'
+    onClick={() => handleDelete(props.files[field.fieldKey + 1].id)}
+  >Delete
+  </Button>
+</div>
+:
+<Form.Item name="imageSet" className="mt-2">
+    <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">
+            <input {...getInputProps()}/>
+            <h6 style={{ color: "#d9d9d9", marginTop: '5%'}}>drag and drop a file or click here to select a file</h6>
+          </div>
+    </Form.Item>
+}
+{/* <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 80} }}
     />
 
-  <Divider><label> or  </label></Divider>
+  <Divider><label> or  </label></Divider> */}
   <Link to='/Faculty/Reg' target="_blank">
          <Button type="default" block>
       Create Resume

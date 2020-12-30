@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import insertFaculty from "../apis/insertFaculty";
 import FacultyRegUi from "../Ui/FacultyRegUi";
 
@@ -42,11 +42,11 @@ const FacultyReg = () => {
     } else {
       values.empHistory = [history];
     }
-let newArray=[];
-    values.imageSet=fileList;
-      values.imageSet.forEach(f => newArray.push(f.file));
+    // let newArray=[];
+    values.imageSet = fileList;
+    // values.imageSet.forEach(f => newArray.push(f.file));
 
-      values.imageSet=newArray;
+    // values.imageSet=newArray;
     delete values.degrees;
     delete values.degreeFrom;
     delete values.degreePassingYear;
@@ -62,15 +62,15 @@ let newArray=[];
     delete values.CourseName;
     delete values.CourseTaughtinstitute;
     delete values.coursesDetails;
-   
-console.log(values);
-    insertFaculty(values).then(result=>{
-        console.log(result);
+
+    console.log(values);
+    insertFaculty(values).then(result => {
+      console.log(result);
     })
 
   };
 
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState(null);
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);

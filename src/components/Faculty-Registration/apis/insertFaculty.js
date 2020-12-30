@@ -1,19 +1,20 @@
 
 import { callApi } from './../../../config/callApi';
-const insertFaculty=async(data)=>{
-  try{
-    var form_data = new FormData();
+const insertFaculty = async (data) => {
+  try {
+    console.log("Data", data)
+    let formData = new FormData();
+    for (let key in data) {
+      formData.append(key, data[key])
+    }
 
-// for ( var key in data ) {
-//     form_data.append(key, data[key]);
-// }
-   let method='POST';
-  let queryResult=await callApi('/teacher/insert',method,null,data,'');
+    let method = 'POST';
+    let queryResult = await callApi('/teacher/insert', method, null, formData ? formData : data, formData ? 'form' : '');
 
-return queryResult.data;
+    return queryResult.data;
 
-  }catch(e){
-      console.log(e);
+  } catch (e) {
+    console.log(e);
 
   }
 }
