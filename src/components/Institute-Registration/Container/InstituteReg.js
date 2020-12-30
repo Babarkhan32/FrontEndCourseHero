@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import InstituteRegUi from "../Ui/InstituteRegUi";
 import insertInstitute from "./../api/insertInstitute";
 const InstituteReg = () => {
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState(null);
 
   const onFinish = (values) => {
 
@@ -68,6 +68,7 @@ const InstituteReg = () => {
     const imgWindow = window.open(src);
     imgWindow.document.write(image.outerHTML);
   };
+
 
   return (
     <InstituteRegUi

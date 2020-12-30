@@ -1,11 +1,11 @@
 import React,{useState, useCallback} from 'react';
 import HeaderCont from '../../Header/Container/Header';
-import {Input,Select,DatePicker,Upload,Button,Form} from 'antd';
+import {Input,Select,DatePicker,Upload,Button,Form, message, Modal} from 'antd';
 // import ImgCrop from 'antd-img-crop';
 import insertStudent from './../api/insertStudent';
 import Dropzone from 'react-dropzone-uploader';// by sulaiman
 import {useDropzone} from 'react-dropzone'//added by sulaiman
-import {InboxOutlined,  MinusCircleFilled, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
+import {InboxOutlined,  MinusCircleFilled, EyeTwoTone, DeleteTwoTone, PlusOutlined, FrownFilled } from '@ant-design/icons';
 const {TextArea} = Input;
 const { Option } = Select;
 
@@ -19,9 +19,7 @@ const selectBefore = (
 
 
 const StudentRegUi=()=>{
-const [fileList, setFileList] = useState([]);
-const [imageURI, setImageURI] = useState(null);
-const [progressPercent, setProgressPercent] = useState(0);
+const [fileList, setFileList] = useState(null);
 const [val,setVal]=useState(false);
 
   const onFinish=(values)=>{
@@ -92,7 +90,7 @@ const [val,setVal]=useState(false);
   /* Dropzone React*/
 
   const getUploadParams = () => {
-    return { url: 'https://localhost:5001/upload' }
+    return { url: 'https://localhost:5001/upload' }// changed by sulaiman
   }
 
   const handleChangeStatus = ({ meta }, status) => {
@@ -107,26 +105,45 @@ const [val,setVal]=useState(false);
     allFiles.forEach(f => f.remove())
   }
 
-  const onDrop = useCallback(acceptedFiles => {
-    console.log('acceptedFiles', acceptedFiles)
-    const reader = new FileReader()
-    let progressNum = 0;
-    reader.onabort = () => console.log('file reading was aborted.')
-    reader.onerror = () => console.log('file reading failed')
-    reader.onprogress = (file) => {
-      if(file.lengthComputable) {
-        progressNum = parseInt(file.loaded / file.total * 100)
-        console.log('progressNum', progressNum)
-      }
-    } 
+  const handlePreview = (file) => {
+    if(file.type === "application/pdf") {
+      Modal.info({
+        title:file.name,
+        okText: 'Close',
+        content: 'No preview available for pdf files.'
+      })
+    } else {
+      const reader = new FileReader()
+    reader.onabort = () => message.warning('file reading was aborted.')
+    reader.onerror = () => message.error('file reading failed')
     reader.onload = () => {
-      const binaryStr = reader.result
-      setImageURI(binaryStr)
+        Modal.info({
+          title:file.name,
+          okText: 'Close',
+          width:"60%",
+          content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+        })
     }
-    reader.readAsDataURL(acceptedFiles[0])
+    reader.readAsDataURL(file)
+    }
+    
+  }
+
+  const handleDelete = () => {
+    setVal(false);
+    setFileList(null)
+  }
+
+  const onDrop = useCallback(acceptedFiles => {
     setFileList(acceptedFiles[0])
+    if(acceptedFiles[0]) {
+      message.success("File uploaded successfully.")
+    } else {
+      message.error("File uploading failed.")
+    }
     setVal(true);
   }, [])
+  
   const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop, multiple:false})
 
     return(
@@ -184,18 +201,17 @@ const [val,setVal]=useState(false);
 </Form.Item>
     <h6 className='Title mtt-15'> Upload Picture </h6>
     {
-      fileList && imageURI ?
-      <>
-        <div> 
-          <h6 className='col-5'>your file has been uploaded</h6>
-          <Button type='primary' className='col-3' onClick={() => {
-            setFileList(null)
-            setImageURI(null)
-          }
-          }>Remove</Button>
-        </div>
-        <img src={imageURI} className="container-fluid"/>
-      </>
+      fileList ?
+      <div className="row"> 
+        <span class="col-5 mr-3 mt-1"><h6 style={{color: "#096dd9"}}>{fileList.name}</h6></span>
+        <Button className="col-3 mx-2" type='primary'
+          onClick={() => handlePreview(fileList)}
+        >Preview</Button>
+        <Button className="col-3" type='primary'
+          onClick={handleDelete}
+        >Delete
+        </Button>
+      </div>
       :
       <Form.Item name="imageSet">
     {/* <ImgCrop rotate> */}

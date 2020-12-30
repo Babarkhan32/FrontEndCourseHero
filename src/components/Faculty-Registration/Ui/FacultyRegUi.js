@@ -1,7 +1,7 @@
 import React,{useState, useCallback} from 'react';
 // import ImgCrop from 'antd-img-crop';
 import HeaderCont from '../../Header/Container/Header';
-import {Input,Select,DatePicker,Upload,Button,Form,Radio} from 'antd';
+import {Input,Select,DatePicker,Upload,Button,Form,Radio, message,Modal} from 'antd';
 import Dropzone from 'react-dropzone-uploader';
 import {useDropzone} from 'react-dropzone'//added by sulaiman
 import {InboxOutlined,  MinusCircleTwoTone, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
@@ -12,8 +12,6 @@ const { RangePicker } = DatePicker;
 
 
 const FacultyRegUi=(props)=>{
-  const [imageURI, setImageURI] = useState(null);
-  const [progressPercent, setProgressPercent] = useState(0);
   const [val,setVal]=useState(false);
     /* Dropzone React*/
 
@@ -42,26 +40,44 @@ const FacultyRegUi=(props)=>{
       return e && e.fileList;
     };
     
-    const onDrop = useCallback(acceptedFiles => {
-      console.log('acceptedFiles', acceptedFiles)
-      const reader = new FileReader()
-      // let progressNum = 0;
-      reader.onabort = () => console.log('file reading was aborted.')
-      reader.onerror = () => console.log('file reading failed')
-      // reader.onprogress = (file) => console.log('progress', Math.ceil(file.total - file.loaded)/ file.total * 10) 
-      reader.onload = () => {
-        const binaryStr = reader.result
-        setImageURI(binaryStr)
+    const handlePreview = (file) => {
+      if(file.type === "application/pdf") {
+        Modal.info({
+          title:file.name,
+          okText: 'Close',
+          content: 'No preview available for pdf files.'
+        })
+      } else {
+        const reader = new FileReader()
+        reader.onabort = () => message.warning('file reading was aborted.')
+        reader.onerror = () => message.error('file reading failed')
+        reader.onload = () => {
+          Modal.info({
+            title:file.name,
+            okText: 'Close',
+            width:"60%",
+            content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+          })
       }
-      reader.readAsDataURL(acceptedFiles[0])
+      reader.readAsDataURL(file)
+      } 
+    }
+    
+    const onDrop = useCallback(acceptedFiles => {
       props.setFileList(acceptedFiles[0])
+      if(acceptedFiles[0]) {
+        message.success("File uploaded successfully.")
+      } else {
+        message.error("File uploading failed.")
+      }
       setVal(true);
     }, [])
     const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop, multiple:false})
 
-  const handleRemove = () => {
-    console.log('removed');
-  }
+    const handleDelete = () => {
+      setVal(false);
+      props.setFileList(null)
+    }
   
     return(
 
@@ -144,18 +160,17 @@ const FacultyRegUi=(props)=>{
 
     <h6 className='Title mtt-15'> Upload Picture </h6>
      {
-      props.fileList && imageURI ?
-      <>
-        <div> 
-          <h6 className='col-5'>your file has been uploaded</h6>
-          <Button type='primary' className='col-3' onClick={() => {
-            props.setFileList(null)
-            setImageURI(null)
-          }
-          }>Remove</Button>
-        </div>
-        <img src={imageURI} className="container-fluid"/>
-      </>
+      props.fileList ?
+      <div className="row"> 
+        <span class="col-5 mr-3 mt-1"><h6 style={{color: "#096dd9"}}>{props.fileList.name}</h6></span>
+        <Button className="col-3 mx-2" type='primary'
+          onClick={() => handlePreview(props.fileList)}
+        >Preview</Button>
+        <Button className="col-3" type='primary'
+          onClick={handleDelete}
+        >Delete
+        </Button>
+      </div>
       :
      <Form.Item name="imageSet">
         <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">

@@ -70,7 +70,7 @@ const FacultyReg = () => {
 
   };
 
-  const [fileList, setFileList] = useState([]);
+  const [fileList, setFileList] = useState(null);
 
   const onChange = ({ fileList: newFileList }) => {
     setFileList(newFileList);

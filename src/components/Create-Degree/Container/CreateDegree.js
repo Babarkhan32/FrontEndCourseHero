@@ -3,7 +3,7 @@ import CreateDegreeUi from '../UI/CreateDegreeUi';
 import newDegree from './../apis/insertDegree';
 
 const CreateDegree = () => {
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState(null);
   const onFinish = async (values) => {
 
     if (values.compulsory && values.compulsory.length > 0) {
@@ -35,9 +35,9 @@ const CreateDegree = () => {
     } else {
       values.offline = [values.offlinename]
     }
-    let newArray = [];
-    files.forEach(f => newArray.push(f.file));
-    values.imageSet = newArray;
+    // let newArray = [];
+    // files.forEach(f => newArray.push(f.file));
+    values.imageSet = files;
     delete values.coursename;
     delete values.compulsorySubject;
     delete values.onlinecoursename;
