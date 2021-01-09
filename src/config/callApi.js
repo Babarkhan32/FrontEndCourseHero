@@ -23,7 +23,7 @@ export const callApi = (address, method, headers, data, type) => {
             }
         });
     } else if (method === 'POST') {
-        console.log('passedData', ...data);
+        // console.log('passedData', ...data);
         return axios.post(config.baseUrl + address + "/", data, {
             headers: {
                 'authorization': token,
