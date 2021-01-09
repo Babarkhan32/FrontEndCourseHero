@@ -1,8 +1,9 @@
-import React,{useState} from 'react';
+import React,{useState, useCallback} from 'react';
 import {Link} from 'react-router-dom';
 import Dropzone from 'react-dropzone-uploader'
 import HeaderCont from '../../Header/Container/Header';
-import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message,} from 'antd';
+import {useDropzone} from 'react-dropzone'//added by sulaiman
+import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message, Modal} from 'antd';
 import { UploadOutlined,PlusOutlined, DeleteTwoTone } from '@ant-design/icons';
 import getSearchedCourses from '../../Search/api/getSearchedCourses';
 const { Option } = Select;
@@ -11,7 +12,7 @@ const { TextArea } = Input;
 
  
 const CreateUi=(props)=>{
-  console.log("props",props);
+  console.log("props33",props);
   /* Dropzone React*/
 
   const getUploadParams = () => {
@@ -46,6 +47,47 @@ const CreateUi=(props)=>{
     },
   };
 
+  //suliaman's work
+  const handlePreview = (file) => {
+    if(file.type === "application/pdf") {
+      Modal.info({
+        title:file.name,
+        okText: 'Close',
+        content: 'No preview available for pdf files.'
+      })
+    } else {
+      const reader = new FileReader()
+    reader.onabort = () => message.warning('file reading was aborted.')
+    reader.onerror = () => message.error('file reading failed')
+    reader.onload = () => {
+        Modal.info({
+          title:file.name,
+          okText: 'Close',
+          width:"60%",
+          content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+        })
+    }
+    reader.readAsDataURL(file)
+    }
+    
+  }
+
+  const handleDelete = () => {
+    // setVal(false);
+    props.setResume(null)
+  }
+
+  const onDrop = useCallback(acceptedFiles => {
+    props.setResume(acceptedFiles[0])
+    if(acceptedFiles[0]) {
+      message.success("File uploaded successfully.")
+    } else {
+      message.error("File uploading failed.")
+    }
+    // setVal(true);
+  }, [])
+  
+  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop, multiple:false})
   
 
     return(
@@ -164,15 +206,31 @@ const CreateUi=(props)=>{
        <Input/>
 </Form.Item>
           <h6 className='Title mtt-15'> Faculty Resume</h6>
+          {
+      props.resume ?
+      <div className="row"> 
+        <span class="col-5 mr-3 mt-1"><h6 style={{color: "#096dd9"}}>{props.resume && props.resume.name}</h6></span>
+        <Button className="col-3 mx-2" type='primary'
+          onClick={() => handlePreview(props.resume)}
+        >Preview</Button>
+        <Button className="col-3" type='primary'
+          onClick={handleDelete}
+        >Delete
+        </Button>
+      </div>
+      :
           <Form.Item name="facultyResume"> 
-
-          <Dropzone
+          <div {...getRootProps()} style={{minHeight : 80, border: "2px dashed #d9d9d9", textAlign:'center'}} className="dropzone">
+            <input {...getInputProps()}/>
+            <h6 style={{ color: "#d9d9d9", marginTop: '5%'}}>drag and drop a file or click here to select a file</h6>
+          </div>
+          {/* <Dropzone
       getUploadParams={getUploadParams}
       onChangeStatus={handleChangeStatus}
       maxFiles={1}
       onSubmit={handleSubmit}
       styles={{ dropzone: { minHeight: 80} }}
-    />
+    /> */}
 
 
           {/* <Upload {...Uploadprops} >
@@ -180,8 +238,7 @@ const CreateUi=(props)=>{
   </Upload> */}
   
   </Form.Item>
-
-
+}
           {/* <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
   {({getRootProps, getInputProps}) => (
     <section>
