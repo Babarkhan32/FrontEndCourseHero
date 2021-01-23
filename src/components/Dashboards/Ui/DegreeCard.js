@@ -1,75 +1,73 @@
 import React,{useState} from 'react';
 import { Card,Modal,Rate,Button,Popover,Timeline} from 'antd';
+import { Fragment } from 'react'
 
-
-const DegreeCardUi=({courseName,totalCost,type,offlinetotal,totalNumberCourses,
-  durationFrom,durationCrit,degreeType,hoursPerWeek,Dep,rev,
-   uni, platform, country,cost, financialAid,AppDeadline, date
-   ,rate,language,course,facName,degreeOfferingInstitute,currency,startingdate,
-   courseSpecification,online,offline,compulsory,optional,AppliedState,SavedState,onlinetotal,coursetotal})=>{
-      console.log(AppDeadline,"App Dead line")
-    const [visible,setVisible]=useState(false),
-    [courseList,setCourseList]=useState(false),
-    [onlineList,setonlineList]=useState(false),
-    [offlineList,setofflineList]=useState(false),
-    [compulsoryList,setcompulsoryList]=useState(false),
-    [optionalList,setoptionalList]=useState(false),
-showCourse=()=>{
-    setCourseList(true)
-},
-
-showOnline=()=>{
-    setonlineList(true)
-},
-
-showOffline=()=>{
-    setofflineList(true)
-},
-showCompulsory=()=>{
-    setcompulsoryList(true)
-},
-showOptional=()=>{
-    setoptionalList(true)
-},
-  showModal = () => {
-   
-      setVisible(true) 
-   
+const DegreeCard=({courseName,totalCost,type,offlinetotal,totalNumberCourses,
+    durationFrom,durationCrit,degreeType,hoursPerWeek,Dep,rev,
+     uni, platform, country,cost, financialAid,AppDeadline, date
+     ,rate,language,course,facName,degreeOfferingInstitute,currency,startingdate,
+     courseSpecification,online,offline,compulsory,optional,AppliedState,SavedState,onlinetotal,coursetotal})=>{
+        console.log(AppDeadline,"App Dead line")
+      const [visible,setVisible]=useState(false),
+      [courseList,setCourseList]=useState(false),
+      [onlineList,setonlineList]=useState(false),
+      [offlineList,setofflineList]=useState(false),
+      [compulsoryList,setcompulsoryList]=useState(false),
+      [optionalList,setoptionalList]=useState(false),
+  showCourse=()=>{
+      setCourseList(true)
   },
-
-  handleOk = e => {
-    console.log(e);
-   setVisible(false)
   
+  showOnline=()=>{
+      setonlineList(true)
+  },
+  
+  showOffline=()=>{
+      setofflineList(true)
+  },
+  showCompulsory=()=>{
+      setcompulsoryList(true)
+  },
+  showOptional=()=>{
+      setoptionalList(true)
+  },
+    showModal = () => {
+     
+        setVisible(true) 
+     
+    },
+  
+    handleOk = e => {
+      console.log(e);
+     setVisible(false)
     
-  },
-  hideCourse=()=>{
-    setCourseList(false)
-  },
-  hideOnline=()=>{
-    setonlineList(false)
-  },
-  hideOffline=()=>{
-    setofflineList(false)
-  },
-  hideCompulsory=()=>{
-    setcompulsoryList(false)
-  },
-  hideOptional=()=>{
-    setoptionalList(false)
-  },
-  handleCancel = e => {
-    console.log(e);
-   
-      setVisible(false)
-    
-    
-  };
-console.log("Course NAME",courseName)
-
+      
+    },
+    hideCourse=()=>{
+      setCourseList(false)
+    },
+    hideOnline=()=>{
+      setonlineList(false)
+    },
+    hideOffline=()=>{
+      setofflineList(false)
+    },
+    hideCompulsory=()=>{
+      setcompulsoryList(false)
+    },
+    hideOptional=()=>{
+      setoptionalList(false)
+    },
+    handleCancel = e => {
+      console.log(e);
+     
+        setVisible(false)
+      
+      
+    };
     return(
-        <div> 
-        <Card className='CourseCards'  hoverable
+        <Fragment>
+                    <Card className='CourseCards'  hoverable
         title={
         <div> 
           <h6>{courseName}  <label className='departmentLabel'>{courseSpecification}</label>  </h6> 
@@ -202,18 +200,8 @@ console.log("Course NAME",courseName)
          }
        >
        <Timeline>
-         {
-           course.map(course=>{
-             return(
-              <Timeline.Item> <h6 className='ItemHeading'> {course} </h6></Timeline.Item>
-             )
-           }
-
-           )
-   
-   
-         }
-  </Timeline>
+         <Timeline.Item> <h6 className='ItemHeading'> {course} </h6></Timeline.Item>    
+         </Timeline>
 
 
          
@@ -229,18 +217,10 @@ console.log("Course NAME",courseName)
          }
        >
        <Timeline>
-       {
-           online.map(online=>{
-             return(
+   
               <Timeline.Item> <h6 className='ItemHeading'> {online} </h6></Timeline.Item>
-             )
-           }
-
-           )
-   
-   
-         }
-  </Timeline>
+    
+         </Timeline>
 
 
          
@@ -258,17 +238,10 @@ console.log("Course NAME",courseName)
          }
        >
        <Timeline>
-  
-  
-       {
-           offline.map(offline=>{
-             return(
-              <Timeline.Item> <h6 className='ItemHeading'> {offline} </h6></Timeline.Item>
-             )
-           }
 
-           )
-   }
+      
+              <Timeline.Item> <h6 className='ItemHeading'> {offline} </h6></Timeline.Item>
+            
   </Timeline>
 
 
@@ -286,18 +259,10 @@ console.log("Course NAME",courseName)
              <Button type='primary' onClick={hideCompulsory}> OK</Button>
          }
        >
-     {
-           compulsory.map(compulsory=>{
-             return(
+     <Timeline>
               <Timeline.Item> <h6 className='ItemHeading'> {compulsory} </h6></Timeline.Item>
-             )
-           }
-
-           )
-   
-   
-         }
-
+            
+              </Timeline>
 
          
        </Modal>
@@ -312,25 +277,18 @@ console.log("Course NAME",courseName)
          }
        >
        <Timeline>
-       {
-           optional.map(optional=>{
-             return(
+      
               <Timeline.Item> <h6 className='ItemHeading'> {optional} </h6></Timeline.Item>
-             )
-           }
-
-           )
-   
-   
-         }
+            
   </Timeline>
 
 
          
        </Modal>
 
-       
-       </div>
+        </Fragment>
     )
 }
-export default DegreeCardUi
+
+
+export default DegreeCard

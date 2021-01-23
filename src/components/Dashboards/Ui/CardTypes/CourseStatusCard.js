@@ -1,11 +1,12 @@
 import React,{useState} from 'react';
 import { Card,Modal,Rate,Button,Popover} from 'antd';
+import { Fragment } from 'react';
 
 
-const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language,
-  duration,durationFor,hoursPerWeek,courseSpecification,AppliedState,SavedState})=>{
+const CourseStatusCard=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language,
+    duration,durationFor,hoursPerWeek,courseSpecification,CourseStatus})=>{
 
-    const [visible,setVisible]=useState(false),
+ const [visible,setVisible]=useState(false),
    
   showModal = () => {
    
@@ -25,10 +26,9 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
       setVisible(false)
     
   };
-
-    return(
-        <div> 
-        <Card className='CourseCards'  hoverable
+return(
+  <Fragment>
+       <Card className='CourseCards'  hoverable
         title={
         <div> 
           <h6>{Subject}  <label className='departmentLabel'> {Dep} / Second Subject</label>  </h6> 
@@ -41,8 +41,8 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
   
   actions={[
     <Button type='primary' > Review </Button>,
-    <Button type='primary'> {AppliedState} </Button>,
-    <Button type='primary'> {SavedState} </Button>
+    <Button type='primary'> {CourseStatus}</Button>,
+
    
   ]}
       >
@@ -131,12 +131,10 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
              <Button type='primary' onClick={handleOk}> OK</Button>
          }
        >
-         <p>{aid}
-
-</p>
+         <p>{aid}</p>
          
        </Modal>
-       </div>
-    )
+  </Fragment>
+)
 }
-export default CardUi
+export default CourseStatusCard

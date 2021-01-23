@@ -44,7 +44,10 @@ const SearchUi=(props)=>{
           return(
             
             course.isDegree? 
-            <DegreeCardUi compulsory={course.compulsory}
+            <DegreeCardUi 
+            SavedState={'Save'}
+            AppliedState={'Apply'}
+            compulsory={course.compulsory}
             online={course.online}
             totalCost={course.totalCost}
             courseName={course.courseName}
@@ -66,7 +69,10 @@ const SearchUi=(props)=>{
             optional={course.optional}/>
             
             : !course.isDegree?
-            <CardUi Subject={course.courseName} 
+            <CardUi 
+            SavedState={'Save'}
+            AppliedState={'Apply'}
+            Subject={course.courseName} 
             Dep={course.programSpecs}
             rev={course.totalCost} 
             uni={course.courseOfferingInstitute}
