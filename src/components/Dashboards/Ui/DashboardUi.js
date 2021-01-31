@@ -17,6 +17,7 @@ import PresentCourse from './DashRoutes/PresentCourses';
 import PreviousCourses from './DashRoutes/PreviousCourses';
 import PresentDegree from './DashRoutes/PresentDegree';
 import PreviousDegree from './DashRoutes/PreviousDegree';
+import InstituteProfile from './InstituteProfile';
 
 
 const DashboardUi=(props)=>{
@@ -31,7 +32,7 @@ return(
               <Menu  mode="inline" defaultSelectedKeys='1'>
                   <h6 className='text-center mtt-5'> <b> Student  </b> </h6>
                   <hr className='hr-def mb-0'/>
-                      <Menu.Item class="nav-link active" id="degree-applied" data-toggle="tab" href="#App-Degree" role="tab" aria-controls="App-Degree" aria-selected="true" key="1" >
+                      <Menu.Item class="nav-link  active" id="degree-applied" data-toggle="tab" href="#App-Degree" role="tab" aria-controls="App-Degree" aria-selected="true" key="1" >
                         Applied Degrees
                       </Menu.Item>
                         <Menu.Divider/>
@@ -63,13 +64,13 @@ return(
                         Completed Courses
                       </Menu.Item>
                         <Menu.Divider/>
-                      <Menu.Item class="nav-link" id="profile" data-toggle="tab" href="#profile-Tab" role="tab" aria-controls="profile-Tab" aria-selected="false" key="9"  >
+                      {/* <Menu.Item class="nav-link" id="profile" data-toggle="tab" href="#profile-Tab" role="tab" aria-controls="profile-Tab" aria-selected="false" key="9"  >
                       Edit Profile
-                      </Menu.Item>
-                        <Menu.Divider/>
+                      </Menu.Item> */}
+                        {/* <Menu.Divider/> */}
 
-                  <h6 className='text-center mtt-5'> <b> Teacher  </b> </h6>
-                  <hr className='hr-def mb-0'/>
+                        <h6 className='text-center mtt-5'> <b> Teacher  </b> </h6>
+                        <hr className='hr-def mb-0'/>
 
                       <Menu.Item class="nav-link" id="degree-applied" data-toggle="tab" href="#App-Degree" role="tab" aria-controls="App-Degree" aria-selected="true" key="10" >
                         Applied Degrees
@@ -103,19 +104,22 @@ return(
                         Previous Degrees
                       </Menu.Item>
                           <Menu.Divider/>
-                      <Menu.Item class="nav-link" id="profile" data-toggle="tab" href="#profile-Tab" role="tab" aria-controls="profile-Tab" aria-selected="false" key="18"  >
+                      {/* <Menu.Item class="nav-link" id="profile" data-toggle="tab" href="#profile-Tab" role="tab" aria-controls="profile-Tab" aria-selected="false" key="18"  >
                       Edit Profile
-                      </Menu.Item>
-                          <Menu.Divider/>
+                      </Menu.Item> */}
+                          {/* <Menu.Divider/> */}
 
                   <h6 className='text-center mtt-5'> <b> Institute  </b> </h6>
                   <hr className='hr-def mb-0'/>
+                  <Menu.Item class="nav-link" id="Institute_profile" data-toggle="tab" href="#profile-Institute" role="tab" aria-controls="profile-Institute" aria-selected="false" key="19"  >
+                      Profile
+                      </Menu.Item>
                 </Menu>
             
               </div>
 
               <div className='col-12 col-sm-12 col-md-9 col-lg-9 col-xl-9'>
-                  <Layout>
+                  <Layout style={{height:'auto'}}>
 
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                       <div class="tab-pane fade show active" id="App-Degree" role="tabpanel" aria-labelledby="degree-applied">
@@ -160,6 +164,10 @@ return(
 
                       <div class="tab-pane fade" id='Previous-Degrees' role="tabpanel" aria-labelledby="degree-previous ">
                      <PreviousDegree/>
+                      </div>
+
+                      <div class="tab-pane fade " id='profile-Institute' role="tabpanel" aria-labelledby="Institute_profile ">
+                        <InstituteProfile/>
                       </div>
                     </div>
                   
