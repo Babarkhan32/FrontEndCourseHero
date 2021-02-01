@@ -580,7 +580,7 @@ const [val,setVal]=useState(false);
 <Input type='text'/>
 </Form.Item>
       <h6 className='Title mtt-15'> Course Country</h6>
-      <Form.Item name="country"  rules={[{ required: true }]}>
+      <Form.Item name="courseCountry"  rules={[{ required: true }]}>
       
          <Select
     style={{ width: '100%' }}
@@ -604,7 +604,7 @@ const [val,setVal]=useState(false);
   </Select>
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
-  <Form.Item name="city"  rules={[{ required: true }]}>
+  <Form.Item name="courseCity	"  rules={[{ required: true }]}>
   
          <Select
     style={{ width: '100%' }}
@@ -746,7 +746,7 @@ const [val,setVal]=useState(false);
       </Form.List>
         
       <h6 className='Title mtt-15'> Degree Offering Institute</h6>
-      <Form.Item name="degreeOfferingInstitute"  rules={[{ required: true }]}>
+      <Form.Item name="courseOfferingInstitute "  rules={[{ required: true }]}>
 
          <Input  type='text'/>
          </Form.Item>
@@ -793,7 +793,7 @@ const [val,setVal]=useState(false);
        </Link> */}
 
        <h6 className='Title mtt-15'> Duration</h6>
-      <Form.Item name="durationfrom"  rules={[{ required: true }]}>
+      <Form.Item name="duration"  rules={[{ required: true }]}>
 
          <Input  type='number'/>
          </Form.Item>
@@ -883,7 +883,7 @@ const [val,setVal]=useState(false);
           <DatePicker  style={{width:'100%'}}  />
           </Form.Item>
           <h6 className='Title mtt-15'> Application Deadline </h6>
-          <Form.Item name="AppDeadline"  rules={[{ required: true }]}>
+          <Form.Item name="endingDate"  rules={[{ required: true }]}>
 
           <DatePicker   style={{width:'100%'}}  />
           </Form.Item>
