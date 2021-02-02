@@ -86,6 +86,10 @@ return(
                       Taught degrees
                       </Menu.Item>
                           <Menu.Divider/>
+
+                        <Menu.Item class="nav-link" id="accounts" data-toggle="tab" href="#Accounts-Section" role="tab" aria-controls="Accounts-Section" aria-selected="false" key="18"  >
+                         Accounts
+                        </Menu.Item>
                       {/* <Menu.Item class="nav-link" id="profile" data-toggle="tab" href="#profile-Tab" role="tab" aria-controls="profile-Tab" aria-selected="false" key="18"  >
                       Edit Profile
                       </Menu.Item> */}
@@ -140,6 +144,10 @@ return(
 
                       <div class="tab-pane fade" id='Previous-Degrees' role="tabpanel" aria-labelledby="degree-previous ">
                      <PreviousDegree/>
+                      </div>
+
+                      <div class="tab-pane fade" id='Accounts-Section' role="tabpanel" aria-labelledby="accounts ">
+                      Account Details
                       </div>
 
                     </div>
