@@ -30,7 +30,7 @@ return(
           <div className='row'>
               <div className='col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mb-5'>
               <Menu  mode="inline" defaultSelectedKeys='1'>
-                  <h6 className='text-center mtt-5'> <b> Student  </b> </h6>
+                  <h6 className='text-center mtt-5'> <b> Dashboard  </b> </h6>
                   <hr className='hr-def mb-0'/>
                       <Menu.Item class="nav-link  active" id="degree-applied" data-toggle="tab" href="#App-Degree" role="tab" aria-controls="App-Degree" aria-selected="true" key="1" >
                         Applied Degrees
@@ -64,32 +64,14 @@ return(
                         Completed Courses
                       </Menu.Item>
                         <Menu.Divider/>
-                      {/* <Menu.Item class="nav-link" id="profile" data-toggle="tab" href="#profile-Tab" role="tab" aria-controls="profile-Tab" aria-selected="false" key="9"  >
-                      Edit Profile
-                      </Menu.Item> */}
-                        {/* <Menu.Divider/> */}
-
-                        <h6 className='text-center mtt-5'> <b> Teacher  </b> </h6>
+                     
+                        <h6 className='text-center mtt-5'> <b>  </b> </h6>
                         <hr className='hr-def mb-0'/>
 
-                      <Menu.Item class="nav-link" id="degree-applied" data-toggle="tab" href="#App-Degree" role="tab" aria-controls="App-Degree" aria-selected="true" key="10" >
-                        Applied Degrees
-                      </Menu.Item>
-                        <Menu.Divider/>
-                      <Menu.Item class="nav-link" id="course-applied" data-toggle="tab" href="#App-Courses" role="tab" aria-controls="App-Courses" aria-selected="false" key="11"  >
-                        Applied Courses
-                      </Menu.Item>
-                        <Menu.Divider/>
-                      <Menu.Item class="nav-link" id="degree-saved" data-toggle="tab" href="#Sav-Degrees" role="tab" aria-controls="Sav-Degrees" aria-selected="false" key="12" >
-                        Saved Degrees
-                      </Menu.Item>
-                        <Menu.Divider/>
-                      <Menu.Item class="nav-link" id="course-saved" data-toggle="tab" href="#Sav-Courses" role="tab" aria-controls="Sav-Courses" aria-selected="false" key="13"  >
-                        Saved Courses
-                      </Menu.Item>
-                          <Menu.Divider/>
+                     
+                        
                       <Menu.Item class="nav-link" id="course-previous" data-toggle="tab" href="#Previous-Courses" role="tab" aria-controls="Previous-Courses" aria-selected="false" key="14"  >
-                        Previous Courses
+                        Taught Courses
                       </Menu.Item>
                         <Menu.Divider/>
                       <Menu.Item class="nav-link" id="course-present" data-toggle="tab" href="#Present-Courses" role="tab" aria-controls="Present-Courses" aria-selected="false" key="15"  >
@@ -101,19 +83,13 @@ return(
                       </Menu.Item>
                         <Menu.Divider/>
                       <Menu.Item class="nav-link" id="degree-previous" data-toggle="tab" href="#Previous-Degrees" role="tab" aria-controls="Present-Degrees" aria-selected="false" key="17"  >
-                        Previous Degrees
+                      Taught degrees
                       </Menu.Item>
                           <Menu.Divider/>
                       {/* <Menu.Item class="nav-link" id="profile" data-toggle="tab" href="#profile-Tab" role="tab" aria-controls="profile-Tab" aria-selected="false" key="18"  >
                       Edit Profile
                       </Menu.Item> */}
                           {/* <Menu.Divider/> */}
-
-                  <h6 className='text-center mtt-5'> <b> Institute  </b> </h6>
-                  <hr className='hr-def mb-0'/>
-                  <Menu.Item class="nav-link" id="Institute_profile" data-toggle="tab" href="#profile-Institute" role="tab" aria-controls="profile-Institute" aria-selected="false" key="19"  >
-                      Profile
-                      </Menu.Item>
                 </Menu>
             
               </div>
@@ -166,9 +142,6 @@ return(
                      <PreviousDegree/>
                       </div>
 
-                      <div class="tab-pane fade " id='profile-Institute' role="tabpanel" aria-labelledby="Institute_profile ">
-                        <InstituteProfile/>
-                      </div>
                     </div>
                   
                   </Layout>

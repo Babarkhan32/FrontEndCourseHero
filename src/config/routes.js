@@ -11,7 +11,8 @@ import StudentRegistration from '../components/Student-Registration/Container/St
 import InstituteReg from '../components/Institute-Registration/Container/InstituteReg';
 import FacultyReg from '../components/Faculty-Registration/Container/FacultyReg';
 import CreateDegree from '../components/Create-Degree/Container/CreateDegree';
-import Dashboard from '../components/Dashboards/Container/Dashboard'
+import Dashboard from '../components/Dashboards/Container/Dashboard';
+import InstitueDashboard from '../components/Dashboards/Container/InstituteDashboard'
 import 'react-dropzone-uploader/dist/styles.css';
 
 //routes
@@ -73,6 +74,7 @@ const Routes = () => {
           <Route exact path='/Institute/Reg' component={InstituteReg} />
           <Route exact path='/Faculty/Reg' component={FacultyReg} />
           <Route exact path='/Dashboard' component={Dashboard}/>
+          <Route exact path='/Ins/Dash' component={InstitueDashboard}/>
           <PrivateRoute exact path='/Create/Degree'><CreateDegree></CreateDegree></PrivateRoute>
         </Switch>
       </div>
