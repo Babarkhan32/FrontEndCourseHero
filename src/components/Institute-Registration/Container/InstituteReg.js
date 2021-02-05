@@ -7,10 +7,7 @@ const InstituteReg = () => {
   const onFinish = (values) => {
 
     values.imageSet = fileList;
-    //   values.imageSet=[];
-    //   for(let i=0;i<fileList.length;i++){
-    // values.imageSet.push(fileList[i].originFileObj);
-    //   }
+    
 
     if (values.campuses && values.campuses.length > 0) {
       values.campuses.push(values.instituteCampus);
@@ -32,11 +29,7 @@ const InstituteReg = () => {
     } else {
       values.department = [values.instituteDepartments];
     }
-    // let newArray = [];
-    // newArray.push(fileList)
-    // fileList.forEach(f => newArray.push(f[0]));//by sulaiman
-    // console.log('newArray', newArray)
-    // values.imageSet = newArray;
+   
     delete values.facultyList;
     delete values.instituteCampus;
     delete values.instituteDepartments;

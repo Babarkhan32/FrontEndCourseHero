@@ -1,10 +1,10 @@
-import React,{useState, useCallback} from 'react';
+import React,{ useCallback} from 'react';
 // import ImgCrop from 'antd-img-crop';
 import HeaderCont from '../../Header/Container/Header';
-import {Input,Select,DatePicker,Upload,Button,Form,Radio, message,Modal} from 'antd';
-import Dropzone from 'react-dropzone-uploader';
+import {Input,Select,DatePicker,Button,Form,Radio, message,Modal} from 'antd';
+
 import {useDropzone} from 'react-dropzone'//added by sulaiman
-import {InboxOutlined,  MinusCircleTwoTone, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
+import { MinusCircleTwoTone, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
 const {TextArea} = Input;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -12,34 +12,7 @@ const { RangePicker } = DatePicker;
 
 
 const FacultyRegUi=(props)=>{
-  const [val,setVal]=useState(false);
-    /* Dropzone React*/
-
-    const getUploadParams = () => {
-      return { url: 'https://httpbin.org/post' }
-    }
   
-    const handleChangeStatus = ({ meta }, status) => {
-      console.log(status, meta)
-    }
-  
-    const handleSubmit = (files, allFiles) => {
-
-      props.setFileList(allFiles);
-      console.log("All files",allFiles);
-      console.log(files.map(f => f.meta))
-      allFiles.forEach(f => f.remove())
-      setVal(true);
-    }
-
-    const normFile = e => {
-      console.log('Upload event:', e);
-      if (Array.isArray(e)) {
-        return e;
-      }
-      return e && e.fileList;
-    };
-    
     const handlePreview = (file) => {
       if(file.type === "application/pdf") {
         Modal.info({
@@ -56,7 +29,7 @@ const FacultyRegUi=(props)=>{
             title:file.name,
             okText: 'Close',
             width:"60%",
-            content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+            content: <img alt='' src={reader.result} style={{width:'100%', height:'100%'}}/>,
           })
       }
       reader.readAsDataURL(file)
@@ -70,12 +43,12 @@ const FacultyRegUi=(props)=>{
       } else {
         message.error("File uploading failed.")
       }
-      setVal(true);
-    }, [])
-    const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop, multiple:false})
+     
+    }, [props])
+    const {getRootProps, getInputProps} = useDropzone({onDrop, multiple:false})
 
     const handleDelete = () => {
-      setVal(false);
+     
       props.setFileList(null)
     }
   

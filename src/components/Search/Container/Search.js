@@ -6,8 +6,6 @@ import getNavSearch from './../api/getNavSearch';
 
 const Search=(props)=>{
 
-
-    console.log("Wew Props",props);
     const [data,setData]=useState([]);
     const[online,setOnline]=useState('');
     const [offline,setOffline]=useState('');
@@ -19,13 +17,12 @@ const Search=(props)=>{
     const [master,setMaster]=useState('');
     const [phd,setPhd]=useState('');
     const [postDoc,setPostDoc]=useState('');
-    const [type,setType]=useState('');
-    const [language,setLanguage]=useState('');
-    const [country,setCountry]=useState('');
-    const [subject,setSubject]=useState('');
-    const [cost,setCost]=useState('');
-    const [duration,setDuration]=useState('');
-    const [university,setUniversity]=useState('');
+    // const [language,setLanguage]=useState('');
+    // const [country,setCountry]=useState('');
+    // const [subject,setSubject]=useState('');
+    // const [cost,setCost]=useState('');
+    // const [duration,setDuration]=useState('');
+    // const [university,setUniversity]=useState('');
 
     let query={
         online:online,
@@ -37,12 +34,13 @@ const Search=(props)=>{
         master:master,
         phd:phd,
         postDoc:postDoc,
-        language:language,
-        country:country,
-        subject:subject,
-        cost:cost,
-        duration:duration,
-        university:university
+        certificateCredit:certificateCredit,
+        // language:language,
+        // country:country,
+        // subject:subject,
+        // cost:cost,
+        // duration:duration,
+        // university:university
     };
 
     const onSetOnline=(value)=>{
@@ -51,7 +49,7 @@ const Search=(props)=>{
 
 
         
-      if(value.checked==true){
+      if(value.checked===true){
         query.online='Online'
         setOnline('Online')
       }else{
@@ -69,7 +67,7 @@ const Search=(props)=>{
      
     }
    const onSetCertificateCredit=(value)=>{
-    if(value.checked==true){
+    if(value.checked===true){
         query.certificateCredit='Certificate/Credit'
         setCertificateCredit('Certificate/Credit');
       }else{
@@ -89,7 +87,7 @@ const Search=(props)=>{
    
     const onSetCertificate=(value)=>{
         console.log(query);
-        if(value.checked==true){
+        if(value.checked===true){
         query.certificate='Certificate'
         setCertificate('Certificate');
           
@@ -109,7 +107,7 @@ const Search=(props)=>{
 
     }
     const onSetNonCertificate=(value)=>{
-        if(value.checked==true){
+        if(value.checked===true){
         query.nonCertificate='Non-Certificate';
         setNonCertificate('Non-Certificate');
 
@@ -130,7 +128,7 @@ const Search=(props)=>{
   
     }
     const onSetAssociate=(value)=>{
-        if(value.checked==true){
+        if(value.checked===true){
             query.associate='Associate'
             setAssociate('Associate')
 
@@ -148,7 +146,7 @@ const Search=(props)=>{
   
     }
     const onSetBachelors=(value)=>{
-        if(value.checked==true){
+        if(value.checked===true){
             query.bachelor='Bachelor'
             setBachelor('Bachelor')
 
@@ -166,7 +164,7 @@ const Search=(props)=>{
   
     }
     const onSetMaster=(value)=>{
-        if(value.checked==true){
+        if(value.checked===true){
             query.master='Master'
             setMaster('Master')
 
@@ -183,7 +181,7 @@ const Search=(props)=>{
   
     }
     const onSetPhd=(value)=>{
-        if(value.checked==true){
+        if(value.checked===true){
             query.phd='PHD'
             setPhd('PHD')
 
@@ -199,7 +197,7 @@ const Search=(props)=>{
   
     }
     const onSetPostDoc=(value)=>{
-        if(value.checked==true){
+        if(value.checked===true){
             query.postDoc='PostDoc';
             setPostDoc('PostDoc')
             
@@ -216,7 +214,7 @@ const Search=(props)=>{
   
     }
     const onSetOffline=(value)=>{
-        if(value.checked==true){
+        if(value.checked===true){
             query.offline='Offline'
             setOffline('Offline')
 
@@ -282,9 +280,7 @@ const Search=(props)=>{
 
     }
     useEffect(()=>{
-        if(props.location.state==undefined){
-
-            console.log("SEARCH0");
+        if(props.location.state===undefined){
             getCourses().then(result=>{
                 if(result){
                 setData(result.data);
@@ -293,9 +289,7 @@ const Search=(props)=>{
             
             })
         }else{
-            console.log("SEARCH1");
-
-            getNavSearch(props.location.state.user).then(result=>{
+           getNavSearch(props.location.state.user).then(result=>{
                 if(result){
 
                     console.log(result);
@@ -306,15 +300,6 @@ const Search=(props)=>{
 
     },[props.location.state])
   
-
-    // useEffect(()=>{
-    //         getCourses().then(result=>{
-    //             if(result){
-    //             setData(result.data);
-    //             console.log(result,"Result for era");
-    //             }
-    //         })
-    // },[])
     return(
         <SearchUi
          onSetOnline={onSetOnline}

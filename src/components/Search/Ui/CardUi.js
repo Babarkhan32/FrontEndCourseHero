@@ -3,7 +3,7 @@ import { Card,Modal,Rate,Button,Popover} from 'antd';
 
 
 const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language,
-  duration,durationFor,hoursPerWeek,courseSpecification,AppliedState,SavedState})=>{
+  duration,durationFor,hoursPerWeek,courseSpecification,AppliedState,SavedState,facultyName,currency,type})=>{
 
     const [visible,setVisible]=useState(false),
    
@@ -31,7 +31,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
         <Card className='CourseCards'  hoverable
         title={
         <div> 
-          <h6>{Subject}  <label className='departmentLabel'> {Dep} / Second Subject</label>  </h6> 
+          <h6>{Subject}  <label className='departmentLabel'> {Dep} / {type}</label>  </h6> 
         
           </div>}
         extra={<div> 
@@ -67,7 +67,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
   {/* <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> 
   <label className='LabelTitle'> Courses: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LinkedTitle'> 4 </label>
   </div> */}
-   <Popover content={"Faculty Introduction"} placement='left' trigger="hover">
+   <Popover content={facultyName} placement='left' trigger="hover">
   <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
  
    <label onClick={showModal} className='LinkedTitle'> Faculty </label> 
@@ -89,7 +89,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
   
   <div className='row'>
   <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'> 
-  <label className='LabelTitle'> Cost: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'> PKR {cost} </label >
+  <label className='LabelTitle'> Cost: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'> {currency} {cost} </label >
   </div>
   <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> 
   <label className='LabelTitle'> Aid: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {aid} </label >
@@ -131,7 +131,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
              <Button type='primary' onClick={handleOk}> OK</Button>
          }
        >
-         <p>{aid}
+         <p>{facultyName}
 
 </p>
          

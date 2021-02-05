@@ -5,6 +5,13 @@ import newDegree from './../apis/insertDegree';
 const CreateDegree = () => {
   const [files, setFiles] = useState(null);
   const onFinish = async (values) => {
+    console.log(values);
+
+let facArray=[];
+
+    facArray=values.facultyInfo.map(item=>item.facultyAnother);
+      facArray.unshift(values.facName)
+      values.facultyInfo=facArray;
 
     if (values.compulsory && values.compulsory.length > 0) {
       values.compulsory.push(values.compulsorySubject);
@@ -35,8 +42,7 @@ const CreateDegree = () => {
     } else {
       values.offline = [values.offlinename]
     }
-    // let newArray = [];
-    // files.forEach(f => newArray.push(f.file));
+    
     values.imageSet = files;
     delete values.coursename;
     delete values.compulsorySubject;
@@ -48,7 +54,6 @@ const CreateDegree = () => {
       console.log("Degree of babar khan ", result);
     })
   };
-
 
   return <CreateDegreeUi
     onFinish={onFinish}

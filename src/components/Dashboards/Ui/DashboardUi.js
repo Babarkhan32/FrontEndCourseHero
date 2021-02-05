@@ -1,14 +1,14 @@
 
-import React,{useEffect,useState} from 'react';
-import getSearchedCourses from '../../Search/api/getSearchedCourses';
+import React from 'react';
+// import getSearchedCourses from '../../Search/api/getSearchedCourses';
 import HeaderCont from '../../Header/Container/Header';
 import { Layout,Menu } from 'antd';
 import SavedCourses from './DashRoutes/SavedCourses';
 import AppliedCourses from './DashRoutes/AppliedCourses';
 import SavedDegree from './DashRoutes/SavedDegree';
 import AppliedDegree from './DashRoutes/AppliedDegree';
-import getCourses from '../../Search/api/getCourses';
-import getNavSearch from '../../Search/api/getNavSearch';
+// import getCourses from '../../Search/api/getCourses';
+// import getNavSearch from '../../Search/api/getNavSearch';
 import EnrolledCourses from './DashRoutes/EnrolledCourses';
 import CompletedCourse from './DashRoutes/CompletedCourse';
 import EnrolledDegree from './DashRoutes/EnrolledDegree';

@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import { Card,Modal,Rate,Button,Popover,Timeline} from 'antd';
+import { Card,Modal,Rate,Button,Timeline} from 'antd';
 import { Fragment } from 'react'
 
 const DegreeCard=({courseName,totalCost,type,offlinetotal,totalNumberCourses,

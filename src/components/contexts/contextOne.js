@@ -15,7 +15,7 @@ let reducer = (state, action) => {
       return { ...state,status : "login" };
     case "logout":
       return { ...state, status:"logout" };
-  
+    default: return
   }
 };
  function ContextOneProvider(props) {

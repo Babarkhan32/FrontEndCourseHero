@@ -1,41 +1,17 @@
-import React,{useState, useCallback, useEffect} from 'react';
+import React,{ useCallback} from 'react';
 // import ImgCrop from 'antd-img-crop';
 import {useDropzone} from 'react-dropzone'//added by sulaiman
 
 import HeaderCont from '../../Header/Container/Header';
 // import Dropzone from 'react-dropzone-uploader' //by sulaiman
-import {Input,Checkbox,Select,Radio,Button,DatePicker,Upload, Form, message, Modal} from 'antd';
-import {InboxOutlined,  MinusCircleTwoTone, PlusOutlined, PropertySafetyFilled } from '@ant-design/icons';
+import {Input,Select,Button, Form, message, Modal} from 'antd';
+import {  MinusCircleTwoTone, PlusOutlined} from '@ant-design/icons';
 const { Option } = Select;
 const { TextArea } = Input;
 
 
 
 const InstituteRegUi=(props)=>{
- const [tempFilesArr, setTempFilesArr] = useState(props && props.filesList)
-  console.log('filesArr', props.fileList)
-  const normFile = e => {
-    console.log('Upload event:', e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    return e && e.fileList;
-  };
-
-  /* Dropzone React*/
-
-  const getUploadParams = () => {
-    return { url: 'https://httpbin.org/post' }
-  }
-
-  const handleChangeStatus = ({ meta }, status) => {
-    console.log(status, meta)
-  }
-
-  const handleSubmit = (files, allFiles) => {
-    console.log(files.map(f => f.meta))
-    allFiles.forEach(f => f.remove())
-  }
 
   const handlePreview = (file) => {
     if(file.type === "application/pdf") {
@@ -53,7 +29,7 @@ const InstituteRegUi=(props)=>{
           title:file.name,
           okText: 'Close',
           width:"60%",
-          content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+          content: <img alt='' src={reader.result} style={{width:'100%', height:'100%'}}/>,
         })
     }
     reader.readAsDataURL(file)
@@ -67,9 +43,9 @@ const InstituteRegUi=(props)=>{
     tempArr.push(acceptedFiles[0]);
     console.log('tempArr', tempArr)
     props.setFileList([...tempArr])
-  }, [])
+  }, [props,tempArr])
 
-  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop,multiple:true})
+  const {getRootProps, getInputProps} = useDropzone({onDrop,multiple:true})
 
   const handleDelete = (fileId) => {
     filteredArr = tempArr.filter((item) => item.id !== fileId)

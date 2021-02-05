@@ -1,5 +1,4 @@
 
-import Form from 'antd/lib/form/Form';
 import { callApi } from './../../../config/callApi';
 const insertStudent = async (data) => {
   try {

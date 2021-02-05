@@ -51,13 +51,13 @@ const SearchUi=(props)=>{
             online={course.online}
             totalCost={course.totalCost}
             courseName={course.courseName}
-            country={course.country}
+            country={course.courseCountry}
             startingdate={course.startingdate}
             course={course.course}
             courseSpecification={course.courseSpecification}
-            facName={course.facName}
+            facultyInfo={course.facultyInfo}
             language={course.courseLanguage}
-            AppDeadline={course.AppDeadline}
+            AppDeadline={course.endingDate}
             financialAid={course.financialAid}
             durationCrit={course.durationCrit}
             offline={course.offline}
@@ -71,13 +71,16 @@ const SearchUi=(props)=>{
             : !course.isDegree?
             <CardUi 
             SavedState={'Save'}
+            type={course.type}
             AppliedState={'Apply'}
+            currency={course.currency}
             Subject={course.courseName} 
             Dep={course.programSpecs}
             rev={course.totalCost} 
             uni={course.courseOfferingInstitute}
             rate={2}
             platform='Coursera' 
+            facultyName={course.facultyName}
             country={course.courseCountry} 
             language={course.courseLanguage}
             cost={course.totalCost}

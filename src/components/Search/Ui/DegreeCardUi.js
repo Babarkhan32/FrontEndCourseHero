@@ -1,12 +1,10 @@
 import React,{useState} from 'react';
-import { Card,Modal,Rate,Button,Popover,Timeline} from 'antd';
-
-
+import { Card,Modal,Rate,Button,Timeline} from 'antd';
 const DegreeCardUi=({courseName,totalCost,type,offlinetotal,totalNumberCourses,
   durationFrom,durationCrit,degreeType,hoursPerWeek,Dep,rev,
    uni, platform, country,cost, financialAid,AppDeadline, date
    ,rate,language,course,facName,degreeOfferingInstitute,currency,startingdate,
-   courseSpecification,online,offline,compulsory,optional,AppliedState,SavedState,onlinetotal,coursetotal})=>{
+   courseSpecification,online,offline,compulsory,optional,AppliedState,SavedState,onlinetotal,coursetotal,facultyInfo})=>{
       console.log(AppDeadline,"App Dead line")
     const [visible,setVisible]=useState(false),
     [courseList,setCourseList]=useState(false),
@@ -111,27 +109,8 @@ console.log("Course NAME",courseName)
      <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'>
   
    <label className='LinkedTitle' onClick={showModal}> Faculty </label> 
-  {/* <label className='LabelTitle'> Online: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LinkedTitle'> 3 </label> */}
-
     </div>
-     
-  {/* <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> 
-  <label className='LabelTitle'> Courses: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LinkedTitle'> 4 </label>
-  </div> */}
-   
   </div>
-
-  {/* <div className='row'>
-  <div className='col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5'> 
-    <label className='LabelTitle'> Degree: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> Master's </label>
-    </div>
-    <div className='col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2'> 
-    <label className='LinkedTitle' onClick={showModal}> Faculty </label> 
-     </div>
-  </div>
-   */}
-
-  
   <div className='row'>
   <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'> 
   <label className='LabelTitle'> Cost: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'>  {totalCost}/{currency} </label >
@@ -172,24 +151,21 @@ console.log("Course NAME",courseName)
              <Button type='primary' onClick={handleOk}> OK</Button>
          }
        >
+         
            <Timeline>
-    <Timeline.Item> <h6 className='ItemHeading'> Professor Dr. John </h6>
+             {facultyInfo&&facultyInfo.map(item=>{
+               return(
+                 <div>
+              <Timeline.Item> <h6 className='ItemHeading'>{item} </h6>
       
        
-   <label className='ItemDesc'>  Faculty Introduction to be written here at this place </label> 
-       </Timeline.Item>
-    <Timeline.Item>  <h6 className='ItemHeading'> Mr. Drake </h6>
-
-  
-   <label className='ItemDesc' >  Faculty Introduction to be written here at this place </label> 
-    </Timeline.Item>
-    <Timeline.Item>  <h6 className='ItemHeading'>Mrs. Blake </h6>
-
-
-   <label className='ItemDesc' >  Faculty Introduction to be written here at this place </label> 
-    </Timeline.Item>
-  </Timeline>
-         
+      <label className='ItemDesc'>  Faculty Introduction to be written here at this place </label> 
+          </Timeline.Item>
+     
+       </div>
+               )  })
+   }
+              </Timeline>
        </Modal>
 
        <Modal
@@ -213,10 +189,7 @@ console.log("Course NAME",courseName)
    
    
          }
-  </Timeline>
-
-
-         
+  </Timeline>     
        </Modal>
       
        <Modal
@@ -240,14 +213,8 @@ console.log("Course NAME",courseName)
    
    
          }
-  </Timeline>
-
-
-         
-       </Modal>
-
-
-        
+  </Timeline>      
+     </Modal>  
        <Modal
          title="Offline Courses"
          visible={offlineList}

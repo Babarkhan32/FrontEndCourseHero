@@ -1,11 +1,11 @@
 import React,{useState, useCallback} from 'react';
 import HeaderCont from '../../Header/Container/Header';
-import {Input,Select,DatePicker,Upload,Button,Form, message, Modal} from 'antd';
+import {Input,Select,DatePicker,Button,Form, message, Modal} from 'antd';
 // import ImgCrop from 'antd-img-crop';
 import insertStudent from './../api/insertStudent';
-import Dropzone from 'react-dropzone-uploader';// by sulaiman
+
 import {useDropzone} from 'react-dropzone'//added by sulaiman
-import {InboxOutlined,  MinusCircleFilled, EyeTwoTone, DeleteTwoTone, PlusOutlined, FrownFilled } from '@ant-design/icons';
+import {DeleteTwoTone, PlusOutlined  } from '@ant-design/icons';
 const {TextArea} = Input;
 const { Option } = Select;
 
@@ -20,7 +20,6 @@ const selectBefore = (
 
 const StudentRegUi=()=>{
 const [fileList, setFileList] = useState(null);
-const [val,setVal]=useState(false);
 
   const onFinish=(values)=>{
     console.log('fileList', fileList)
@@ -47,64 +46,17 @@ const [val,setVal]=useState(false);
 
     console.log("Success",values);
     
-    // let newArray=[];
-    //   values.imageSet=fileList;
-    //   values.imageSet.forEach(f => newArray.push(f.file));
+    
       insertStudent(values).then(result=>{
       console.log(result);
   })
   }
   
   
-  const onChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList);
-    console.log(newFileList);
-  };
   
-  
-  const onPreview = async file => {
-    let src = file.url;
-    if (!src) {
-      src = await new Promise(resolve => {
-        const reader = new FileReader();
-        reader.readAsDataURL(file.originFileObj);
-        reader.onload = () => resolve(reader.result);
-      });
-    }
-    const image = new Image();
-    image.src = src;
-    const imgWindow = window.open(src);
-    imgWindow.document.write(image.outerHTML);
-  };
-  
-  const normFile = e => {
-      console.log('Upload event:', e);
-      if (Array.isArray(e)) {
-        return e;
-      }
-      return e && e.fileList;
-    };
-  
-  
-
   /* Dropzone React*/
 
-  const getUploadParams = () => {
-    return { url: 'https://localhost:5001/upload' }// changed by sulaiman
-  }
-
-  const handleChangeStatus = ({ meta }, status) => {
-    console.log(status, meta)
-  }
-
-  const handleSubmit = (files, allFiles) => {
-    console.log(files.map(f => f.meta))
-
-    setFileList(allFiles);
-    setVal(true);
-    allFiles.forEach(f => f.remove())
-  }
-
+  
   const handlePreview = (file) => {
     if(file.type === "application/pdf") {
       Modal.info({
@@ -121,7 +73,7 @@ const [val,setVal]=useState(false);
           title:file.name,
           okText: 'Close',
           width:"60%",
-          content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+          content: <img alt='' src={reader.result} style={{width:'100%', height:'100%'}}/>,
         })
     }
     reader.readAsDataURL(file)
@@ -130,7 +82,7 @@ const [val,setVal]=useState(false);
   }
 
   const handleDelete = () => {
-    setVal(false);
+   
     setFileList(null)
   }
 
@@ -141,10 +93,10 @@ const [val,setVal]=useState(false);
     } else {
       message.error("File uploading failed.")
     }
-    setVal(true);
+   
   }, [])
   
-  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop, multiple:false})
+  const {getRootProps, getInputProps} = useDropzone({onDrop, multiple:false})
 
     return(
       console.log('fileList', fileList),

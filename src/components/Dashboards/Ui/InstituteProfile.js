@@ -71,7 +71,7 @@ const InstituteProfile=()=>{
                         <Carousel >
                             {InstitueImg.map((data)=>(
                             <div>
-                              <img className={style.CarouselStyle} src={data.src}/>
+                              <img alt='' className={style.CarouselStyle} src={data.src}/>
                             </div>
                             ))}
                         </Carousel>

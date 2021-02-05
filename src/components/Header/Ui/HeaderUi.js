@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Popover,Modal,Card} from 'antd';
+import {Modal,Card} from 'antd';
 import style from '../Assets/Header.module.css'
 import '../Assets/Header.css';
 import degree from '../Assets/images/degree.jpg';
@@ -8,9 +8,7 @@ import course from '../Assets/images/course.png';
 const {Meta}=Card;
 
 
-const content = (
-  <Link to='/register'> Logout </Link>
-  );
+
 
 const HeaderUi=()=>{
   const [addCourse, showAddCourse]=useState(false),
@@ -44,19 +42,7 @@ const HeaderUi=()=>{
                  
                  </ul>
                  </div>
-                 {/* <div className=' p-0 col-4 col-sm-4 col-md-2 col-lg-2 col-xl-2'>
-                 <ul className={style.RightNav} >
-                 
-                 <Popover placement="bottom" content={content}  >
-                   <li className={style.HeaderLi}>
-                  
-                      
-                      
-                   </li>
-                   </Popover>
-                
-                     </ul>
-                 </div> */}
+              
                  </div>
                 
                  <Modal

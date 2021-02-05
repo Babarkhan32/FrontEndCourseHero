@@ -1,10 +1,10 @@
-import React,{useState, useCallback} from 'react';
-import {Link} from 'react-router-dom';
+import React,{ useCallback} from 'react';
+
 import HeaderCont from '../../Header/Container/Header';
-import Dropzone from 'react-dropzone-uploader';
+
 import {useDropzone} from 'react-dropzone'//added by sulaiman
-import {Input,Checkbox,Select,Radio,Button,DatePicker,Form,Divider,Upload, message, Modal} from 'antd';
-import { UploadOutlined,PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,InboxOutlined } from '@ant-design/icons';
+import {Input,Select,Radio,Button,DatePicker,Form, message, Modal} from 'antd';
+import { PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,} from '@ant-design/icons';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -12,25 +12,8 @@ const { TextArea } = Input;
 
 
 const CreateDegreeUi =(props)=>{
-const [val,setVal]=useState(false);
+
     /* Dropzone React*/
-
-    const getUploadParams = () => {
-      return { url: 'https://httpbin.org/post' }
-    }
-  
-    const handleChangeStatus = ({ meta }, status) => {
-      console.log(status, meta)
-    }
-  
-    const handleSubmit = (files, allFiles) => {
-
-      props.setFiles(allFiles);
-      console.log(files.map(f => f.meta))
-      allFiles.forEach(f => f.remove())
-      setVal(true);
-    }
-
 
     let tempArr = props.files ? props.files : []
 
@@ -42,10 +25,10 @@ const [val,setVal]=useState(false);
     } else {
       message.error("File uploading failed.")
     }
-    setVal(true);
+
     console.log('filesArr', props.files)
-  }, [])
-  const {getRootProps, getInputProps, acceptedFiles} = useDropzone({onDrop})
+  }, [props,tempArr])
+  const {getRootProps, getInputProps} = useDropzone({onDrop})
 
   const handlePreview = (file) => {
     if(file.type === "application/pdf") {
@@ -63,7 +46,7 @@ const [val,setVal]=useState(false);
           title:file.name,
           okText: 'Close',
           width:"60%",
-          content: <img src={reader.result} style={{width:'100%', height:'100%'}}/>,
+          content: <img alt='' src={reader.result} style={{width:'100%', height:'100%'}}/>,
         })
     }
     reader.readAsDataURL(file)
@@ -75,24 +58,6 @@ const [val,setVal]=useState(false);
     tempArr = filteredArr
     props.setFiles([...tempArr])
   }
-    // const Uploadprops = {
-    //     name: 'file',
-    //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    //     headers: {
-    //       authorization: 'authorization-text',
-    //     },
-    //     onChange(info) {
-    //       if (info.file.status !== 'uploading') {
-    //         console.log(info.file, info.fileList);
-    //       }
-    //       if (info.file.status === 'done') {
-    //         message.success(`${info.file.name} file uploaded successfully`);
-    //       } else if (info.file.status === 'error') {
-    //         message.error(`${info.file.name} file upload failed.`);
-    //       }
-    //     },
-    //   };
-
 
     return(
 
@@ -237,7 +202,7 @@ const [val,setVal]=useState(false);
             {fields.map((field, index) => (
               <div  style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }}
                 required={false}
-                key={field.key}
+                key={index}
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
@@ -254,10 +219,9 @@ const [val,setVal]=useState(false);
                 >
                   
                   <Input placeholder="course name"  />
-</Form.Item>
+                  </Form.Item>
                  
-               
-                      </div>
+               </div>
 
                       <div className='col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1'>
                      
@@ -304,7 +268,7 @@ const [val,setVal]=useState(false);
             {fields.map((field, index) => (
               <div  style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }}
                 required={false}
-                key={field.key}
+                key={index}
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
@@ -370,7 +334,7 @@ const [val,setVal]=useState(false);
             {fields.map((field, index) => (
               <div  style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }}
                 required={false}
-                key={field.key}
+                key={index}
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
@@ -424,22 +388,6 @@ const [val,setVal]=useState(false);
        <Input type='text'/>
 </Form.Item>
 
-
-          {/* <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
-          <Upload {...Uploadprops} >
-
-          <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
-          <Dropzone
-      getUploadParams={getUploadParams}
-      onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
-      styles={{ dropzone: { minHeight: 80} }}
-    />
-          {/* <Upload {...Uploadprops} >
-
-    <Button style={{width:'100%'}} icon={<UploadOutlined />}>Upload CV</Button>
-  </Upload> */}
-
 <h6 className='BlkTitle mtt-15'> Faculty Resume</h6>
 {
   props.files && props.files.length > 0 ? 
@@ -461,60 +409,29 @@ const [val,setVal]=useState(false);
           </div>
     </Form.Item>
 }
-{/* {
-       props.fileList && props.fileList.map((file, index) => (
-        <div>
-           <ul>
-          <li>{index + 1}- {file.name}
-          <Button type="primary" className="mx-3">preview</Button>
-          <Button type="primary">Remove</Button>
-          </li>
-          
-        </ul>
-        </div>
-       
-      ))
-    } */}
-    
 
-          {/* <Dropzone
-      getUploadParams={getUploadParams}
-      onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
-      styles={{ dropzone: { minHeight: 80} }}
-    />
-  <Divider><label> or  </label></Divider> */}
-  {/* <Link to='/Faculty/Reg' target="_blank">
-         <Button type="default" block>
-      Create Resume
-       </Button>
-       </Link>  */}
-       {/* {val?
-    <p>Your files have beenn uploaded</p>:""
-} */}
-
-       <Form.List name="degree">
+       <Form.List name="facultyInfo">
         {(fields, { add, remove }) => (
           <>
-            {fields.map(field => (
-              <div key={field.key} style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }} align="baseline">
+            {fields.map((field,index) => (
+              <div key={index} style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }} align="baseline">
                
   <h6 className='Title mtt-15'> Add Faculty </h6>
   <hr className='hr-def mb-0'/>
-                <div
+
+  <h6 className='BlkTitle mtt-15'> Faculty Name</h6>
+
+                <Form.Item
                   {...field}
-                  name={[field.name, 'faculty']}
-                  fieldKey={[field.fieldKey, 'faculty']}
+                  name={[field.name, 'facultyAnother']}
+                  fieldKey={[field.fieldKey, 'faculty Another']}
                   rules={[{ required: true, message: 'Missing faculty' }]}
                 >
                   
-                  <h6 className='BlkTitle mtt-15'> Faculty Name</h6>
-                  <Form.Item name="faculty"  rules={[{ required: true }]}>
-
-<Input placeholder="faculty"  />
+              <Input placeholder="faculty"  />
 </Form.Item>
 
-                </div>
+            
                 <div
                   {...field}
                   name={[field.name, 'resume']}
@@ -548,19 +465,7 @@ const [val,setVal]=useState(false);
           </div>
     </Form.Item>
 }
-{/* <Dropzone
-      getUploadParams={getUploadParams}
-      onChangeStatus={handleChangeStatus}
-      onSubmit={handleSubmit}
-      styles={{ dropzone: { minHeight: 80} }}
-    />
 
-  <Divider><label> or  </label></Divider> */}
-  <Link to='/Faculty/Reg' target="_blank">
-         <Button type="default" block>
-      Create Resume
-       </Button>
-       </Link> 
                 </div>
 
                 <DeleteTwoTone twoToneColor='red' className='mtt-10' onClick={() => remove(field.name)} />
@@ -639,7 +544,7 @@ const [val,setVal]=useState(false);
             {fields.map((field, index) => (
               <div  style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }}
                 required={false}
-                key={field.key}
+                key={index}
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
@@ -698,7 +603,7 @@ const [val,setVal]=useState(false);
             {fields.map((field, index) => (
               <div  style={{ display: 'flex',flexDirection:'column', marginBottom: 8 }}
                 required={false}
-                key={field.key}
+                key={index}
               >
                   <div className='row mtt-5'>
                       <div className='col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11'>
@@ -762,13 +667,7 @@ const [val,setVal]=useState(false);
          <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
          </Form.Item>
 
-         {/* <Divider><label> Add Institute Complete Profile </label></Divider>
-         <Link to='/Institute/Reg' target="_blank">
-         <Button type="default" block>
-       Register Institiute 
-       </Button>
-       </Link>  */}
-
+  
          <h6 className='Title mtt-15'>Teaching Medium Institute</h6>
       <Form.Item name="teachingmedium"  rules={[{ required: true }]}>
 
@@ -785,13 +684,7 @@ const [val,setVal]=useState(false);
 
  <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
 </Form.Item>
-         {/* <Divider><label> Add Institute Complete Profile </label></Divider>
-         <Link to='/Institute/Reg' target="_blank">
-         <Button type="default" block>
-       Register Institiute 
-       </Button>
-       </Link> */}
-
+      
        <h6 className='Title mtt-15'> Duration</h6>
       <Form.Item name="duration"  rules={[{ required: true }]}>
 
@@ -846,16 +739,7 @@ const [val,setVal]=useState(false);
     $
       
     </Option>
-    {/* <Option value="PKR" label="PKR">
-     
-    PKR
-      
-    </Option>
-    <Option value="Pound" label="Pound">
-     
-    Pound
-    
-    </Option> */}
+
   </Select>
  </Form.Item>
          <h6 className='Title mtt-15'> Cost Breakdown</h6>
@@ -888,13 +772,7 @@ const [val,setVal]=useState(false);
           <DatePicker   style={{width:'100%'}}  />
           </Form.Item>
 
-          {/* <h6 className='BlkTitle mtt-15'>Add Course Details  </h6>
-  <hr className='hr-def mb-0'/>
-  <Link to='/create/course' target="_blank">
-         <Button className='mtt-10' type="default" block>
-       Add Course
-       </Button>
-       </Link> */}
+      
 
   <hr className='hr-def'/>
           <div className='text-center mtt-5'>
