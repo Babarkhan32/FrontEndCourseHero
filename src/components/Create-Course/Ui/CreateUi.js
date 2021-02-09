@@ -109,11 +109,11 @@ const CreateUi=(props)=>{
           <Input type='text'/>
           </Form.Item>
           <h6 className='BlkTitle mtt-15'>Additional Subject</h6>
-          <Form.Item name="additionalSubject2"  rules={[{ required: true }]}> 
+          <Form.Item name="additionalSubject2" > 
           <Input type='text'/>
           </Form.Item>
           <h6 className='BlkTitle mtt-15'> Additional Subject</h6>
-          <Form.Item name="additionalSubject3"  rules={[{ required: true }]}> 
+          <Form.Item name="additionalSubject3"> 
           <Input type='text'/>
           </Form.Item>
           <hr className='hr-def'/>
@@ -254,7 +254,7 @@ const CreateUi=(props)=>{
          <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'> Institue Web Address</h6>
-         <Form.Item name="instituteWebAddress"  rules={[{ required: true }]}> 
+         <Form.Item name="instituteWebAddress"> 
          <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
@@ -269,15 +269,15 @@ const CreateUi=(props)=>{
        </Link>  */}
 
          <h6 className='Title mtt-15'>Teaching Medium Institute</h6>
-         <Form.Item name="mediumInstitute"  rules={[{ required: true }]}> 
+         <Form.Item name="mediumInstitute" > 
          <Input   type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Teaching Medium Institue Web Address</h6>
-         <Form.Item name="mediumInstituteWebAddress"  rules={[{ required: true }]}> 
+         <Form.Item name="mediumInstituteWebAddress"> 
          <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
-         <Form.Item name="mediumInstituteDetails"  rules={[{ required: true }]}> 
+         <Form.Item name="mediumInstituteDetails" > 
  <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
  </Form.Item>
 
@@ -313,26 +313,12 @@ const CreateUi=(props)=>{
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
   <Form.Item name="courseCity"  rules={[{ required: true }]}> 
-         <Select
+         <Input
     style={{ width: '100%' }}
-    optionLabelProp="label"
   >
-    <Option value="Islamabad" label="Islamabad">
-      
-  Islamabad
-      
-    </Option>
-    <Option value="Wah Cantt" label="Wah Cantt">
-     
-    Wah Cantt
-      
-    </Option>
-    <Option value="Peshawar" label="Peshawar">
-     
-    Peshawar
-    
-    </Option>
-  </Select>
+ 
+
+  </Input>
   </Form.Item>
 
           <h6 className='Title mtt-15'> Duration</h6>
