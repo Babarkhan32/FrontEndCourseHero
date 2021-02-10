@@ -164,7 +164,7 @@ const CreateUi=(props)=>{
   </Select>
        </Form.Item>
   <h6 className='Title mtt-15'> Course Importance & Breakdown </h6>
-  <Form.Item name="courseBreakDown"  rules={[{ required: true }]}> 
+  <Form.Item name="breakDown"  rules={[{ required: true }]}> 
   <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the course breakdown' />
 </Form.Item>
   <h6 className='Title'> Faculty Name</h6>
@@ -269,15 +269,15 @@ const CreateUi=(props)=>{
        </Link>  */}
 
          <h6 className='Title mtt-15'>Teaching Medium Institute</h6>
-         <Form.Item name="mediumInstitute" > 
+         <Form.Item name="medium" > 
          <Input   type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Teaching Medium Institue Web Address</h6>
-         <Form.Item name="mediumInstituteWebAddress"> 
+         <Form.Item name="mediumWebAddress"> 
          <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
-         <Form.Item name="mediumInstituteDetails" > 
+         <Form.Item name="mediumDetails" > 
  <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
  </Form.Item>
 

@@ -12,7 +12,8 @@ let facArray=[];
     facArray=values.facultyInfo.map(item=>item.facultyAnother);
       facArray.unshift(values.facName)
       values.facultyInfo=facArray;
-
+      values.status=1;
+      values.owner_type=0;
     if (values.compulsory && values.compulsory.length > 0) {
       values.compulsory.push(values.compulsorySubject);
     } else {

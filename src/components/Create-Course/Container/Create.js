@@ -8,6 +8,8 @@ const Create = (props) => {
     const [resume, setResume] = useState('')
     const onFinish = (data) => {
         data.facultyResume = resume;
+        data.status=1;
+        data.owner_type=0;
         insertCourse(data).then(result => {
             console.log("Result", result);
             alert("Course inserted Successfully")

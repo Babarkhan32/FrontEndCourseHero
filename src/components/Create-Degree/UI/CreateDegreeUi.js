@@ -651,36 +651,36 @@ const CreateDegreeUi =(props)=>{
       </Form.List>
         
       <h6 className='Title mtt-15'> Degree Offering Institute</h6>
-      <Form.Item name="courseOfferingInstitute "  rules={[{ required: true }]}>
+      <Form.Item name="courseOfferingInstitute"  rules={[{ required: true }]}>
 
          <Input  type='text'/>
          </Form.Item>
          
          <h6 className='Title mtt-15'> Institue Web Address</h6>
-      <Form.Item name="webaddress"  rules={[{ required: true }]}>
+      <Form.Item name="instituteWebAddress"  rules={[{ required: true }]}>
          
          <Input  type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
-      <Form.Item name="instDetails"  rules={[{ required: true }]}>
+      <Form.Item name="instituteDetails: "  rules={[{ required: true }]}>
          
          <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
          </Form.Item>
 
   
          <h6 className='Title mtt-15'>Teaching Medium Institute</h6>
-      <Form.Item name="teachingmedium"  rules={[{ required: true }]}>
+      <Form.Item name="medium"  rules={[{ required: true }]}>
 
          <Input  type='text'/>
          </Form.Item>
 
          <h6 className='Title mtt-15'>Teaching Medium Institue Web Address</h6>
-      <Form.Item name="teachingmediumweb"  rules={[{ required: true }]}>
+      <Form.Item name="mediumWebAddress"  rules={[{ required: true }]}>
 
          <Input  type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
-      <Form.Item name="inssdetails"  rules={[{ required: true }]}>
+      <Form.Item name="mediumDetails"  rules={[{ required: true }]}>
 
  <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
 </Form.Item>
@@ -691,7 +691,7 @@ const CreateDegreeUi =(props)=>{
          <Input  type='number'/>
          </Form.Item>
          <h6 className='Title mtt-15'> Duration For</h6>
-      <Form.Item name="durationCrit"  rules={[{ required: true }]}>
+      <Form.Item name="durationFor"  rules={[{ required: true }]}>
 
          <Select
     style={{ width: '100%' }}
@@ -762,7 +762,7 @@ const CreateDegreeUi =(props)=>{
            </Form.Item>
            
           <h6 className='Title mtt-15'>Starting Date </h6>
-  <Form.Item name="startingdate"  rules={[{ required: true }]}>
+  <Form.Item name="startingDate"  rules={[{ required: true }]}>
 
           <DatePicker  style={{width:'100%'}}  />
           </Form.Item>

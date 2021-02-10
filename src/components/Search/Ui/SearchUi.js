@@ -52,7 +52,7 @@ const SearchUi=(props)=>{
             totalCost={course.totalCost}
             courseName={course.courseName}
             country={course.courseCountry}
-            startingdate={course.startingdate}
+            startingdate={course.startingDate}
             course={course.course}
             courseSpecification={course.courseSpecification}
             facultyInfo={course.facultyInfo}
