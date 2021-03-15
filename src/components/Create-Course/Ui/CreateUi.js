@@ -2,7 +2,9 @@ import React,{useCallback} from 'react';
 import HeaderCont from '../../Header/Container/Header';
 import {useDropzone} from 'react-dropzone'//added by sulaiman
 import {Input,Select,Radio,Button,DatePicker,Form,Divider, message, Modal} from 'antd';
+import countryList from 'react-select-country-list'
 import {  DeleteTwoTone } from '@ant-design/icons';
+import { Fragment } from 'react';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -10,10 +12,15 @@ const { TextArea } = Input;
 
  
 const CreateUi=(props)=>{
+  var languages = require('langu-list')();
+  console.log('langages list are',languages.getLanguageNames());
+  const optionsLangauges=languages.getLanguageNames();
+  const countries = countryList().getLabels();
+  console.log('Countries List', countries);
+  
   console.log("props33",props);
   /* Dropzone React*/
 
- 
   //suliaman's work
   const handlePreview = (file) => {
     if(file.type === "application/pdf") {
@@ -58,9 +65,11 @@ const CreateUi=(props)=>{
   
 
     return(
+      <Fragment> 
+        <HeaderCont/>
       <div className='MainCont'>
       <div className='PageWrapper'> 
-<HeaderCont/>
+
  
 <div className='container'>
 <div className='row'>
@@ -90,6 +99,7 @@ const CreateUi=(props)=>{
          
         >
           <Option value="Disciplinary">Disciplinary Course</Option>
+          
         </Select>
       </Form.Item>
       <Form.Item
@@ -100,25 +110,25 @@ const CreateUi=(props)=>{
           return getFieldValue('type') === 'Interdisciplinary' ? (
             <div name="customizeType" rules={[{ required: true }]}>
 
-<h6 className='BlkTitle mtt-15'> Enter Main Disciplinary Subject</h6>
-<Form.Item name="mainDisciplinarySubject"  rules={[{ required: true }]}> 
-              <Input type='text'/>
-</Form.Item>
+            <h6 className='BlkTitle mtt-15'> Enter Main Disciplinary Subject</h6>
+            <Form.Item name="mainDisciplinarySubject"  rules={[{ required: true }]}> 
+                          <Input type='text'/>
+            </Form.Item>
               <h6 className='BlkTitle mtt-15'> Additional Subject</h6>
               <Form.Item name="additionalSubject1"  rules={[{ required: true }]}> 
-          <Input type='text'/>
-          </Form.Item>
-          <h6 className='BlkTitle mtt-15'>Additional Subject</h6>
-          <Form.Item name="additionalSubject2" > 
-          <Input type='text'/>
-          </Form.Item>
-          <h6 className='BlkTitle mtt-15'> Additional Subject</h6>
-          <Form.Item name="additionalSubject3"> 
-          <Input type='text'/>
-          </Form.Item>
-          <hr className='hr-def'/>
+              <Input type='text'/>
+              </Form.Item>
+              <h6 className='BlkTitle mtt-15'>Additional Subject</h6>
+              <Form.Item name="additionalSubject2" > 
+              <Input type='text'/>
+              </Form.Item>
+              <h6 className='BlkTitle mtt-15'> Additional Subject</h6>
+              <Form.Item name="additionalSubject3"> 
+              <Input type='text'/>
+              </Form.Item>
+              <hr className='hr-def'/>
 
-            </div>
+                </div>
           ) : getFieldValue('type') === 'Disciplinary' ? (
             <div name="customizeType"  rules={[{ required: true }]}>
                <h6 className='BlkTitle mtt-15'> Enter Main Subject</h6>
@@ -133,7 +143,7 @@ const CreateUi=(props)=>{
       
   
       <h6 className='Title mtt-15'> Mode</h6>
-      <Form.Item name="mode"  rules={[{ required: true }]}> 
+      <Form.Item name="mode"  rules={[{ required: false }]}> 
           <Radio.Group name="radiogroup" defaultValue={'online'}>
     <Radio value={'Online'}>Online</Radio>
     <Radio  value={'Offline'}>Offline</Radio>
@@ -141,27 +151,18 @@ const CreateUi=(props)=>{
 </Form.Item>
   <h6 className='Title mtt-15'> Course Language</h6>
   <Form.Item name="courseLanguage"  rules={[{ required: true }]}> 
-         <Select
+  {/* <ReactLanguageSelect
+    searchable={true}
+    searchPlaceholder="Search for a language" /> */}
+    <Select
+    showSearch
     style={{ width: '100%' }}
-  
-    optionLabelProp="label"
-  >
-    <Option value="English" label="Englishn">
-      
-    English
-      
-    </Option>
-    <Option value="Urdu" label="Urdu">
-     
-    Urdu
-      
-    </Option>
-    <Option value="Arabic" label="Arabic">
-     
-    Arabic
-    
-    </Option>
-  </Select>
+    placeholder="Please select"
+    >
+    {optionsLangauges.map((item,i)=>(
+      <Option key={i} value={item}> {item} </Option>
+    ))}
+    </Select>
        </Form.Item>
   <h6 className='Title mtt-15'> Course Importance & Breakdown </h6>
   <Form.Item name="breakDown"  rules={[{ required: true }]}> 
@@ -290,30 +291,19 @@ const CreateUi=(props)=>{
 
        <h6 className='Title mtt-15'> Course Country</h6>
        <Form.Item name="courseCountry"  rules={[{ required: true }]}> 
-         <Select
+       <Select
+       showSearch
     style={{ width: '100%' }}
-    optionLabelProp="label"
-  >
-    <Option value="Pakistan" label="Pakistan">
-      
-    Pakistan
-      
-    </Option>
-    <Option value="Saudi Arabia" label="Saudi Arabia">
-     
-    Saudi Arabia
-      
-    </Option>
-    <Option value="China" label="China">
-     
-    China
-    
-    </Option>
-  </Select>
+    placeholder="Please select"
+    >
+    {countries.map((item,i)=>(
+      <Option key={i} value={item}> {item} </Option>
+    ))}
+    </Select>
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
-  <Form.Item name="courseCity"  rules={[{ required: true }]}> 
-         <Input
+  <Form.Item name="courseCity"  rules={[{ required: false }]}> 
+         <Input disabled
     style={{ width: '100%' }}
   >
  
@@ -340,8 +330,9 @@ const CreateUi=(props)=>{
          <Input type='number'/>
 </Form.Item>
          <h6 className='Title mtt-15'> Currency</h6>
-         <Form.Item name="currency"  rules={[{ required: true }]}> 
+         <Form.Item name="currency"  rules={[{ required: false }]}> 
          <Select
+         disabled
     style={{ width: '100%' }}
     optionLabelProp="label"
   >
@@ -355,15 +346,15 @@ const CreateUi=(props)=>{
  
       
          <h6 className='Title mtt-15'> Financial Aid</h6>
-         <Form.Item name="financialAid"  rules={[{ required: true }]}> 
-         <Radio.Group name="radiogroup" defaultValue={'online'}>
+         <Form.Item name="financialAid"  rules={[{ required: false }]}> 
+         <Radio.Group name="radiogroup" defaultValue={''}>
     <Radio value={'Yes'}>Yes</Radio>
     <Radio  value={'No'}>No</Radio>
   </Radio.Group>
   </Form.Item>
 
   <h6 className='Title mtt-15'> Financial Aid Details </h6>
-  <Form.Item name="financialAidDetails"  rules={[{ required: true }]}> 
+  <Form.Item name="financialAidDetails"  rules={[{ required: false }]}> 
           <TextArea rows={3} />
           </Form.Item>
           <h6 className='Title mtt-15'>Starting Date </h6>
@@ -377,7 +368,7 @@ const CreateUi=(props)=>{
           <h6 className='BlkTitle mtt-15'>Is this course is a part of any other program/degree ?  </h6>
   <hr className='hr-def mb-0'/>
   
-  <Form.Item name="part"  rules={[{ required: true }]}>
+  <Form.Item name="part"  rules={[{ required: false}]}>
         <Select
           placeholder="Specify Course"
          
@@ -708,6 +699,7 @@ const CreateUi=(props)=>{
     
         </div>
         </div>
+        </Fragment>
     )
 }
 export default CreateUi

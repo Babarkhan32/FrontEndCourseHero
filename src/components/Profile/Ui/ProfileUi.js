@@ -2,14 +2,17 @@ import React from 'react'
 import HeaderCont from '../../Header/Container/Header';
 import '../Assets/Profile.css';
 import { Layout, Menu } from 'antd';
+import { Fragment } from 'react';
 
 
 
 const ProfileUi=()=>{
     return(
+      <Fragment> 
+            <HeaderCont/>
         <div className='MainCont'>
           <div className='PageWrapper'> 
-         <HeaderCont/>
+     
          <div className='container'>
 <div className='row'>
     <div className='col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mb-5'>
@@ -45,6 +48,7 @@ const ProfileUi=()=>{
          </div>
         </div>
         </div>
+        </Fragment>
     )
 }
 export default ProfileUi

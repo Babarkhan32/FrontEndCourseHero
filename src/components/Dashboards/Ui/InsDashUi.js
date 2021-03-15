@@ -10,12 +10,15 @@ import CampusList from './InstituteMenu/CampusList';
 import ProgramList from './InstituteMenu/ProgramList';
 import DepartmentList from './InstituteMenu/DepartmentList';
 import FacultyList from './InstituteMenu/FacultyList';
+import { Fragment } from 'react';
 
 const InsDashUi=()=>{
     return(
+      <Fragment>
+      <HeaderCont/>
         <div className='MainCont'>
     <div className='PageWrapper'> 
-     <HeaderCont/>
+
         <div className='container'>
           <div className='row'>
               <div className='col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mb-5'>
@@ -110,6 +113,7 @@ const InsDashUi=()=>{
                   </div>
                     </div>
                     </div></div> </div>
+      </Fragment>
     )
 }
 

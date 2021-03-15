@@ -6,6 +6,7 @@ import HeaderCont from '../../Header/Container/Header';
 // import Dropzone from 'react-dropzone-uploader' //by sulaiman
 import {Input,Select,Button, Form, message, Modal} from 'antd';
 import {  MinusCircleTwoTone, PlusOutlined} from '@ant-design/icons';
+import { Fragment } from 'react';
 const { Option } = Select;
 const { TextArea } = Input;
 
@@ -55,10 +56,12 @@ const InstituteRegUi=(props)=>{
   }
 
     return(
+<Fragment>
+<HeaderCont/>
 
         <div className='MainCont'>
         <div className='PageWrapper'> 
-<HeaderCont/>
+
    
   <div className='container'>
   <div className='row'>
@@ -469,6 +472,7 @@ const InstituteRegUi=(props)=>{
             </div>
             </div>
             </div>
+            </Fragment>
     )
 }
 

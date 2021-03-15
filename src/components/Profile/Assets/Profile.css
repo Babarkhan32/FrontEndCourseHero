@@ -32,31 +32,41 @@ border: 1px solid #dcdcdc;
 
 
 .MainCont{
-    margin-left:auto;
+    position: absolute;
+    top: 105px;
+    bottom: 0;
+    overflow-y: scroll;
+    width: 100%;
+    /* margin-left:auto;
     margin-right: auto;
     overflow: auto;
     width: 100%;
     height: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden; */
+    /* background-color: green; */
 }
 .PageWrapper{
+    padding-top: 30px;
     margin-top: 1px;
     margin-left: auto;
     margin-right: auto;
-    position: fixed;
-    width: 100%;
+    /* overflow-y: scroll; */
+    /* position: fixed; */
+    /* width: 100%; */
+    /* background-color: lightgreen; */
     
 }
 .container{
-    margin-top: 20px;
-    height: 90vh;
+    /* margin-top: 20px; */
+    /* height: 90vh;
     overflow-x: hidden;
-    overflow-y: scroll;
-    padding-bottom: 90px;
+    overflow-y: scroll; */
+    /* padding-bottom: 90px;
+    background-color: red; */
 
 }
 .container::-webkit-scrollbar{
-    display: none;
+    /* display: none; */
 }
 .ant-popover{
     width: 150px;

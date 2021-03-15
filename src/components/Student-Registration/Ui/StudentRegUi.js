@@ -6,6 +6,7 @@ import insertStudent from './../api/insertStudent';
 
 import {useDropzone} from 'react-dropzone'//added by sulaiman
 import {DeleteTwoTone, PlusOutlined  } from '@ant-design/icons';
+import { Fragment } from 'react';
 const {TextArea} = Input;
 const { Option } = Select;
 
@@ -100,9 +101,11 @@ const [fileList, setFileList] = useState(null);
 
     return(
       console.log('fileList', fileList),
+      <Fragment> 
+          <HeaderCont/>
         <div className='MainCont'>
         <div className='PageWrapper'> 
-        <HeaderCont/>
+      
         <div className='container'>
 <div className='row'>
     <div className='col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2'></div>
@@ -546,6 +549,7 @@ const [fileList, setFileList] = useState(null);
     </div>
         </div>
         </div>
+        </Fragment>
     )
 }
 export default StudentRegUi

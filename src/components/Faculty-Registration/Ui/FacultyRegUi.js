@@ -5,6 +5,7 @@ import {Input,Select,DatePicker,Button,Form,Radio, message,Modal} from 'antd';
 
 import {useDropzone} from 'react-dropzone'//added by sulaiman
 import { MinusCircleTwoTone, DeleteTwoTone, PlusOutlined } from '@ant-design/icons';
+import { Fragment } from 'react';
 const {TextArea} = Input;
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -53,10 +54,11 @@ const FacultyRegUi=(props)=>{
     }
   
     return(
-
+<Fragment>
+<HeaderCont/>
         <div className='MainCont'>
       <div className='PageWrapper'> 
-<HeaderCont/>
+
  <div className='container'>
 <div className='row'>
     <div className='col-1 col-sm-1 col-md-2 col-lg-2 col-xl-2'></div>
@@ -663,6 +665,7 @@ const FacultyRegUi=(props)=>{
     
         </div>
         </div>
+        </Fragment>
     )
 }
 export default FacultyRegUi

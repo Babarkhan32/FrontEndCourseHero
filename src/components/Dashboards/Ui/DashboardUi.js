@@ -18,14 +18,17 @@ import PreviousCourses from './DashRoutes/PreviousCourses';
 import PresentDegree from './DashRoutes/PresentDegree';
 import PreviousDegree from './DashRoutes/PreviousDegree';
 import InstituteProfile from './InstituteProfile';
+import { Fragment } from 'react';
 
 
 const DashboardUi=(props)=>{
 
 return(
+  <Fragment> 
+    <HeaderCont/>
 <div className='MainCont'>
     <div className='PageWrapper'> 
-      <HeaderCont/>
+    
         <div className='container'>
           <div className='row'>
               <div className='col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 mb-5'>
@@ -157,6 +160,8 @@ return(
           </div>
         </div>
     </div>
-</div>)}
+</div>
+</Fragment>
+)}
 
 export default DashboardUi

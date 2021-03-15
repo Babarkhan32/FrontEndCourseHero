@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Fragment} from 'react';
 import HeaderCont from '../../Header/Container/Header';
 import style from '../Assets/Search.module.css';
 import '../Assets/Search.css';
@@ -8,9 +8,11 @@ import DegreeCardUi from './DegreeCardUi';
 import {Empty} from 'antd';
 const SearchUi=(props)=>{
     return(
+      <Fragment>
+        <HeaderCont/>
         <div className='MainCont'>
       <div className='PageWrapper'> 
-<HeaderCont/>
+
 <div className='container'>
     <div className='row'>
         <div className='col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
@@ -116,6 +118,9 @@ const SearchUi=(props)=>{
 </div>
         </div>
         </div>
+    
+      </Fragment>
+        
     )
 }
 export default SearchUi
