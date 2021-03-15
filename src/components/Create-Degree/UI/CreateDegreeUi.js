@@ -513,8 +513,13 @@ const CreateDegreeUi =(props)=>{
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
   <Form.Item name="courseCity	"  rules={[{ required: false }]}>
-  
-         <Select
+  <Form.Item name="courseCity"  rules={[{ required: false }]}> 
+         <Input 
+    style={{ width: '100%' }}
+  >
+  </Input>
+  </Form.Item>
+         {/* <Select
          disabled
     style={{ width: '100%' }}
     optionLabelProp="label"
@@ -534,7 +539,7 @@ const CreateDegreeUi =(props)=>{
     Peshawar
     
     </Option>
-  </Select>
+  </Select> */}
 </Form.Item>
 
       <h6 className='Title mtt-15'> List of Compulsory Subjects </h6>
@@ -734,7 +739,6 @@ const CreateDegreeUi =(props)=>{
       <Form.Item name="currency"  rules={[{ required: false}]}>
 
          <Select
-         disabled
     style={{ width: '100%' }}
    
     optionLabelProp="label"

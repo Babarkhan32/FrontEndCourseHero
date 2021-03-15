@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import { Card,Modal,Rate,Button,Popover} from 'antd';
+import moment from 'moment';
 
 
 const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,rate,language,
@@ -103,16 +104,16 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
     </div> 
 
     <div className='col-1 col-sm-1 col-md-1 col-lg-1 col-xl-1'>
-    <label className='LabelTitle'>Islamabad </label> 
+    <label className='LabelTitle'>{''} </label> 
     </div> 
   </div>
 
   <div className='row'>
   <div className='col-5 col-sm-5 col-md-5 col-lg-5 col-xl-5'> 
-  <label className='LabelTitle'> Application Deadline: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'>{deadline}</label >
+  <label className='LabelTitle'> Application Deadline: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label  className='LabelValue'>{moment(deadline).format('MMMM Do, YYYY hh:mm A')}</label >
   </div>
   <div className='col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4'> 
-  <label className='LabelTitle'> Start Date: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {date} </label >
+  <label className='LabelTitle'> Start Date: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {moment(date).format('MMMM Do, YYYY hh:mm A')} </label >
   </div>
   <div className='col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3'> 
   <label className='LabelTitle'> Language: </label> &nbsp; &nbsp; &nbsp; &nbsp;  <label className='LabelValue'> {language} </label>

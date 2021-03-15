@@ -87,13 +87,13 @@ const CreateUi=(props)=>{
           <Input  type='text'/>
             </Form.Item>
           <h6 className='Title mtt-15'> Select Course Type </h6>
-          {/* <Radio.Group name="type" defaultValue={'Disciplinary'}>
-    <Radio  value='Disciplinary'>Disciplinary</Radio>
-    <Radio value='Inter-Disciplinary'>Inter-Disciplinary</Radio>
-  </Radio.Group> */}
+                {/* <Radio.Group name="type" defaultValue={'Disciplinary'}>
+          <Radio  value='Disciplinary'>Disciplinary</Radio>
+          <Radio value='Inter-Disciplinary'>Inter-Disciplinary</Radio>
+        </Radio.Group> */}
 
 
-      <Form.Item name="type"  rules={[{ required: true }]}>
+      <Form.Item name="type"  rules={[{ required: false }]}>
         <Select
           placeholder="Select Course Type"
          
@@ -158,14 +158,15 @@ const CreateUi=(props)=>{
     showSearch
     style={{ width: '100%' }}
     placeholder="Please select"
+    optionLabelProp="label"
     >
     {optionsLangauges.map((item,i)=>(
-      <Option key={i} value={item}> {item} </Option>
+      <Option key={i} value={item} label={item}> {item} </Option>
     ))}
     </Select>
        </Form.Item>
   <h6 className='Title mtt-15'> Course Importance & Breakdown </h6>
-  <Form.Item name="breakDown"  rules={[{ required: true }]}> 
+  <Form.Item name="breakDown"  rules={[{ required: false }]}> 
   <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the course breakdown' />
 </Form.Item>
   <h6 className='Title'> Faculty Name</h6>
@@ -259,7 +260,7 @@ const CreateUi=(props)=>{
          <Input type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
-         <Form.Item name="instituteDetails"  rules={[{ required: true }]}> 
+         <Form.Item name="instituteDetails"  rules={[{ required: false }]}> 
          <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
 </Form.Item>
          {/* <Divider><label> Add Institute Complete Profile </label></Divider>
@@ -302,12 +303,10 @@ const CreateUi=(props)=>{
     </Select>
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
-  <Form.Item name="courseCity"  rules={[{ required: false }]}> 
-         <Input disabled
+  <Form.Item name="courseCity"  rules={[{ required: true }]}> 
+         <Input 
     style={{ width: '100%' }}
   >
- 
-
   </Input>
   </Form.Item>
 
@@ -332,14 +331,11 @@ const CreateUi=(props)=>{
          <h6 className='Title mtt-15'> Currency</h6>
          <Form.Item name="currency"  rules={[{ required: false }]}> 
          <Select
-         disabled
     style={{ width: '100%' }}
     optionLabelProp="label"
   >
     <Option value="$" label="$">
-      
-    $
-      
+       $
     </Option>
   </Select>
   </Form.Item>
