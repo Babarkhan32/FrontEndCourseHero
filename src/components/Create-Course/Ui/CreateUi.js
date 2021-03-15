@@ -4,6 +4,7 @@ import {useDropzone} from 'react-dropzone'//added by sulaiman
 import {Input,Select,Radio,Button,DatePicker,Form,Divider, message, Modal} from 'antd';
 import countryList from 'react-select-country-list'
 import {  DeleteTwoTone } from '@ant-design/icons';
+import csc from 'country-state-city'
 import { Fragment } from 'react';
 
 const { Option } = Select;
@@ -16,7 +17,13 @@ const CreateUi=(props)=>{
   console.log('langages list are',languages.getLanguageNames());
   const optionsLangauges=languages.getLanguageNames();
   const countries = countryList().getLabels();
+  const cities = csc.getAllCities();
   console.log('Countries List', countries);
+  console.log('cities List', cities);
+
+  const citiesList= cities.map((item,i)=>(
+    <Option key={i} value={item.name} > {item.name}</Option>
+  ))
   
   console.log("props33",props);
   /* Dropzone React*/
@@ -303,12 +310,30 @@ const CreateUi=(props)=>{
     </Select>
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
-  <Form.Item name="courseCity"  rules={[{ required: true }]}> 
+  <Form.Item name="courseCity	"  rules={[{ required: false }]}>
+  {/* <Form.Item name="courseCity"  rules={[{ required: false }]}> 
          <Input 
     style={{ width: '100%' }}
   >
   </Input>
-  </Form.Item>
+  </Form.Item> */}
+         <Select
+     showSearch
+     style={{ width: '100%' }}
+     placeholder="Please select"
+  >
+    {citiesList}
+    {/* {cities.map((item,i)=>(
+      <Option key={i} value={item.name} > {item} </Option>
+    ))} */}
+  </Select>
+</Form.Item>
+  {/* <Form.Item name="courseCity"  rules={[{ required: true }]}> 
+         <Input 
+    style={{ width: '100%' }}
+  >
+  </Input>
+  </Form.Item> */}
 
           <h6 className='Title mtt-15'> Duration</h6>
           <Form.Item name="duration"  rules={[{ required: true }]}> 

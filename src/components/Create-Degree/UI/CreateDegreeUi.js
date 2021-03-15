@@ -7,6 +7,9 @@ import {Input,Select,Radio,Button,DatePicker,Form, message, Modal} from 'antd';
 import { PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,} from '@ant-design/icons';
 import { Fragment } from 'react';
 import countryList from 'react-select-country-list'
+import csc from 'country-state-city'
+
+
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -18,8 +21,23 @@ const CreateDegreeUi =(props)=>{
   console.log('langages list are',languages.getLanguageNames());
   const optionsLangauges=languages.getLanguageNames();
   const countries = countryList().getLabels();
+  const cities = csc.getAllCities();
   console.log('Countries List', countries);
+  console.log('cities List', cities);
 
+  // const Listings=[];
+  // const citiesList= cities.map((item,i)=>(
+  //   Listings.push({
+  //     key:i,
+  //     value:item.name
+  //   })
+  // ))
+
+  const citiesList= cities.map((item,i)=>(
+      <Option key={i} value={item.name} > {item.name}</Option>
+    ))
+
+  console.log('listingdddd', citiesList)
     /* Dropzone React*/
 
     let tempArr = props.files ? props.files : []
@@ -505,41 +523,31 @@ const CreateDegreeUi =(props)=>{
       showSearch
     style={{ width: '100%' }}
     placeholder="Please select"
+    optionLabelProp='label'
     >
     {countries.map((item,i)=>(
-      <Option key={i} value={item}> {item} </Option>
+      <Option key={i} value={item} label={item}> {item} </Option>
     ))}
     </Select>
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
   <Form.Item name="courseCity	"  rules={[{ required: false }]}>
-  <Form.Item name="courseCity"  rules={[{ required: false }]}> 
+  {/* <Form.Item name="courseCity"  rules={[{ required: false }]}> 
          <Input 
     style={{ width: '100%' }}
   >
   </Input>
-  </Form.Item>
-         {/* <Select
-         disabled
-    style={{ width: '100%' }}
-    optionLabelProp="label"
+  </Form.Item> */}
+         <Select
+     showSearch
+     style={{ width: '100%' }}
+     placeholder="Please select"
   >
-    <Option value="Islamabad" label="Islamabad">
-      
-  Islamabad
-      
-    </Option>
-    <Option value="Wah Cantt" label="Wah Cantt">
-     
-    Wah Cantt
-      
-    </Option>
-    <Option value="Peshawar" label="Peshawar">
-     
-    Peshawar
-    
-    </Option>
-  </Select> */}
+    {citiesList}
+    {/* {cities.map((item,i)=>(
+      <Option key={i} value={item.name} > {item} </Option>
+    ))} */}
+  </Select>
 </Form.Item>
 
       <h6 className='Title mtt-15'> List of Compulsory Subjects </h6>

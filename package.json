@@ -25,7 +25,8 @@
     "react-languages-select": "^1.0.20",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
-    "react-select-country-list": "^2.2.3"
+    "react-select-country-list": "^2.2.3",
+    "react-select-currency": "^1.0.7"
   },
   "scripts": {
     "start-dev": "react-scripts start",
