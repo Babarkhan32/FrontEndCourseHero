@@ -57,6 +57,7 @@ border: 1px solid #dcdcdc;
     
 }
 .container{
+    margin-bottom: 10px;
     /* margin-top: 20px; */
     /* height: 90vh;
     overflow-x: hidden;
