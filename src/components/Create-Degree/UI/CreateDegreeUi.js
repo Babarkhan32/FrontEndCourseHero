@@ -538,16 +538,7 @@ const CreateDegreeUi =(props)=>{
   >
   </Input>
   </Form.Item> */}
-         <Select
-     showSearch
-     style={{ width: '100%' }}
-     placeholder="Please select"
-  >
-    {citiesList}
-    {/* {cities.map((item,i)=>(
-      <Option key={i} value={item.name} > {item} </Option>
-    ))} */}
-  </Select>
+  <Input></Input>
 </Form.Item>
 
       <h6 className='Title mtt-15'> List of Compulsory Subjects </h6>
@@ -702,11 +693,7 @@ const CreateDegreeUi =(props)=>{
  <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
 </Form.Item>
       
-       <h6 className='Title mtt-15'> Duration</h6>
-      <Form.Item name="duration"  rules={[{ required: true }]}>
-
-         <Input  type='number'/>
-         </Form.Item>
+     
          <h6 className='Title mtt-15'> Duration For</h6>
       <Form.Item name="durationFor"  rules={[{ required: true }]}>
 
@@ -732,6 +719,11 @@ const CreateDegreeUi =(props)=>{
     </Option>
   </Select>
 </Form.Item>
+<h6 className='Title mtt-15'> Duration</h6>
+      <Form.Item name="duration"  rules={[{ required: true }]}>
+
+         <Input  type='number'/>
+         </Form.Item>
   <h6 className='Title mtt-15'> Hours Per week</h6>
   <Form.Item name="hoursPerWeek"  rules={[{ required: true }]}>
 

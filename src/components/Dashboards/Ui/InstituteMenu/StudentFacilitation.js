@@ -1,6 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react'
-import { Descriptions,Divider,Carousel,Timeline, Typography,Avatar } from 'antd';
+import { Divider, Typography } from 'antd';
 const {  Paragraph} = Typography;
 const StudentFacilitation=()=>{
     return(

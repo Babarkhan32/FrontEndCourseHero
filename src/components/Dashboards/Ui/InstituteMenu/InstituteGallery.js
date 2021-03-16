@@ -1,6 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react';
-import { Descriptions,Divider,Carousel,Timeline, Typography,Avatar } from 'antd';
+import { Divider,Carousel} from 'antd';
 import style from '../../Assets/Css/Profile.module.css';
 const InstitueImg=[];
 for(let i=1; i<=4; i++){
@@ -18,7 +18,7 @@ const InstitueGallery=()=>{
                  <Carousel >
                             {InstitueImg.map((data)=>(
                             <div>
-                              <img className={style.CarouselStyle} src={data.src}/>
+                              <img alt='' className={style.CarouselStyle} src={data.src}/>
                             </div>
                             ))}
                 </Carousel>

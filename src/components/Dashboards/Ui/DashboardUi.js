@@ -17,7 +17,7 @@ import PresentCourse from './DashRoutes/PresentCourses';
 import PreviousCourses from './DashRoutes/PreviousCourses';
 import PresentDegree from './DashRoutes/PresentDegree';
 import PreviousDegree from './DashRoutes/PreviousDegree';
-import InstituteProfile from './InstituteProfile';
+// import InstituteProfile from './InstituteProfile';
 import { Fragment } from 'react';
 
 

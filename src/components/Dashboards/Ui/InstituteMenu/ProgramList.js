@@ -1,6 +1,6 @@
 import React from 'react'
 import { Fragment } from 'react';
-import { Descriptions,Divider,Carousel,Timeline, Typography,Avatar } from 'antd';
+import { Divider,Timeline } from 'antd';
 
 const ProgList=[];
 for(let i=1; i<=3; i++){

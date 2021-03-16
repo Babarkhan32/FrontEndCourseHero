@@ -28,9 +28,9 @@ const CreateUi=(props)=>{
     <Option key={i} value={item.abbr} > {item.abbr}</Option>
    ))
 //Cities
-  const citiesList= cities.map((item,i)=>(
-    <Option key={i} value={item.name} > {item.name}</Option>
-  ))
+  // const citiesList= cities.map((item,i)=>(
+  //   <Option key={i} value={item.name} > {item.name}</Option>
+  // ))
   
   console.log("props33",props);
   /* Dropzone React*/
@@ -324,16 +324,12 @@ const CreateUi=(props)=>{
   >
   </Input>
   </Form.Item> */}
-         <Select
-     showSearch
-     style={{ width: '100%' }}
-     placeholder="Please select"
-  >
-    {citiesList}
+   <Input></Input>
+    
     {/* {cities.map((item,i)=>(
       <Option key={i} value={item.name} > {item} </Option>
     ))} */}
-  </Select>
+
 </Form.Item>
   {/* <Form.Item name="courseCity"  rules={[{ required: true }]}> 
          <Input 
@@ -342,16 +338,17 @@ const CreateUi=(props)=>{
   </Input>
   </Form.Item> */}
 
-          <h6 className='Title mtt-15'> Duration</h6>
-          <Form.Item name="duration"  rules={[{ required: true }]}> 
-         <Input type='number'/>
-         </Form.Item>
+         
          <h6 className='Title mtt-15'> Duration For</h6>
          <Form.Item name="durationFor"  rules={[{ required: true }]}> 
          <Input type='text'/>
    
  </Form.Item>
+ <h6 className='Title mtt-15'> Duration</h6>
+      <Form.Item name="duration"  rules={[{ required: true }]}>
 
+         <Input  type='number'/>
+         </Form.Item>
   <h6 className='Title mtt-15'> Hours Per week</h6>
   <Form.Item name="hoursPerWeek"  rules={[{ required: true }]}> 
          <Input type='number'/>
