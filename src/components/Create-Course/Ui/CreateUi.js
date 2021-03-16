@@ -13,14 +13,21 @@ const { TextArea } = Input;
 
  
 const CreateUi=(props)=>{
-  var languages = require('langu-list')();
+  let languages = require('langu-list')();
   console.log('langages list are',languages.getLanguageNames());
   const optionsLangauges=languages.getLanguageNames();
   const countries = countryList().getLabels();
   const cities = csc.getAllCities();
+  let getCurrencyList = require("country-currency-map").getCurrencyList();
+  console.log('Currency List ', getCurrencyList);
   console.log('Countries List', countries);
   console.log('cities List', cities);
 
+  //Currency 
+  const currency= getCurrencyList.map((item,i)=>(
+    <Option key={i} value={item.abbr} > {item.abbr}</Option>
+   ))
+//Cities
   const citiesList= cities.map((item,i)=>(
     <Option key={i} value={item.name} > {item.name}</Option>
   ))
@@ -356,13 +363,23 @@ const CreateUi=(props)=>{
          <h6 className='Title mtt-15'> Currency</h6>
          <Form.Item name="currency"  rules={[{ required: false }]}> 
          <Select
+     showSearch
+     style={{ width: '100%' }}
+     placeholder="Please select"
+  >
+   {currency}
+    {/* {cities.map((item,i)=>(
+      <Option key={i} value={item.name} > {item} </Option>
+    ))} */}
+  </Select>
+         {/* <Select
     style={{ width: '100%' }}
     optionLabelProp="label"
   >
     <Option value="$" label="$">
        $
     </Option>
-  </Select>
+  </Select> */}
   </Form.Item>
  
       

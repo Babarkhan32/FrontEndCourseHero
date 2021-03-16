@@ -10,6 +10,7 @@
     "antd": "^4.7.0",
     "antd-img-crop": "^3.13.2",
     "axios": "^0.20.0",
+    "country-currency-map": "^2.1.7",
     "country-state-city": "^2.0.0",
     "dotenv": "^8.2.0",
     "express-favicon": "^2.0.1",
@@ -30,7 +31,7 @@
   },
   "scripts": {
     "start-dev": "react-scripts start",
-    "start": "react-scripts start",
+    "start": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
