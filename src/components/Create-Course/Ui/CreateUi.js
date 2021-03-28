@@ -341,7 +341,27 @@ const CreateUi=(props)=>{
          
          <h6 className='Title mtt-15'> Duration For</h6>
          <Form.Item name="durationFor"  rules={[{ required: true }]}> 
-         <Input type='text'/>
+         <Select
+    style={{ width: '100%' }}
+   
+    optionLabelProp="label"
+  >
+    <Option value="Weeks" label="Weeks">
+      
+    Weeks
+      
+    </Option>
+    <Option value="Months" label="Months">
+     
+    Months
+      
+    </Option>
+    <Option value="Years" label="Years">
+     
+    Years
+    
+    </Option>
+  </Select>
    
  </Form.Item>
  <h6 className='Title mtt-15'> Duration</h6>

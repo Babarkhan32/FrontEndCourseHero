@@ -9,7 +9,7 @@ const CreateDegree = () => {
 
 let facArray=[];
 
-    facArray=values.facultyInfo.map(item=>item.facultyAnother);
+    facArray=values.facultyInfo?values.facultyInfo.map(item=>item.facultyAnother):[];
       facArray.unshift(values.facName)
       values.facultyInfo=facArray;
       values.status=1;
