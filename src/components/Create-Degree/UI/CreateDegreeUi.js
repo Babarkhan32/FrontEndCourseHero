@@ -6,6 +6,7 @@ import { PlusOutlined, DeleteTwoTone,MinusCircleTwoTone,} from '@ant-design/icon
 import { Fragment } from 'react';
 import countryList from 'react-select-country-list'
 import csc from 'country-state-city'
+import Loader from '../../Loader/Loader';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -87,7 +88,8 @@ const CreateDegreeUi =(props)=>{
     return(
 <Fragment>
 <HeaderCont/>
-<div className='MainCont'>
+{props.load ? <Loader/> : 
+  <div className='MainCont'>
 <div className='PageWrapper'> 
 <div className='container'>
 <div className='row'>
@@ -202,11 +204,11 @@ const CreateDegreeUi =(props)=>{
       
 
       <h6 className='Title mtt-15'> Degree Importance/Overview </h6>
-      <Form.Item name="degreeOverview"  rules={[{ required: true }]}>
+      <Form.Item name="degreeOverview"  rules={[{ required: false }]}>
   <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the degree overview' />
 </Form.Item>
   <h6 className='Title'> Degree Content</h6>
-  <Form.Item name="degreeContent"  rules={[{ required: true }]}>
+  <Form.Item name="degreeContent"  rules={[{ required: false }]}>
           <TextArea  rows={4} /> 
           </Form.Item>
           <h6 className='Title mtt-15'> Total Number of Courses</h6>
@@ -531,14 +533,14 @@ const CreateDegreeUi =(props)=>{
     </Select>
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
-  <Form.Item name="courseCity	"  rules={[{ required: false }]}>
+  <Form.Item name="courseCity	"  rules={[{ required: true }]}>
   {/* <Form.Item name="courseCity"  rules={[{ required: false }]}> 
          <Input 
     style={{ width: '100%' }}
   >
   </Input>
   </Form.Item> */}
-  <Input></Input>
+  <Input placeholder='Enter City'/>
 </Form.Item>
 
       <h6 className='Title mtt-15'> List of Compulsory Subjects </h6>
@@ -670,7 +672,7 @@ const CreateDegreeUi =(props)=>{
          <Input  type='text'/>
          </Form.Item>
          <h6 className='Title mtt-15'>Add Institute Details</h6>
-      <Form.Item name="instituteDetails: "  rules={[{ required: true }]}>
+      <Form.Item name="instituteDetails: "  rules={[{ required: false }]}>
          
          <TextArea rows={4} showCount maxLength={100} placeholder='Brielfy explain the details' />
          </Form.Item>
@@ -736,7 +738,7 @@ const CreateDegreeUi =(props)=>{
          <Input  type='number'/>
 </Form.Item>
          <h6 className='Title mtt-15'> Currency</h6>
-      <Form.Item name="currency"  rules={[{ required: false}]}>
+      <Form.Item name="currency"  rules={[{ required: true}]}>
       <Select
      showSearch
      style={{ width: '100%' }}
@@ -810,6 +812,9 @@ const CreateDegreeUi =(props)=>{
    
        </div>
        </div>
+   
+   
+}
     </Fragment>
     )
 }

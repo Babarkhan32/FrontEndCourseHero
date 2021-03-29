@@ -6,6 +6,7 @@ import countryList from 'react-select-country-list'
 import {  DeleteTwoTone } from '@ant-design/icons';
 import csc from 'country-state-city'
 import { Fragment } from 'react';
+import Loader from '../../Loader/Loader';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -81,6 +82,7 @@ const CreateUi=(props)=>{
     return(
       <Fragment> 
         <HeaderCont/>
+     {props.load ? <Loader/> : 
       <div className='MainCont'>
       <div className='PageWrapper'> 
 
@@ -317,7 +319,7 @@ const CreateUi=(props)=>{
     </Select>
 </Form.Item>
   <h6 className='Title mtt-15'> Course City</h6>
-  <Form.Item name="courseCity	"  rules={[{ required: false }]}>
+  <Form.Item name="courseCity	"  rules={[{ required: true }]}>
   {/* <Form.Item name="courseCity"  rules={[{ required: false }]}> 
          <Input 
     style={{ width: '100%' }}
@@ -754,6 +756,9 @@ const CreateUi=(props)=>{
     
         </div>
         </div>
+       
+     }
+       
         </Fragment>
     )
 }

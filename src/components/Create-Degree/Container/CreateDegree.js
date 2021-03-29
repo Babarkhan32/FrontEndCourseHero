@@ -1,10 +1,13 @@
+import { message } from 'antd';
 import React, { useState } from 'react';
 import CreateDegreeUi from '../UI/CreateDegreeUi';
 import newDegree from './../apis/insertDegree';
 
 const CreateDegree = () => {
   const [files, setFiles] = useState(null);
+  const [loader,setLoader] = useState(false);
   const onFinish = async (values) => {
+    setLoader(true)
     console.log(values);
 
 let facArray=[];
@@ -52,7 +55,9 @@ let facArray=[];
     delete values.offlinename;
 
     await newDegree(values).then(result => {
-      console.log("Degree of babar khan ", result);
+      setLoader(false)
+      console.log("Degree Added ", result);
+      message.success('Degree Created Succesfully')
     })
   };
 
@@ -60,6 +65,7 @@ let facArray=[];
     onFinish={onFinish}
     setFiles={setFiles}
     files={files}
+    load={loader} firstLoadHook={setLoader}
   />
 }
 export default CreateDegree

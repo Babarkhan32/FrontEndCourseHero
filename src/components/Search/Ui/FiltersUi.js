@@ -9,8 +9,8 @@ const { Option } = Select;
 const FiltersUi=(props)=>{
   const countries = countryList().getLabels();
   const getCurrencyList = require("country-currency-map").getCurrencyList();
-  const languages = require('language-list')();
-  const langagesList = languages.getData()
+  let languages = require('langu-list')();
+  const langagesList=languages.getLanguageNames();
 
   function handleChange(value) {
    props.onSetSubject(value)
@@ -93,7 +93,7 @@ const FiltersUi=(props)=>{
     optionLabelProp="label"
   >
    {langagesList.map((item,i)=>(
-    <Option key={i} value={item.language} > {item.language}</Option>
+    <Option key={i} value={item} > {item}</Option>
     ))
     }
   </Select>
