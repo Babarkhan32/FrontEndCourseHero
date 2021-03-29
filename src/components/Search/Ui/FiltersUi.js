@@ -1,11 +1,17 @@
 import React from 'react';
 import style from '../Assets/Search.module.css';
 import { Card,Checkbox,Select,Input} from 'antd';
+import countryList from 'react-select-country-list'
 const { Option } = Select;
 
 
  
 const FiltersUi=(props)=>{
+  const countries = countryList().getLabels();
+  const getCurrencyList = require("country-currency-map").getCurrencyList();
+  const languages = require('language-list')();
+  const langagesList = languages.getData()
+
   function handleChange(value) {
    props.onSetSubject(value)
   }
@@ -49,6 +55,8 @@ const FiltersUi=(props)=>{
 
     <Card className={style.FilterCard} size="small" title="Subject" >
      <Select
+     showSearch
+     placeholder='Select Subject'
     style={{ width: '100%' }}
     onChange={handleChange}
     optionLabelProp="label"
@@ -78,88 +86,36 @@ const FiltersUi=(props)=>{
 
     <Card className={style.FilterCard} size="small" title="Language" >
      <Select
+     showSearch
     style={{ width: '100%' }}
+    placeholder='Select Language'
     onChange={handleLanguageChange}
     optionLabelProp="label"
   >
-    <Option value="English" label="English">
-      
-    English
-      
-    </Option>
-    <Option value="Urdu" label="Urdu">
-     
-  Urdu
-      
-    </Option>
-    <Option value="Arabic" label="Arabic">
-     
-   Arabic
-    
-    </Option>
-    <Option value="Malay" label="Malay">
-      
-Malay
-      
-    </Option>
+   {langagesList.map((item,i)=>(
+    <Option key={i} value={item.language} > {item.language}</Option>
+    ))
+    }
   </Select>
     </Card>
     <Card className={style.FilterCard} size="small" title="University/Institute" >
     <Input type='text' placeholder='Institute'/>
     </Card>
     <Card className={style.FilterCard} size="small" title="Country" >
-     <Select
-    style={{ width: '100%' }}
-    onChange={handleCountryChange}
-    optionLabelProp="label"
-  >
-    <Option value="China" label="China">
-      
-    China
-      
-    </Option>
-    <Option value="Pakistan" label="Pakistan">
-Pakistan
-      
-    </Option>
-    <Option value="Saudi Arabia" label="Saudi Arabia">
-     
-    Saudi Arabia
-    
-    </Option>
-    <Option value="Australia" label="Australia">
-      
-    Australia
-      
-    </Option>
-  </Select>
+    <Select
+        showSearch
+          style={{ width: '100%' }}
+          placeholder="Select Country"
+          onChange={handleCountryChange}
+      >
+      {countries.map((item,i)=>(
+        <Option key={i} value={item}> {item} </Option>
+      ))}
+      </Select>
     </Card>
 
     <Card className={style.FilterCard} size="small" title="City" >
-     <Select
-    style={{ width: '100%' }}
-    optionLabelProp="label"
-  >
-    <Option value="Islamabad" label="Islamabad">
-      
-    Islamabad
-      
-    </Option>
-    <Option value="Peshawar" label="Peshawar">
-    Peshawar
-      
-    </Option>
-    <Option value="Wah Cantt" label="Wah Cantt">
-     
-    Wah Cantt
-    
-    </Option>
-    <Option value="Rawalpindi" label="Rawalpindi">
-      
-    Rawalpindi
-      
-    </Option>
-  </Select>
+     <Input placeholder='Enter City'/>
     </Card>
 
  
@@ -171,27 +127,14 @@ Pakistan
      <br/>
 
      <Select
+     showSearch
+     placeholder='Select Currency'
     style={{ width: '100%' }}
     optionLabelProp="label"
-  >
-    <Option value=" Dollar ($)" label=" Dollar ($)">
- Dollar ($)
-      
-    </Option>
-    <Option value="PKR (Rs)" label="PKR (Rs)">
-PKR (Rs)
-      
-    </Option>
-    <Option value="Riyal (SAR)" label="Riyal (SAR)">
-     
-    Riyal (SAR)
-    
-    </Option>
-    <Option value="Renminbi (¥)" label="Renminbi (¥)">
-      
-    Renminbi (¥)
-      
-    </Option>
+    >
+     {getCurrencyList.map((item,i)=>(
+      <Option key={i} value={item.abbr} > {item.abbr}</Option>
+      ))}
   </Select>
     </Card>
     <Card className={style.FilterCard} size="small" title="Duration" >

@@ -7,6 +7,7 @@ import getNavSearch from './../api/getNavSearch';
 const Search=(props)=>{
 
     const [data,setData]=useState([]);
+    const [firstLoad, setFirstLoad] = useState(true);
     const[online,setOnline]=useState('');
     const [offline,setOffline]=useState('');
     const [certificate,setCertificate]=useState('');
@@ -61,6 +62,7 @@ const Search=(props)=>{
               
               setData(result.data);
           }
+          setFirstLoad(false)
       })
 
    
@@ -81,6 +83,7 @@ const Search=(props)=>{
             console.log(result.data)
             setData(result.data);
         }
+        setFirstLoad(false)
     })
 
     }
@@ -101,6 +104,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
     
         })
   
@@ -123,6 +127,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
        
         })
   
@@ -142,6 +147,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
         })
   
     }
@@ -160,6 +166,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
         })
   
     }
@@ -177,6 +184,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
         })
   
     }
@@ -193,6 +201,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
         })
   
     }
@@ -210,6 +219,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
         })
   
     }
@@ -228,6 +238,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
         })
   
 
@@ -238,6 +249,7 @@ const Search=(props)=>{
             if(result){
                 setData(result.data);
             }
+            setFirstLoad(false)
         })
   
 
@@ -257,6 +269,7 @@ const Search=(props)=>{
         if(result){
             setData(result.data);
         }
+        setFirstLoad(false)
     })
 
     }
@@ -266,6 +279,7 @@ const Search=(props)=>{
         if(result){
             setData(result.data);
         }
+        setFirstLoad(false)
     })
 
     }
@@ -275,6 +289,7 @@ const Search=(props)=>{
           if(result){
               setData(result.data)
           }
+          setFirstLoad(false)
         console.log("Result",result);
     })
 
@@ -285,7 +300,9 @@ const Search=(props)=>{
                 if(result){
                 setData(result.data);
                 console.log(result,"Result for era");
+                setFirstLoad(false)
                 }
+                
             
             })
         }else{
@@ -302,6 +319,7 @@ const Search=(props)=>{
   
     return(
         <SearchUi
+        load={firstLoad} firstLoadHook={setFirstLoad}
          onSetOnline={onSetOnline}
          onSetOffline={onSetOffline}
         onSetSubject={onSetSubject}

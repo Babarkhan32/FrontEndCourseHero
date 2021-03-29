@@ -6,14 +6,15 @@ import CardUi from './CardUi';
 import FiltersUi from './FiltersUi';
 import DegreeCardUi from './DegreeCardUi';
 import {Empty} from 'antd';
+import Loader from '../../Loader/Loader';
 const SearchUi=(props)=>{
+
     return(
       <Fragment>
         <HeaderCont/>
         <div className='MainCont'>
       <div className='PageWrapper'> 
-
-<div className='container'>
+{ props.load ? <Loader/> : <div className='container'>
     <div className='row'>
         <div className='col-12 col-sm-3 col-md-3 col-lg-3 col-xl-3'>
 <div className={style.FilterCont}>
@@ -42,7 +43,7 @@ const SearchUi=(props)=>{
       {
         props.data.length>0 ?
         props.data.map(course=>{
-          console.log(course,"Rent wali garhi");
+          console.log(course,"Course List");
           return(
             
             course.isDegree? 
@@ -116,6 +117,9 @@ const SearchUi=(props)=>{
         </div>
     </div>
 </div>
+  }
+      
+        
         </div>
         </div>
     

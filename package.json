@@ -16,6 +16,7 @@
     "express-favicon": "^2.0.1",
     "jsonwebtoken": "^8.5.1",
     "langu-list": "^0.0.5",
+    "language-list": "^0.0.3",
     "languages-list": "^1.0.2",
     "object-to-formdata": "^4.1.0",
     "react": "^16.13.1",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "start-dev": "react-scripts start",
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
