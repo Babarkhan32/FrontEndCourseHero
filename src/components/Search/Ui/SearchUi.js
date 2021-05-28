@@ -71,6 +71,7 @@ const SearchUi = (props) => {
                           }
                           totalNumberCourses={course.totalNumberCourses}
                           optional={course.optional}
+                          facultyInformation={course.facultyInformation}
                         />
                       ) : !course.isDegree ? (
                         <CardUi
@@ -95,6 +96,7 @@ const SearchUi = (props) => {
                           duration={course.duration}
                           hoursPerWeek={course.hoursPerWeek}
                           durationFor={course.durationFor}
+                          facultyInformation={course.facultyInformation}
                         />
                       ) : (
                         ""
