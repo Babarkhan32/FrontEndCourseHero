@@ -9,9 +9,7 @@ const CardUi=({Subject,Dep,rev, uni, platform, country,cost, aid,deadline, date,
     const [visible,setVisible]=useState(false),
    
   showModal = () => {
-   
-      setVisible(true) 
-   
+    setVisible(true)  
   },
 
   handleOk = e => {
