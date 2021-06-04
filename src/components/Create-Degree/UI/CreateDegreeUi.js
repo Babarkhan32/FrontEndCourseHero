@@ -10,6 +10,7 @@ import {
   Form,
   message,
   Modal,
+  Checkbox,
 } from "antd";
 import {
   PlusOutlined,
@@ -26,10 +27,11 @@ const CreateDegreeUi = (props) => {
   const [countries, setCountries] = useState([]);
   const [getCurrencyList, setCurrencies] = useState([]);
   const [languages, setLanguages] = useState([]);
+  const [showTeachingMedium, setShowTeachingMedium] = useState(false);
+
   useEffect(() => {
     getTextField().then((result) => {
       let myCurrencies = result.data[0].currencies;
-
       console.log("My Currencies", myCurrencies);
       console.log("Here is somehting to check", result);
       if (result && result.data) {
@@ -146,7 +148,7 @@ const CreateDegreeUi = (props) => {
                                   value="Non Certificate"
                                   label="Non Certificate"
                                 >
-                                  Certificate
+                                  Non Certificate
                                 </Option>
                                 <Option value="Certificate" label="Certificate">
                                   Certificate
@@ -169,7 +171,7 @@ const CreateDegreeUi = (props) => {
                                 </Option>
                               </Select>
                             </Form.Item>
-                            <h6 className="Title mtt-15">
+                            {/* <h6 className="Title mtt-15">
                               {" "}
                               Select Degree Type{" "}
                             </h6>
@@ -185,8 +187,8 @@ const CreateDegreeUi = (props) => {
                                   Interdisciplinary Course
                                 </Option>
                               </Select>
-                            </Form.Item>
-                            <Form.Item
+                            </Form.Item> */}
+                            {/* <Form.Item
                               noStyle
                               shouldUpdate={(prevValues, currentValues) =>
                                 prevValues.type !== currentValues.type
@@ -260,7 +262,7 @@ const CreateDegreeUi = (props) => {
                                   </div>
                                 ) : null;
                               }}
-                            </Form.Item>
+                            </Form.Item> */}
 
                             <h6 className="Title mtt-15">
                               {" "}
@@ -297,56 +299,159 @@ const CreateDegreeUi = (props) => {
                                 type="number"
                               />
                             </Form.Item>
-
-                            <h6 className="BlkTitle mtt-15"> Course Name</h6>
+                            <h6 className="Title mtt-15">
+                              {" "}
+                              Total Number of Credit Hours
+                            </h6>
                             <Form.Item
-                              name="coursename"
-                              rules={[{ required: false }]}
+                              name="totalNumberCourses"
+                              rules={[{ required: true }]}
                             >
-                              <Input placeholder="course name" />
+                              <Input
+                                placeholder="total courses"
+                                type="number"
+                              />
                             </Form.Item>
+
                             <Form.List name="course">
                               {(fields, { add, remove }, { errors }) => (
                                 <>
-                                  {fields.map((field, index) => (
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        marginBottom: 8,
-                                      }}
-                                      required={false}
-                                      key={index}
-                                    >
-                                      <div className="row mtt-5">
-                                        <div className="col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11">
-                                          <Form.Item
-                                            {...field}
-                                            validateTrigger={[
-                                              "onChange",
-                                              "onBlur",
-                                            ]}
-                                            rules={[
-                                              {
-                                                required: true,
-                                                whitespace: true,
-                                                message:
-                                                  "Please input course's name or delete this field.",
-                                              },
-                                            ]}
-                                          >
-                                            <Input placeholder="course name" />
-                                          </Form.Item>
-                                        </div>
+                                  {fields.map(
+                                    ({ key, name, fieldKey, ...restField }) => (
+                                      <div
+                                        style={{
+                                          display: "flex",
+                                          flexDirection: "column",
+                                          marginBottom: 8,
+                                        }}
+                                        required={false}
+                                        key={key}
+                                      >
+                                        <div className="row mtt-5">
+                                          <div className="col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11">
+                                            <Form.Item
+                                              {...restField}
+                                              name={[name, "_courseName"]}
+                                              fieldKey={[
+                                                fieldKey,
+                                                "_courseName",
+                                              ]}
+                                              validateTrigger={[
+                                                "onChange",
+                                                "onBlur",
+                                              ]}
+                                              rules={[
+                                                {
+                                                  required: true,
+                                                  whitespace: true,
+                                                  message:
+                                                    "Please input course's name or delete this field.",
+                                                },
+                                              ]}
+                                            >
+                                              <Input placeholder="course name" />
+                                            </Form.Item>
+                                            <Form.Item
+                                              {...restField}
+                                              name={[
+                                                name,
+                                                "_courseDescription",
+                                              ]}
+                                              validateTrigger={[
+                                                "onChange",
+                                                "onBlur",
+                                              ]}
+                                              rules={[
+                                                {
+                                                  required: true,
+                                                  whitespace: true,
+                                                  message:
+                                                    "Please input course's name or delete this field.",
+                                                },
+                                              ]}
+                                            >
+                                              <Input placeholder="course description" />
+                                            </Form.Item>
+                                            <Form.Item
+                                              {...restField}
+                                              validateTrigger={[
+                                                "onChange",
+                                                "onBlur",
+                                              ]}
+                                              rules={[
+                                                {
+                                                  required: true,
+                                                  whitespace: true,
+                                                  message:
+                                                    "Please input course description or delete this field.",
+                                                },
+                                              ]}
+                                            >
+                                              <Input placeholder="faculty name" />
+                                            </Form.Item>
+                                            <Form.Item
+                                              {...restField}
+                                              validateTrigger={[
+                                                "onChange",
+                                                "onBlur",
+                                              ]}
+                                              rules={[
+                                                {
+                                                  required: true,
+                                                  whitespace: true,
+                                                  message:
+                                                    "Please input course's name or delete this field.",
+                                                },
+                                              ]}
+                                            >
+                                              <Input placeholder="course description" />
+                                            </Form.Item>
 
-                                        <div className="col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1">
-                                          <MinusCircleTwoTone
-                                            onClick={() => remove(field.name)}
-                                          />
+                                            <Form.Item
+                                              {...restField}
+                                              name={[name, "_CourseMode"]}
+                                              validateTrigger={[
+                                                "onChange",
+                                                "onBlur",
+                                              ]}
+                                              rules={[
+                                                {
+                                                  required: true,
+                                                  whitespace: true,
+                                                  message:
+                                                    "Please input course description or delete this field.",
+                                                },
+                                              ]}
+                                            >
+                                              <Select
+                                                style={{ width: "100%" }}
+                                                placeholder="Please select Course Mode"
+                                              >
+                                                <Option
+                                                  key={"Online"}
+                                                  value="Online"
+                                                >
+                                                  Online
+                                                </Option>
+                                                <Option
+                                                  key={"Offline"}
+                                                  value="Offline"
+                                                >
+                                                  Offline
+                                                </Option>
+                                              </Select>
+                                            </Form.Item>
+                                          </div>
+
+                                          <div className="col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1">
+                                            <MinusCircleTwoTone
+                                              onClick={() => remove(name)}
+                                            />
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                  ))}
+                                    )
+                                  )}
                                   <div className="text-center mtt-10">
                                     <Button
                                       style={{ width: "100%" }}
@@ -354,7 +459,7 @@ const CreateDegreeUi = (props) => {
                                       onClick={() => add()}
                                       icon={<PlusOutlined />}
                                     >
-                                      Add another course
+                                      Add Course Details
                                     </Button>
 
                                     <Form.ErrorList errors={errors} />
@@ -362,227 +467,6 @@ const CreateDegreeUi = (props) => {
                                 </>
                               )}
                             </Form.List>
-
-                            <h6 className="Title mtt-15">
-                              {" "}
-                              Total Number of Online Courses
-                            </h6>
-                            <Form.Item
-                              name="totalCourses"
-                              rules={[{ required: false }]}
-                            >
-                              <Input
-                                placeholder="total courses"
-                                type="number"
-                              />
-                            </Form.Item>
-
-                            <h6 className="BlkTitle mtt-15">
-                              {" "}
-                              Online Course Name
-                            </h6>
-                            <Form.Item
-                              name="onlinecoursename"
-                              rules={[{ required: false }]}
-                            >
-                              <Input placeholder="online course name" />
-                            </Form.Item>
-                            <Form.List name="online">
-                              {(fields, { add, remove }, { errors }) => (
-                                <>
-                                  {fields.map((field, index) => (
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        marginBottom: 8,
-                                      }}
-                                      required={false}
-                                      key={index}
-                                    >
-                                      <div className="row mtt-5">
-                                        <div className="col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11">
-                                          <Form.Item
-                                            {...field}
-                                            validateTrigger={[
-                                              "onChange",
-                                              "onBlur",
-                                            ]}
-                                            rules={[
-                                              {
-                                                required: true,
-                                                whitespace: true,
-                                                message:
-                                                  "Please input online's name or delete this field.",
-                                              },
-                                            ]}
-                                          >
-                                            <Input placeholder="course name" />
-                                          </Form.Item>
-                                        </div>
-
-                                        <div className="col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1">
-                                          <MinusCircleTwoTone
-                                            onClick={() => remove(field.name)}
-                                          />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ))}
-                                  <div className="text-center mtt-10">
-                                    <Button
-                                      style={{ width: "100%" }}
-                                      type="dashed"
-                                      onClick={() => add()}
-                                      icon={<PlusOutlined />}
-                                    >
-                                      Add another course
-                                    </Button>
-
-                                    <Form.ErrorList errors={errors} />
-                                  </div>
-                                </>
-                              )}
-                            </Form.List>
-
-                            <h6 className="Title mtt-15">
-                              {" "}
-                              Total Number of Offline Courses
-                            </h6>
-                            <Form.Item
-                              name="offlinetotal"
-                              rules={[{ required: false }]}
-                            >
-                              <Input
-                                placeholder="total courses"
-                                type="number"
-                              />
-                            </Form.Item>
-                            <h6 className="BlkTitle mtt-15">
-                              {" "}
-                              Offline Course Name
-                            </h6>
-                            <Form.Item
-                              name="offlinename"
-                              rules={[{ required: false }]}
-                            >
-                              <Input placeholder="offline course name" />
-                            </Form.Item>
-                            <Form.List name="offline">
-                              {(fields, { add, remove }, { errors }) => (
-                                <>
-                                  {fields.map((field, index) => (
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        marginBottom: 8,
-                                      }}
-                                      required={false}
-                                      key={index}
-                                    >
-                                      <div className="row mtt-5">
-                                        <div className="col-lg-11 col-sm-11 col-11 col-md-11 col-xl-11">
-                                          <Form.Item
-                                            {...field}
-                                            validateTrigger={[
-                                              "onChange",
-                                              "onBlur",
-                                            ]}
-                                            rules={[
-                                              {
-                                                required: true,
-                                                whitespace: true,
-                                                message:
-                                                  "Please input offline's name or delete this field.",
-                                              },
-                                            ]}
-                                          >
-                                            <Input placeholder="offline name" />
-                                          </Form.Item>
-                                        </div>
-
-                                        <div className="col-lg-1 col-sm-1 col-1 col-md-1 col-xl-1">
-                                          <MinusCircleTwoTone
-                                            onClick={() => remove(field.name)}
-                                          />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  ))}
-                                  <div className="text-center mtt-10">
-                                    <Button
-                                      style={{ width: "100%" }}
-                                      type="dashed"
-                                      onClick={() => add()}
-                                      icon={<PlusOutlined />}
-                                    >
-                                      Add another course
-                                    </Button>
-
-                                    <Form.ErrorList errors={errors} />
-                                  </div>
-                                </>
-                              )}
-                            </Form.List>
-                            <h6 className="Title mtt-15"> Faculty Name</h6>
-                            <Form.Item
-                              name="facName"
-                              rules={[{ required: false }]}
-                            >
-                              <Input type="text" />
-                            </Form.Item>
-
-                            <h6 className="BlkTitle mtt-15"> Faculty Resume</h6>
-                            {props.files && props.files.length > 0 ? (
-                              <div className="row mt-1" key={props.files[0].id}>
-                                <span className="col-5 mr-3 mt-1">
-                                  <h6 style={{ color: "#096dd9" }}>
-                                    {props.files[0].name}
-                                  </h6>
-                                </span>
-                                <Button
-                                  className="col-3 mx-2"
-                                  type="primary"
-                                  onClick={() => handlePreview(props.files[0])}
-                                >
-                                  Preview
-                                </Button>
-                                <Button
-                                  className="col-3"
-                                  type="primary"
-                                  onClick={() =>
-                                    handleDelete(props.files[0].id)
-                                  }
-                                >
-                                  Delete
-                                </Button>
-                              </div>
-                            ) : (
-                              <Form.Item name="imageSetFirst" className="mt-2">
-                                <div
-                                  {...getRootProps()}
-                                  style={{
-                                    minHeight: 80,
-                                    border: "2px dashed #d9d9d9",
-                                    textAlign: "center",
-                                  }}
-                                  className="dropzone"
-                                >
-                                  <input {...getInputProps()} />
-                                  <h6
-                                    style={{
-                                      color: "#d9d9d9",
-                                      marginTop: "5%",
-                                    }}
-                                  >
-                                    drag and drop a file or click here to select
-                                    a file
-                                  </h6>
-                                </div>
-                              </Form.Item>
-                            )}
-
                             <Form.List name="facultyInfo">
                               {(fields, { add, remove }) => (
                                 <>
@@ -790,16 +674,6 @@ const CreateDegreeUi = (props) => {
                               <Input placeholder="Enter City" />
                             </Form.Item>
 
-                            <h6 className="Title mtt-15">
-                              {" "}
-                              List of Compulsory Subjects{" "}
-                            </h6>
-                            <Form.Item
-                              name="compulsorySubject"
-                              rules={[{ required: false }]}
-                            >
-                              <Input placeholder="compulsory subject name" />
-                            </Form.Item>
                             <Form.List name="compulsory">
                               {(fields, { add, remove }, { errors }) => (
                                 <>
@@ -849,7 +723,7 @@ const CreateDegreeUi = (props) => {
                                       onClick={() => add()}
                                       icon={<PlusOutlined />}
                                     >
-                                      Add another subject
+                                      Add Compulsory subjects
                                     </Button>
 
                                     <Form.ErrorList errors={errors} />
@@ -857,17 +731,6 @@ const CreateDegreeUi = (props) => {
                                 </>
                               )}
                             </Form.List>
-
-                            <h6 className="Title mtt-15">
-                              {" "}
-                              List of Optional Subjects{" "}
-                            </h6>
-                            <Form.Item
-                              name="optionalSubname"
-                              rules={[{ required: false }]}
-                            >
-                              <Input placeholder="optional subject name" />
-                            </Form.Item>
                             <Form.List name="optional">
                               {(fields, { add, remove }, { errors }) => (
                                 <>
@@ -917,7 +780,7 @@ const CreateDegreeUi = (props) => {
                                       onClick={() => add()}
                                       icon={<PlusOutlined />}
                                     >
-                                      Add another subject
+                                      Add Optional subjects
                                     </Button>
 
                                     <Form.ErrorList errors={errors} />
@@ -961,40 +824,59 @@ const CreateDegreeUi = (props) => {
                                 placeholder="Brielfy explain the details"
                               />
                             </Form.Item>
-
-                            <h6 className="Title mtt-15">
-                              Teaching Medium Institute
-                            </h6>
-                            <Form.Item
-                              name="medium"
-                              rules={[{ required: false }]}
-                            >
-                              <Input type="text" />
-                            </Form.Item>
-
-                            <h6 className="Title mtt-15">
-                              Teaching Medium Institue Web Address
-                            </h6>
-                            <Form.Item
-                              name="mediumWebAddress"
-                              rules={[{ required: false }]}
-                            >
-                              <Input type="text" />
-                            </Form.Item>
-                            <h6 className="Title mtt-15">
-                              Add Institute Details
-                            </h6>
-                            <Form.Item
-                              name="mediumDetails"
-                              rules={[{ required: false }]}
-                            >
-                              <TextArea
-                                rows={4}
-                                showCount
-                                maxLength={100}
-                                placeholder="Brielfy explain the details"
-                              />
-                            </Form.Item>
+                            <div className="text-center mtt-10">
+                              <Button
+                                style={{ width: "100%" }}
+                                type="dashed"
+                                onClick={() =>
+                                  setShowTeachingMedium(!showTeachingMedium)
+                                }
+                                icon={<PlusOutlined />}
+                              >
+                                {!showTeachingMedium
+                                  ? "Add teaching medium institute if Any"
+                                  : "Remove Medium Institute"}
+                              </Button>
+                            </div>
+                            {showTeachingMedium ? (
+                              <div>
+                                {" "}
+                                <h6 className="Title mtt-15">
+                                  Teaching Medium Institute
+                                </h6>
+                                <Form.Item
+                                  name="medium"
+                                  rules={[{ required: false }]}
+                                >
+                                  <Input type="text" />
+                                </Form.Item>
+                                <h6 className="Title mtt-15">
+                                  Teaching Medium Institue Web Address
+                                </h6>
+                                <Form.Item
+                                  name="mediumWebAddress"
+                                  rules={[{ required: false }]}
+                                >
+                                  <Input type="text" />
+                                </Form.Item>
+                                <h6 className="Title mtt-15">
+                                  Add Institute Details
+                                </h6>
+                                <Form.Item
+                                  name="mediumDetails"
+                                  rules={[{ required: false }]}
+                                >
+                                  <TextArea
+                                    rows={4}
+                                    showCount
+                                    maxLength={100}
+                                    placeholder="Brielfy explain the details"
+                                  />
+                                </Form.Item>{" "}
+                              </div>
+                            ) : (
+                              ""
+                            )}
 
                             <h6 className="Title mtt-15"> Duration For</h6>
                             <Form.Item
