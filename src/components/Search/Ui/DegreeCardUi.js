@@ -48,12 +48,6 @@ const DegreeCardUi = ({
     showCourse = () => {
       setCourseList(true);
     },
-    showOnline = () => {
-      setonlineList(true);
-    },
-    showOffline = () => {
-      setofflineList(true);
-    },
     showCompulsory = () => {
       setcompulsoryList(true);
     },
@@ -143,15 +137,6 @@ const DegreeCardUi = ({
             <label className="LinkedCount" onClick={showCourse}>
               {" "}
               {totalNumberCourses}{" "}
-            </label>
-            &nbsp; <label className="smallLabel">Online</label> &nbsp;{" "}
-            <label className="LinkedCount" onClick={showOnline}>
-              {online.length}{" "}
-            </label>
-            &nbsp; <label className="smallLabel">Offline</label> &nbsp;{" "}
-            <label className="LinkedCount" onClick={showOffline}>
-              {" "}
-              {offlinetotal}{" "}
             </label>
             &nbsp; <label className="smallLabel"> Compulsory</label> &nbsp;{" "}
             <label className="LinkedCount" onClick={showCompulsory}>
@@ -259,7 +244,7 @@ const DegreeCardUi = ({
             return (
               <Timeline.Item>
                 {" "}
-                <h6 className="ItemHeading"> {course} </h6>
+                <h6 className="ItemHeading"> {course._courseName} </h6>
               </Timeline.Item>
             );
           })}
@@ -278,7 +263,7 @@ const DegreeCardUi = ({
           </Button>
         }
       >
-        <Timeline>
+        {/* <Timeline>
           {online.map((online) => {
             return (
               <Timeline.Item>
@@ -287,7 +272,7 @@ const DegreeCardUi = ({
               </Timeline.Item>
             );
           })}
-        </Timeline>
+        </Timeline> */}
       </Modal>
       <Modal
         title="Offline Courses"
@@ -301,7 +286,7 @@ const DegreeCardUi = ({
           </Button>
         }
       >
-        <Timeline>
+        {/* <Timeline>
           {offline.map((offline) => {
             return (
               <Timeline.Item>
@@ -310,7 +295,7 @@ const DegreeCardUi = ({
               </Timeline.Item>
             );
           })}
-        </Timeline>
+        </Timeline> */}
       </Modal>
 
       <Modal

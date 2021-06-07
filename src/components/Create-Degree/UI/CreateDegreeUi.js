@@ -10,7 +10,6 @@ import {
   Form,
   message,
   Modal,
-  Checkbox,
 } from "antd";
 import {
   PlusOutlined,
@@ -149,6 +148,12 @@ const CreateDegreeUi = (props) => {
                                   label="Non Certificate"
                                 >
                                   Non Certificate
+                                </Option>{" "}
+                                <Option
+                                  value="Single Course"
+                                  label="Single Course"
+                                >
+                                  Single Course
                                 </Option>
                                 <Option value="Certificate" label="Certificate">
                                   Certificate
@@ -162,7 +167,6 @@ const CreateDegreeUi = (props) => {
                                 <Option value="Master's" label="Master's">
                                   Master's
                                 </Option>
-
                                 <Option value="PHD" label="PHD">
                                   PHD
                                 </Option>
@@ -304,7 +308,7 @@ const CreateDegreeUi = (props) => {
                               Total Number of Credit Hours
                             </h6>
                             <Form.Item
-                              name="totalNumberCourses"
+                              name="totalNumberCreditHours"
                               rules={[{ required: true }]}
                             >
                               <Input
@@ -366,7 +370,7 @@ const CreateDegreeUi = (props) => {
                                                   required: true,
                                                   whitespace: true,
                                                   message:
-                                                    "Please input course's name or delete this field.",
+                                                    "Please input course's Description or delete this field.",
                                                 },
                                               ]}
                                             >
@@ -374,6 +378,7 @@ const CreateDegreeUi = (props) => {
                                             </Form.Item>
                                             <Form.Item
                                               {...restField}
+                                              name={[name, "_facultyName"]}
                                               validateTrigger={[
                                                 "onChange",
                                                 "onBlur",
@@ -383,30 +388,12 @@ const CreateDegreeUi = (props) => {
                                                   required: true,
                                                   whitespace: true,
                                                   message:
-                                                    "Please input course description or delete this field.",
+                                                    "Please input faculty name or delete this field.",
                                                 },
                                               ]}
                                             >
                                               <Input placeholder="faculty name" />
                                             </Form.Item>
-                                            <Form.Item
-                                              {...restField}
-                                              validateTrigger={[
-                                                "onChange",
-                                                "onBlur",
-                                              ]}
-                                              rules={[
-                                                {
-                                                  required: true,
-                                                  whitespace: true,
-                                                  message:
-                                                    "Please input course's name or delete this field.",
-                                                },
-                                              ]}
-                                            >
-                                              <Input placeholder="course description" />
-                                            </Form.Item>
-
                                             <Form.Item
                                               {...restField}
                                               name={[name, "_CourseMode"]}
@@ -419,7 +406,7 @@ const CreateDegreeUi = (props) => {
                                                   required: true,
                                                   whitespace: true,
                                                   message:
-                                                    "Please input course description or delete this field.",
+                                                    "Please input course mode or delete this field.",
                                                 },
                                               ]}
                                             >
