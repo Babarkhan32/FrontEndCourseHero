@@ -23,6 +23,8 @@ const SearchUi = (props) => {
                     <h6 className={style.Title}> Filters </h6>
                     <hr className="hr-def" />
                     <FiltersUi
+                      onSetUniversity={props.onSetUniversity}
+                      onDefaultClick={props.onDefaultClick}
                       onSetOnline={props.onSetOnline}
                       onSetOffline={props.onSetOffline}
                       onSetSubject={props.onSetSubject}

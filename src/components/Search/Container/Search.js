@@ -7,6 +7,7 @@ import getNavSearch from "./../api/getNavSearch";
 const Search = (props) => {
   const [data, setData] = useState([]);
   const [firstLoad, setFirstLoad] = useState(true);
+  const [load, setLoad] = useState(false);
   const [online, setOnline] = useState("");
   const [offline, setOffline] = useState("");
   const [certificate, setCertificate] = useState("");
@@ -17,12 +18,12 @@ const Search = (props) => {
   const [master, setMaster] = useState("");
   const [phd, setPhd] = useState("");
   const [postDoc, setPostDoc] = useState("");
-  // const [language,setLanguage]=useState('');
-  // const [country,setCountry]=useState('');
-  // const [subject,setSubject]=useState('');
-  // const [cost,setCost]=useState('');
-  // const [duration,setDuration]=useState('');
-  // const [university,setUniversity]=useState('');
+  const [language, setLanguage] = useState("");
+  const [country, setCountry] = useState("");
+  const [subject, setSubject] = useState("");
+  const [cost, setCost] = useState("");
+  const [duration, setDuration] = useState("");
+  const [university, setUniversity] = useState("");
 
   let query = {
     online: online,
@@ -35,17 +36,26 @@ const Search = (props) => {
     phd: phd,
     postDoc: postDoc,
     certificateCredit: certificateCredit,
-    // language:language,
-    // country:country,
-    // subject:subject,
-    // cost:cost,
-    // duration:duration,
-    // university:university
+    language: language,
+    country: country,
+    subject: subject,
+    cost: cost,
+    duration: duration,
+    university: university,
   };
 
+  const onDefaultClick = () => {
+    getCourses().then((result) => {
+      console.log(result, "Check result");
+      if (result) {
+        setData(result.data);
+        console.log(result, "Result for era");
+        setFirstLoad(false);
+      }
+    });
+  };
   const onSetOnline = (value) => {
-    console.log(value);
-
+    setLoad(true);
     if (value.checked === true) {
       query.online = "Online";
       setOnline("Online");
@@ -53,7 +63,9 @@ const Search = (props) => {
       query.online = "";
       setOnline("");
     }
+
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
       if (result) {
         setData(result.data);
       }
@@ -61,6 +73,7 @@ const Search = (props) => {
     });
   };
   const onSetCertificateCredit = (value) => {
+    setLoad(true);
     if (value.checked === true) {
       query.certificateCredit = "Certificate/Credit";
       setCertificateCredit("Certificate/Credit");
@@ -70,6 +83,8 @@ const Search = (props) => {
     }
     console.log(query);
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
+
       if (result) {
         console.log(result.data);
         setData(result.data);
@@ -79,7 +94,8 @@ const Search = (props) => {
   };
 
   const onSetCertificate = (value) => {
-    console.log(query);
+    setLoad(true);
+
     if (value.checked === true) {
       query.certificate = "Certificate";
       setCertificate("Certificate");
@@ -88,7 +104,7 @@ const Search = (props) => {
       setCertificate("");
     }
     getSearchedCourses(query).then((result) => {
-      console.log(result.data);
+      setLoad(false);
       if (result) {
         setData(result.data);
       }
@@ -96,15 +112,17 @@ const Search = (props) => {
     });
   };
   const onSetNonCertificate = (value) => {
+    setLoad(true);
     if (value.checked === true) {
-      query.nonCertificate = "Non-Certificate";
-      setNonCertificate("Non-Certificate");
+      query.nonCertificate = "Non Certificate";
+      setNonCertificate("Non Certificate");
     } else {
       query.nonCertificate = "";
       setNonCertificate("");
     }
     getSearchedCourses(query).then((result) => {
-      console.log(result);
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
@@ -112,6 +130,8 @@ const Search = (props) => {
     });
   };
   const onSetAssociate = (value) => {
+    setLoad(true);
+
     if (value.checked === true) {
       query.associate = "Associate";
       setAssociate("Associate");
@@ -120,7 +140,8 @@ const Search = (props) => {
       setAssociate("");
     }
     getSearchedCourses(query).then((result) => {
-      console.log(query);
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
@@ -128,14 +149,18 @@ const Search = (props) => {
     });
   };
   const onSetBachelors = (value) => {
+    setLoad(true);
+
     if (value.checked === true) {
-      query.bachelor = "Bachelor";
-      setBachelor("Bachelor");
+      query.bachelor = "Bachelor's";
+      setBachelor("Bachelor's");
     } else {
       query.bachelor = "";
       setBachelor("");
     }
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
@@ -143,14 +168,17 @@ const Search = (props) => {
     });
   };
   const onSetMaster = (value) => {
+    setLoad(true);
+
     if (value.checked === true) {
-      query.master = "Master";
-      setMaster("Master");
+      query.master = "Master's";
+      setMaster("Master's");
     } else {
       query.master = "";
       setMaster("");
     }
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
       if (result) {
         setData(result.data);
       }
@@ -158,6 +186,7 @@ const Search = (props) => {
     });
   };
   const onSetPhd = (value) => {
+    setLoad(true);
     if (value.checked === true) {
       query.phd = "PHD";
       setPhd("PHD");
@@ -166,6 +195,7 @@ const Search = (props) => {
       setPhd("");
     }
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
       if (result) {
         setData(result.data);
       }
@@ -173,9 +203,11 @@ const Search = (props) => {
     });
   };
   const onSetPostDoc = (value) => {
+    setLoad(true);
+
     if (value.checked === true) {
-      query.postDoc = "PostDoc";
-      setPostDoc("PostDoc");
+      query.postDoc = "Post doc";
+      setPostDoc("Post doc");
     } else {
       query.postDoc = "";
       setPostDoc("");
@@ -188,6 +220,8 @@ const Search = (props) => {
     });
   };
   const onSetOffline = (value) => {
+    setLoad(true);
+
     if (value.checked === true) {
       query.offline = "Offline";
       setOffline("Offline");
@@ -196,7 +230,8 @@ const Search = (props) => {
       setOffline("");
     }
     getSearchedCourses(query).then((result) => {
-      console.log(result.data);
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
@@ -204,8 +239,12 @@ const Search = (props) => {
     });
   };
   const onSetLanguage = (value) => {
+    setLoad(true);
+    setLanguage(value);
     query.language = value;
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
@@ -213,16 +252,24 @@ const Search = (props) => {
     });
   };
   const onSetCountry = (value) => {
+    setLoad(true);
+    setCountry(value);
     query.country = value;
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
     });
   };
   const onSetCost = (value) => {
+    setLoad(true);
+    setCost(value);
     query.cost = value;
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
@@ -230,8 +277,12 @@ const Search = (props) => {
     });
   };
   const onSetSubject = (value) => {
+    setLoad(true);
+    setSubject(value);
     query.subject = value;
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
+
       if (result) {
         setData(result.data);
       }
@@ -239,8 +290,25 @@ const Search = (props) => {
     });
   };
   const onSetDuration = (value) => {
+    setLoad(true);
+    setDuration(value);
     query.duration = value;
     getSearchedCourses(query).then((result) => {
+      setLoad(false);
+      if (result) {
+        setData(result.data);
+      }
+      setFirstLoad(false);
+      console.log("Result", result);
+    });
+  };
+
+  const onSetUniversity = (value) => {
+    setLoad(true);
+    setUniversity(value);
+    query.duration = value;
+    getSearchedCourses(query).then((result) => {
+      setLoad(false);
       if (result) {
         setData(result.data);
       }
@@ -271,6 +339,7 @@ const Search = (props) => {
   return (
     <SearchUi
       load={firstLoad}
+      loading={load}
       firstLoadHook={setFirstLoad}
       onSetOnline={onSetOnline}
       onSetOffline={onSetOffline}
@@ -287,6 +356,8 @@ const Search = (props) => {
       onSetCountry={onSetCountry}
       onSetLanguage={onSetLanguage}
       onSetCertificateCredit={onSetCertificateCredit}
+      onDefaultClick={onDefaultClick}
+      onSetUniversity={onSetUniversity}
       data={data}
     />
   );
