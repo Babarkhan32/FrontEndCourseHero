@@ -1,15 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 import style from "../Assets/Search.module.css";
-import { Card, Checkbox, Select, Input } from "antd";
+import { Button,Card, Checkbox, Select, Input } from "antd";
 import countryList from "react-select-country-list";
 const { Option } = Select;
 
 const FiltersUi = (props) => {
   const countries = countryList().getLabels();
-  const getCurrencyList = require("country-currency-map").getCurrencyList();
   let languages = require("langu-list")();
   const langagesList = languages.getLanguageNames();
-
+  const [costVal,setCost]=useState();
+  const [cityVal,setCity]=useState("");
   function handleChange(value) {
     props.onSetSubject(value);
   }
@@ -20,6 +20,9 @@ const FiltersUi = (props) => {
 
   function handleCountryChange(value) {
     props.onSetCountry(value);
+  }
+  function handleCityChange(){
+    props.onSetCity(cityVal);
   }
 
   return (
@@ -89,7 +92,7 @@ const FiltersUi = (props) => {
         </Checkbox>
       </Card>
 
-      <Card className={style.FilterCard} size="small" title="Subject">
+      {/* <Card className={style.FilterCard} size="small" title="Subject">
         <Select
           showSearch
           placeholder="Select Subject"
@@ -110,7 +113,7 @@ const FiltersUi = (props) => {
             Human Computer Interation
           </Option>
         </Select>
-      </Card>
+      </Card> */}
 
       <Card className={style.FilterCard} size="small" title="Language">
         <Select
@@ -128,13 +131,13 @@ const FiltersUi = (props) => {
           ))}
         </Select>
       </Card>
-      <Card
+      {/* <Card
         className={style.FilterCard}
         size="small"
         title="University/Institute"
       >
         <Input type="text" placeholder="Institute" />
-      </Card>
+      </Card> */}
       <Card className={style.FilterCard} size="small" title="Country">
         <Select
           showSearch
@@ -152,36 +155,26 @@ const FiltersUi = (props) => {
       </Card>
 
       <Card className={style.FilterCard} size="small" title="City">
-        <Input placeholder="Enter City" />
+        <Input onChange={(e)=>setCity(e.target.value)} placeholder="Enter City" />
+              <Button onClick={handleCityChange}>Search</Button>
       </Card>
-
-      <Card className={style.FilterCard} size="small" title="Cost">
-        <Checkbox> Free </Checkbox>
+              
+      <Card className={style.FilterCard} size="small" title="Cost in Dollars">
+        
         <br />
         <Input
-          onChange={(e) => props.onSetCost(e.target.value)}
+          onChange={(e) =>setCost(e.target.value)}
           placeholder="Cost Upto"
           type="number"
           className="mtt-5"
         />
-        <label className="mtt-10"> Curreny Type </label>
         <br />
+        <Button onClick={()=>props.onSetCost(costVal)}>Search</Button>
+        
+        
 
-        <Select
-          showSearch
-          placeholder="Select Currency"
-          style={{ width: "100%" }}
-          optionLabelProp="label"
-        >
-          {getCurrencyList.map((item, i) => (
-            <Option key={i} value={item.abbr}>
-              {" "}
-              {item.abbr}
-            </Option>
-          ))}
-        </Select>
-      </Card>
-      <Card className={style.FilterCard} size="small" title="Duration">
+             </Card>
+      {/* <Card className={style.FilterCard} size="small" title="Duration">
         <label> Upto (Months) </label>
         <br />
         <Input
@@ -189,7 +182,7 @@ const FiltersUi = (props) => {
           placeholder="Months"
           type="number"
         />
-      </Card>
+      </Card> */}
     </div>
   );
 };

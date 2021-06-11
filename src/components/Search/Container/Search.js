@@ -20,6 +20,7 @@ const Search = (props) => {
   const [postDoc, setPostDoc] = useState("");
   const [language, setLanguage] = useState("");
   const [country, setCountry] = useState("");
+  const [city,setCity]=useState("");
   const [subject, setSubject] = useState("");
   const [cost, setCost] = useState("");
   const [duration, setDuration] = useState("");
@@ -42,6 +43,7 @@ const Search = (props) => {
     cost: cost,
     duration: duration,
     university: university,
+    city:city
   };
 
   const onDefaultClick = () => {
@@ -72,6 +74,20 @@ const Search = (props) => {
       setFirstLoad(false);
     });
   };
+
+  const onSetCity=(value)=>{
+    setCity(value);
+    query.city=value;
+    getSearchedCourses(query).then((result) => {
+      setLoad(false);
+
+      if (result) {
+        setData(result.data);
+      }
+      setFirstLoad(false);
+    });
+
+  }
   const onSetCertificateCredit = (value) => {
     setLoad(true);
     if (value.checked === true) {
@@ -358,6 +374,7 @@ const Search = (props) => {
       onSetCertificateCredit={onSetCertificateCredit}
       onDefaultClick={onDefaultClick}
       onSetUniversity={onSetUniversity}
+      onSetCity={onSetCity}
       data={data}
     />
   );

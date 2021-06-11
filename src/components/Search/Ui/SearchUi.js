@@ -39,6 +39,7 @@ const SearchUi = (props) => {
                       onSetDuration={props.onSetDuration}
                       onSetCountry={props.onSetCountry}
                       onSetLanguage={props.onSetLanguage}
+                      onSetCity={props.onSetCity}
                       onSetCertificateCredit={props.onSetCertificateCredit}
                     />
                   </div>
