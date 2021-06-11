@@ -649,7 +649,7 @@ const CreateDegreeUi = (props) => {
                             </Form.Item>
                             <h6 className="Title mtt-15"> Course City</h6>
                             <Form.Item
-                              name="courseCity	"
+                              name="courseCity"
                               rules={[{ required: true }]}
                             >
                               {/* <Form.Item name="courseCity"  rules={[{ required: false }]}> 

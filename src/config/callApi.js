@@ -27,7 +27,10 @@ export const callApi = (address, method, headers, data, type) => {
         return axios.post(config.baseUrl + address + "/", data, {
             headers: {
                 'authorization': token,
-                'Content-Type': content_type
+                'Content-Type': content_type,
+               "Control-Allow-Origin": "*"
+
+ 
             }
         });
     } else if (method === 'PUT') {

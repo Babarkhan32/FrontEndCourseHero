@@ -10,9 +10,9 @@ const FiltersUi = (props) => {
   const langagesList = languages.getLanguageNames();
   const [costVal,setCost]=useState();
   const [cityVal,setCity]=useState("");
-  function handleChange(value) {
-    props.onSetSubject(value);
-  }
+  // function handleChange(value) {
+  //   props.onSetSubject(value);
+  // }
 
   function handleLanguageChange(value) {
     props.onSetLanguage(value);
